@@ -1,7 +1,7 @@
 #pragma once
-#include "Rendering/Renderer.h"
 #include "Rendering/VertexArray.h"
 #include "Rendering/IndexBuffer.h"
+#include "Rendering/Shader.h"
 
 namespace Gio 
 {

@@ -1,7 +1,9 @@
-#include "OpenGLUtilities.h"
+#include "Rendering/OpenGLUtilities.h"
 #include "Renderer.h"
 
-namespace Gio::Rendering
+using namespace Gio::Rendering;
+
+namespace Gio
 {
     void Renderer::Draw(VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
     {

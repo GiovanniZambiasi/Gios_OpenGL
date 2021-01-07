@@ -1,4 +1,6 @@
 #include "Object2D.h"
+
+#include "Renderer.h"
 #include "Rendering/VertexBuffer.h"
 
 namespace Gio 
@@ -24,6 +26,6 @@ namespace Gio
 	
 	void Object2D::Render()
 	{
-		Rendering::Renderer::Draw(_vertexArray, _indexBuffer, _shader);
+		Renderer::Draw(_vertexArray, _indexBuffer, _shader);
 	}
 }

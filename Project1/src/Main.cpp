@@ -1,5 +1,7 @@
-#include "Rendering/Renderer.h"
+#include "Debug.h"
 #include "Object2D.h"
+#include "Renderer.h"
+#include "Time.h"
 #include "Window.h"
 
 using namespace Gio;
@@ -33,8 +35,11 @@ int main(void)
 
         while (!window.ShouldClose())
         {
+            Time::RecordFrameTime();
+            
+            Debug::Log(std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " + std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox()));
             /* Render here */
-            Rendering::Renderer::Clear();
+            Renderer::Clear();
 
             object.Render();
 

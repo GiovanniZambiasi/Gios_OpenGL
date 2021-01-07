@@ -165,11 +165,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Debug.cpp" />
+    <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Object2D.cpp" />
-    <ClCompile Include="src\Rendering\IndexBuffer.cpp" />
-    <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Rendering\OpenGLUtilities.cpp" />
-    <ClCompile Include="src\Rendering\Renderer.cpp">
+    <ClCompile Include="src\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
@@ -238,22 +236,28 @@
       <AdditionalIncludeDirectories>D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Rendering\IndexBuffer.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Rendering\OpenGLUtilities.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Rendering\VertexBuffer.cpp" />
+    <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Entity.h" />
     <ClInclude Include="src\Object2D.h" />
     <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Rendering\OpenGLUtilities.h" />
-    <ClInclude Include="src\Rendering\Renderer.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
     <ClInclude Include="src\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\Rendering\VertexBufferLayout.h" />
+    <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>
