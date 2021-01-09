@@ -9,6 +9,7 @@ namespace Gio
 	{
 	private:
 		Rendering::VertexArray _vertexArray;
+		Rendering::VertexBuffer _vertexBuffer;
 		Rendering::IndexBuffer _indexBuffer;
 		Rendering::Shader _shader;
 

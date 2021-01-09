@@ -1,50 +1,51 @@
 #include "Debug.h"
-#include "Object2D.h"
+#include "Entity.h"
 #include "Renderer.h"
 #include "Time.h"
 #include "Window.h"
+#include "ECS/ObjectRenderer.h"
 
 using namespace Gio;
 
-int main(void)
+int main()
 {
     Window window;
 
     if (!window.TryToInitialize())
         return -1;
 
-    // Scope created here to make sure the index and array buffers get deallocated before glTerminate is called
+    Entity* _object = new Entity();
+
+    std::vector<Vector2>* vec = new std::vector<Vector2>
     {
-        float vertices[] =
-        {
-            -0.5f, -0.5f, // 0
-            0.5f, -0.5f, // 1
-            0.5f, 0.5f, // 2
-            -0.5f, 0.5f, // 3
-        };
+        Vector2(0.0f, .5f),
+        Vector2(-.5f, -.5f),
+        Vector2(.5f, -.5f),
+    };
 
-        unsigned int indices[] =
-        {
-            0, 1, 2,
-            2, 3, 0
-        };
+    auto renderer = new ECS::ObjectRenderer(_object->GetTransform(), vec, Color(1.0f, 0.0f, 0.0f, 1.0f));
 
-        //Rendering::Renderer renderer = Rendering::Renderer();
+    _object->AddComponent(renderer);
+    
+    while (!window.ShouldClose())
+    {
+        Time::RecordFrameTime();
 
-        Object2D object = Object2D(vertices, indices);
+        Debug::Log(
+            std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " +
+            std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox()));
 
-        while (!window.ShouldClose())
-        {
-            Time::RecordFrameTime();
-            
-            Debug::Log(std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " + std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox()));
-            /* Render here */
-            Renderer::Clear();
+        /* Render here */
+        Renderer::Clear();
 
-            object.Render();
-
-            window.Update();
-        }
+        float deltaTime = Time::GetTimeSinceStartSeconds();
+        
+        _object->Update(deltaTime);
+        
+        _object->LateUpdate(deltaTime);
+        
+        window.Update();
     }
+
     return 0;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "../Vector2.h"
 
 namespace Gio::Rendering 
 {
@@ -15,5 +16,10 @@ namespace Gio::Rendering
 		void Bind() const;
 
 		void UnBind() const;
+		
+		void Translate(const Gio::Vector2& vector2)
+		{
+			
+		}
 	};
 }
