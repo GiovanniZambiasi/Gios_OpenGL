@@ -3,8 +3,8 @@
 #include "ObjectRenderer.h"
 #include "../Debug.h"
 
-Gio::ECS::ObjectRenderer::ObjectRenderer(Transform* transform, std::vector<Vector2>* vertices, Color color)
-    : Component(transform)
+Gio::ECS::ObjectRenderer::ObjectRenderer(Entity* entity, std::vector<Vector2> vertices, Color color)
+    : Component(entity)
 {
     _color = color;
 
@@ -27,7 +27,11 @@ void Gio::ECS::ObjectRenderer::LateUpdate(float deltaTime)
 {    
     glPushMatrix();
 
+    auto transform = entity->GetTransform();
+    
     Vector2 position = transform->position;
+
+    glRotatef(transform->rotation.z, .0f, .0f, 1.0f);
     
     glTranslatef(position.x, position.y, 0.0f);
 
@@ -35,14 +39,25 @@ void Gio::ECS::ObjectRenderer::LateUpdate(float deltaTime)
 
     glBegin(GL_TRIANGLES);
     
-    for (int i = 0; i < _vertices->size(); i++)
+    for (int i = 0; i < _vertices.size(); i++)
     {
-        Vector2 vertex = _vertices->at(i);
+        Vector2 vertex = _vertices.at(i);
 
         glVertex2f(vertex.x, vertex.y);
     }
     
     glEnd();
-    
+
     glPopMatrix();
+
+    glColor3f(1.0f ,.0f, .0f);
+    
+    glBegin(GL_LINES);
+
+    glVertex2f(.0f, .0f);
+
+    auto up = transform->GetUp();
+    glVertex2f(up.x, up.y);
+
+    glEnd();
 }

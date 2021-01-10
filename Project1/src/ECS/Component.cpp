@@ -1,6 +1,6 @@
 ﻿#include "Component.h"
 
-Gio::ECS::Component::Component(Transform* transform)
+Gio::ECS::Component::Component(Entity* entity)
 {
-    this->transform = transform;
+    this->entity = entity;
 }

@@ -1,14 +1,14 @@
 ﻿#pragma once
-#include "../Transform.h"
+#include "Entity.h"
 
 namespace Gio::ECS
 {
     class Component
     {
     protected:
-        Transform* transform = nullptr;
+        Entity* entity;
         
-        Component(Transform* transform);
+        Component(Entity* entity);
 
     public:
         
