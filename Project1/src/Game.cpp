@@ -61,8 +61,10 @@ void Gio::Game::RemoveEntity(ECS::Entity* entity)
 
 void Gio::Game::Update(float deltaTime)
 {
-    float scaleAnim = Math::Sin(Time::GetTimeSinceStartSeconds() * 100.0f);
-    
+    float time = Time::GetTimeSinceStartSeconds();
+    float sinOfTime =Math::Sin(time * 100.0f); 
+    float sinAnim = sinOfTime * 150.0f;
+
     for (int i = _entities.size() - 1; i >= 0; i--)
         // Loops in reverse because a component's update could result in the object being destroyed
     {
@@ -72,14 +74,14 @@ void Gio::Game::Update(float deltaTime)
 
         Transform& trans = entity->GetTransform();
 
-        auto scale = trans.GetScale();
-        scale.y = 100.0f * scaleAnim;
+        //auto scale = trans.GetScale();
+        //scale.y = 100.0f * scaleAnim;
 
         //trans.SetScale(scale);
         
-        //trans.Translate(Vector3::Up() * 10.0f * deltaTime);
-        
-        entity->GetTransform().Rotate(Vector3::Forward() * (180.0f * deltaTime));
+        trans.position = Vector3::Up() * sinAnim;
+
+        //entity->GetTransform().Rotate(Vector3::Forward() * (720.0f * deltaTime));
         
         //Debug::Log("Entity's up: " + up.to_string() + " rotation: " + entity->GetTransform().rotation.to_string());
     }

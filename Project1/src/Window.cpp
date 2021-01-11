@@ -38,7 +38,13 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
     {
     case GLEW_OK:
         Debug::Log("Initializing OpenGL...");
-        Debug::Log((const char*)glGetString(GL_VERSION));
+        
+        {
+            std::string version = std::string("[OpenGL] v.");
+            version += (const char*)glGetString(GL_VERSION);
+            Debug::Log(version);
+        }
+        
         break;
     default:
         Debug::LogError("GLEW needs a valid OpenGL context to initialize!");

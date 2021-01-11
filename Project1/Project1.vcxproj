@@ -307,6 +307,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GUI.cpp" />
     <ClCompile Include="src\Math.cpp" />
     <ClCompile Include="src\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -456,6 +457,10 @@
     <ClCompile Include="src\Vector2.cpp" />
     <ClCompile Include="src\Vector3.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\vendor\imgui\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -465,6 +470,7 @@
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\ECS\ObjectRenderer.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\GUI.h" />
     <ClInclude Include="src\Math.h" />
     <ClInclude Include="src\Debug.h" />
     <ClInclude Include="src\Renderer.h" />
@@ -897,6 +903,13 @@
     <ClInclude Include="src\vendor\glm\vec3.hpp" />
     <ClInclude Include="src\vendor\glm\vec4.hpp" />
     <ClInclude Include="src\vendor\glm\vector_relational.hpp" />
+    <ClInclude Include="src\vendor\imgui\imconfig.h" />
+    <ClInclude Include="src\vendor\imgui\imgui.h" />
+    <ClInclude Include="src\vendor\imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="src\vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="src\vendor\imgui\stb_rect_pack.h" />
+    <ClInclude Include="src\vendor\imgui\stb_textedit.h" />
+    <ClInclude Include="src\vendor\imgui\stb_truetype.h" />
     <ClInclude Include="src\Window.h" />
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,8 @@ namespace Gio
 
         ~Window();
 
+        GLFWwindow* GetGLFWWindow() { return _window; }
+        
         bool TryToInitialize(const char* title, int width, int height);
         
         bool ShouldClose();

@@ -1,6 +1,7 @@
 #include "Camera.h"
 #include "Debug.h"
 #include "Game.h"
+#include "GUI.h"
 #include "Renderer.h"
 #include "Time.h"
 #include "Window.h"
@@ -11,16 +12,18 @@ int main()
 {
     Window window;
 
-    unsigned int screenWidth = 960;
-    unsigned int screenHeight = 540;
+    unsigned int screenWidth = 1240;
+    unsigned int screenHeight = 720;
     
     if (!window.TryToInitialize("Gio's OpenGL", screenWidth, screenHeight))
         return -1;
 
+    GUI::Initialize(window);
+    
     Renderer::SetupProjectionMatrix(screenWidth, screenHeight);
 
     Camera::Initialize();
-    
+
     Transform& camTrans = Camera::GetTransform();
     
     auto camPos = camTrans.position;
@@ -39,6 +42,8 @@ int main()
         
         /*Debug::Log(std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " +
             std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox())); */
+
+        GUI::Clear();
         
         Renderer::Clear();
 
@@ -49,9 +54,13 @@ int main()
         Renderer::BeforeDraw();
         
         game.Draw();
+
+        GUI::Draw();
         
         window.SwapBuffers();
     }
+
+    GUI::Shutdown();
 
     return 0;
 };
