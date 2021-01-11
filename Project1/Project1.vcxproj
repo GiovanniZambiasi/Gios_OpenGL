@@ -454,6 +454,7 @@
       <AdditionalIncludeDirectories>src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Utilities\Singleton.cpp" />
     <ClCompile Include="src\Vector2.cpp" />
     <ClCompile Include="src\Vector3.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
@@ -482,6 +483,7 @@
     <ClInclude Include="src\Rendering\VertexBufferLayout.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Utilities\Singleton.h" />
     <ClInclude Include="src\Vector2.h" />
     <ClInclude Include="src\Vector3.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />

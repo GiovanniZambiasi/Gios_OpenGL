@@ -8,56 +8,62 @@
 
 using namespace Gio;
 
-int main()
+void HandleWindowSizeChanged(unsigned int width, unsigned int height)
 {
-    Window window;
-
-    unsigned int screenWidth = 1240;
-    unsigned int screenHeight = 720;
+    Debug::Log("Window size changed to: " + std::to_string(width) + "x" + std::to_string(height));
     
-    if (!window.TryToInitialize("Gio's OpenGL", screenWidth, screenHeight))
-        return -1;
-
-    GUI::Initialize(window);
-    
-    Renderer::SetupProjectionMatrix(screenWidth, screenHeight);
-
-    Camera::Initialize();
+    Renderer::SetupProjectionMatrix(width, height);
 
     Transform& camTrans = Camera::GetTransform();
     
     auto camPos = camTrans.position;
-    camPos.x = int((screenWidth/2));
-    camPos.y = int((screenHeight/2));
+    camPos.x = int((width/2));
+    camPos.y = int((height/2));
 
-    Debug::Log("New Cam pos will be" + camPos.to_string());
+    Debug::Log("Setting camPos to: " + camPos.to_string());
     
-    camTrans.position = camPos;
+    camTrans.SetPosition(camPos);
+}
+
+int main()
+{
+    Window* window = new Window();
+
+    unsigned int screenWidth = 1240;
+    unsigned int screenHeight = 720;
     
-    Game game = Game();
+    if (!window->TryToInitialize("Gio's OpenGL", screenWidth, screenHeight))
+        return -1;
+
+    GUI::Initialize(*window);
     
-    while (!window.ShouldClose())
+    Camera::Initialize();
+
+    window->onSizeChanged = HandleWindowSizeChanged;
+
+    HandleWindowSizeChanged(screenWidth, screenHeight);
+    
+    Game* game = new Game();
+    
+    while (!window->ShouldClose())
     {
         Time::RecordFrameTime();
         
-        /*Debug::Log(std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " +
-            std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox())); */
-
         GUI::Clear();
         
         Renderer::Clear();
 
         float deltaTime = Time::GetDeltaTimeSeconds();
 
-        game.Update(deltaTime);
+        game->Update(deltaTime);
 
         Renderer::BeforeDraw();
         
-        game.Draw();
+        game->Draw();
 
         GUI::Draw();
         
-        window.SwapBuffers();
+        window->SwapBuffers();
     }
 
     GUI::Shutdown();

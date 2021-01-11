@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "ECS/Entity.h"
+#include "Utilities/Singleton.h"
 
 namespace Gio
 {
@@ -25,6 +26,6 @@ namespace Gio
         
         void Draw();
 
-        inline static Game* instance = nullptr;
+        inline static Game* instance = nullptr; 
     };
 }

@@ -1,9 +1,5 @@
 ﻿#include "GUI.h"
-
 #include <string>
-
-
-
 #include "Game.h"
 #include "Math.h"
 #include "time.h"
@@ -68,22 +64,14 @@ void DrawEntities()
     ImGui::End();
 }
 
-void DrawSettingsWindow(bool& showDebugInfo, bool& showEntities)
-{
-    ImGui::Begin("Settings");
-    ImGui::Checkbox("Show Debug Info", &showDebugInfo);
-    ImGui::Checkbox("Show Entities", &showEntities);
-    ImGui::End();
-}
-
 void Gio::GUI::Draw()
 {
-    DrawSettingsWindow(_shouldShowDebugInfo, _shouldShowEntities);
+    instance->DrawSettingsWindow();
     
-    if(_shouldShowDebugInfo)
+    if(instance->_shouldShowDebugInfo)
         DrawDebugInfo();
     
-    if(_shouldShowEntities)
+    if(instance->_shouldShowEntities)
         DrawEntities();
     /*
     bool show_demo_window = true;
@@ -119,4 +107,25 @@ void Gio::GUI::Shutdown()
     ImGui_ImplGlfwGL3_Shutdown();
     ImGui::DestroyContext();
     glfwTerminate();
+}
+
+void Gio::GUI::DrawSettingsWindow()
+{
+    ImGui::Begin("Settings");
+    ImGui::Checkbox("Show Debug Info", &_shouldShowDebugInfo);
+    ImGui::Checkbox("Show Entities", &_shouldShowEntities);
+    
+    ImGui::Text("Video:");
+    ImGui::Indent(1);
+    
+    ImGui::InputInt("Width", &_windowWidth);
+    
+    ImGui::InputInt("Height", &_windowHeight);
+
+    if(ImGui::Button("Apply"))
+    {
+        Gio::Window::instance->SetSize(_windowWidth, _windowHeight);
+    }
+    
+    ImGui::End();
 }

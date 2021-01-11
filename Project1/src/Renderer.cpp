@@ -1,6 +1,7 @@
 #include "Rendering/OpenGLUtilities.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "Debug.h"
 
 using namespace Gio::Rendering;
 
@@ -17,8 +18,6 @@ namespace Gio
     void Renderer::SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight)
     {
         projectionMatrix = glm::ortho(.0f,  float(screenWidth), .0f, float(screenHeight), -1.0f, 1.0f);
-
-        //sceneGizmosShader = new Shader("res/Shaders/Basic.shader");
     }
 
     void Renderer::DrawRay(Vector3 origin, Vector3 direction, Color color)
@@ -42,7 +41,7 @@ namespace Gio
         
         glEnd();
 
-        sceneGizmosShader->UnBind();
+        //sceneGizmosShader->UnBind();
     }
 
     void Renderer::BeforeDraw()
@@ -65,7 +64,7 @@ namespace Gio
 
     void Renderer::CalculateViewProjectionMatrix()
     {
-        auto cameraTransform = Camera::GetTransform();
+        Transform& cameraTransform = Camera::GetTransform();
         
         auto cameraPosition = cameraTransform.position;
         

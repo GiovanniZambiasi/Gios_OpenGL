@@ -8,12 +8,6 @@
 
 Gio::Game::Game()
 {
-    if(instance != nullptr)
-    {
-        Debug::LogError("Two instances of game have been created");
-        return;
-    }
-    
     instance = this;
     
     ECS::Entity* cube = new ECS::Entity("Green Cube");
@@ -74,8 +68,7 @@ void Gio::Game::Update(float deltaTime)
     float sinOfTime =Math::Sin(time * 100.0f); 
     float sinAnim = sinOfTime * 150.0f;
 
-    for (int i = _entities.size() - 1; i >= 0; i--)
-        // Loops in reverse because a component's update could result in the object being destroyed
+    for (int i = _entities.size() - 1; i >= 0; i--)        // Loops in reverse because entities can get destroyed, and removed from the collection
     {
         auto entity = _entities[i];
             
@@ -105,8 +98,7 @@ void Gio::Game::Update(float deltaTime)
 
 void Gio::Game::Draw()
 {
-    for (int i = _entities.size() - 1; i >= 0; i--)
-        // Loops in reverse because a component's update could result in the object being destroyed
+    for (int i = 0; i < _entities.size(); i++)
     {
         auto entity = _entities[i];
 

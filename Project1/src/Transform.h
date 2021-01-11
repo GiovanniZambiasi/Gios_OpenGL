@@ -24,8 +24,10 @@ namespace Gio
         Vector3 GetForward();
 
         Vector3 GetRotationRadians() { return Vector3(Math::DegreesToRadians(rotationEuler.x), Math::DegreesToRadians(rotationEuler.y), Math::DegreesToRadians(rotationEuler.z)); }
-        
+
         void Translate(Vector3 translation);
+
+        void SetPosition(Vector3 position) { this->position = position; }
         
         void Rotate(Vector3 rotation);
 

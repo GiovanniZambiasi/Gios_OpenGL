@@ -2,7 +2,15 @@
 #include "Debug.h"
 
 Gio::Window::Window()
-{ }
+{
+    if(instance != nullptr)
+    {
+        Debug::LogError("Multiple instances of window created!");
+        return;
+    }
+
+    instance = this;
+}
 
 Gio::Window::~Window()
 {
@@ -22,6 +30,9 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
     /* Create a windowed mode window and its OpenGL context */
     _window = glfwCreateWindow(width, height, title, NULL, NULL);
 
+    _width = width;
+    _height = height;
+    
     if (!_window)
     {
         glfwTerminate();
@@ -69,4 +80,10 @@ void Gio::Window::SwapBuffers()
 void Gio::Window::SetSize(unsigned int width, unsigned int height)
 {
     glfwSetWindowSize(_window, width, height);
+
+    _width = width;
+    _height = height;
+    
+    if(onSizeChanged != nullptr)
+        onSizeChanged(width, height);
 }
