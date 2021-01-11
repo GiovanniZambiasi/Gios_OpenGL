@@ -1,15 +1,22 @@
 ﻿#include "Game.h"
-
 #include "Camera.h"
 #include "Debug.h"
 #include "Math.h"
 #include "Renderer.h"
 #include "time.h"
-#include "ECS/ObjectRenderer.h"
+#include "ECS/Components/ObjectRenderer.h"
 
 Gio::Game::Game()
 {
-    ECS::Entity* cube = new ECS::Entity();
+    if(instance != nullptr)
+    {
+        Debug::LogError("Two instances of game have been created");
+        return;
+    }
+    
+    instance = this;
+    
+    ECS::Entity* cube = new ECS::Entity("Green Cube");
 
     float vertices[] =
     {
@@ -25,7 +32,7 @@ Gio::Game::Game()
         2, 3, 0
     };
 
-    auto renderer = new ECS::ObjectRenderer(cube, vertices, 4 * 2 * sizeof(float), indices, 6,
+    auto renderer = new ECS::Components::ObjectRenderer(*cube, vertices, 4 * 2 * sizeof(float), indices, 6,
                                             Color(0.0f, 0.7f, 0.3f, 1.0f));
 
     cube->AddComponent(renderer);
@@ -54,9 +61,11 @@ void Gio::Game::RemoveEntity(ECS::Entity* entity)
         if (currEntity == entity)
         {
             _entities.erase(_entities.begin() + i);
-            return;
+            break;
         }
     }
+
+    delete entity;
 }
 
 void Gio::Game::Update(float deltaTime)
@@ -69,24 +78,29 @@ void Gio::Game::Update(float deltaTime)
         // Loops in reverse because a component's update could result in the object being destroyed
     {
         auto entity = _entities[i];
+            
+        if(entity->IsDeleted())
+        {
+            RemoveEntity(entity);
+        }
+        else
+        {
+            entity->Update(deltaTime);
 
-        entity->Update(deltaTime);
+            Transform& trans = entity->GetTransform();
 
-        Transform& trans = entity->GetTransform();
+            //auto scale = trans.GetScale();
+            //scale.y = 100.0f * scaleAnim;
 
-        //auto scale = trans.GetScale();
-        //scale.y = 100.0f * scaleAnim;
-
-        //trans.SetScale(scale);
+            //trans.SetScale(scale);
         
-        trans.position = Vector3::Up() * sinAnim;
+            trans.position = Vector3::Up() * sinAnim;
 
-        //entity->GetTransform().Rotate(Vector3::Forward() * (720.0f * deltaTime));
+            //entity->GetTransform().Rotate(Vector3::Forward() * (720.0f * deltaTime));
         
-        //Debug::Log("Entity's up: " + up.to_string() + " rotation: " + entity->GetTransform().rotation.to_string());
+            //Debug::Log("Entity's up: " + up.to_string() + " rotation: " + entity->GetTransform().rotation.to_string());
+        }
     }
-
-    //Camera::GetTransform().Translate(Vector3::Right() * deltaTime * 10.0f);
 }
 
 void Gio::Game::Draw()

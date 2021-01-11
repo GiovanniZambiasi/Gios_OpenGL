@@ -35,7 +35,7 @@ int main()
     camTrans.position = camPos;
     
     Game game = Game();
-
+    
     while (!window.ShouldClose())
     {
         Time::RecordFrameTime();

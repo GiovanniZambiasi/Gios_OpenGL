@@ -7,18 +7,24 @@ namespace Gio::ECS
 {
     class Component;
 
-    class Entity sealed
+    class Entity
     {
     private:
-        Transform* _transform;
+        std::string _name;
+        Transform _transform;
         std::vector<Component*> _components;
-    
+        bool _isDeleted = false;
+        
     public:
-        Entity();
+        Entity(std::string name);
 
         ~Entity();
 
-        Transform& GetTransform() { return *_transform; }
+        std::string GetName() { return _name; }
+        
+        Transform& GetTransform() { return _transform; }
+
+        bool IsDeleted() { return _isDeleted; }
 
         void AddComponent(Component* component);
 
@@ -27,5 +33,7 @@ namespace Gio::ECS
         void Update(float deltaTime);
 
         void Draw();
+
+        void Delete();
     };
 }

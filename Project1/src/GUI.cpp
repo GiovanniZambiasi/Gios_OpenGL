@@ -4,6 +4,7 @@
 
 
 
+#include "Game.h"
 #include "Math.h"
 #include "time.h"
 #include "Window.h"
@@ -26,9 +27,6 @@ void DrawDebugInfo()
 {
     ImGui::Begin("Debug Info:");
     
-    ImGui::Text("Debug:");
-    //ImGui::SameLine();
-    
     std::string string ="Time: " + std::to_string(Gio::Time::GetTimeSinceStartSeconds());
     ImGui::Text(string.c_str());
     
@@ -41,21 +39,52 @@ void DrawDebugInfo()
     ImGui::End();
 }
 
-void DrawSettingsWindow(bool& showDebugInfo)
+void DrawEntity(Gio::ECS::Entity* entity)
+{
+    ImGui::Text(entity->GetName().c_str());
+    ImGui::SameLine();
+    if(ImGui::Button("Delete"))
+    {
+        entity->Delete();
+    }
+}
+
+void DrawEntities()
+{
+    ImGui::Begin("Entities");
+
+    Gio::Game& game = *Gio::Game::instance;
+
+    std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
+    
+    ImGui::Indent(1);
+    
+    for (int i = entities.size() - 1; i >=0 ; i--)
+    {
+        Gio::ECS::Entity* entity = entities[i];
+        DrawEntity(entity);
+    }
+    
+    ImGui::End();
+}
+
+void DrawSettingsWindow(bool& showDebugInfo, bool& showEntities)
 {
     ImGui::Begin("Settings");
     ImGui::Checkbox("Show Debug Info", &showDebugInfo);
+    ImGui::Checkbox("Show Entities", &showEntities);
     ImGui::End();
 }
 
 void Gio::GUI::Draw()
 {
-    DrawSettingsWindow(_shouldShowDebugInfo);
+    DrawSettingsWindow(_shouldShowDebugInfo, _shouldShowEntities);
     
     if(_shouldShowDebugInfo)
         DrawDebugInfo();
     
-        
+    if(_shouldShowEntities)
+        DrawEntities();
     /*
     bool show_demo_window = true;
     bool show_another_window = false;

@@ -21,5 +21,7 @@ namespace Gio
         bool ShouldClose();
 
         void SwapBuffers();
+
+        void SetSize(unsigned int width, unsigned int height);
     };
 }

@@ -6,9 +6,9 @@ namespace Gio::ECS
     class Component
     {
     protected:
-        Entity* entity;
+        Entity& entity;
         
-        Component(Entity* entity);
+        Component(Entity& entity);
 
     public:
         

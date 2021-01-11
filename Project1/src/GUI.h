@@ -11,6 +11,8 @@ namespace Gio
         ~GUI();
 
         inline static bool _shouldShowDebugInfo = false;
+        
+        inline static bool _shouldShowEntities= false;
     public:
         static void Initialize(Window& window);
 

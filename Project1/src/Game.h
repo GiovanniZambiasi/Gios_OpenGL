@@ -15,6 +15,8 @@ namespace Gio
         
         ~Game();
 
+        std::vector<ECS::Entity*>& GetEntities() { return _entities; }
+        
         void AddEntity(ECS::Entity* entity);
         
         void RemoveEntity(ECS::Entity* entity);
@@ -22,5 +24,7 @@ namespace Gio
         void Update(float deltaTime);
         
         void Draw();
+
+        inline static Game* instance = nullptr;
     };
 }

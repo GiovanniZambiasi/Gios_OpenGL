@@ -21,6 +21,7 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
 
     /* Create a windowed mode window and its OpenGL context */
     _window = glfwCreateWindow(width, height, title, NULL, NULL);
+
     if (!_window)
     {
         glfwTerminate();
@@ -63,4 +64,9 @@ void Gio::Window::SwapBuffers()
 
     /* Poll for and process events */
     glfwPollEvents();
+}
+
+void Gio::Window::SetSize(unsigned int width, unsigned int height)
+{
+    glfwSetWindowSize(_window, width, height);
 }
