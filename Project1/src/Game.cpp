@@ -27,7 +27,7 @@ Gio::Game::Game()
     };
 
     auto renderer = new ECS::Components::ObjectRenderer(*cube, vertices, 4 * 2 * sizeof(float), indices, 6,
-                                            Color(0.0f, 0.7f, 0.3f, 1.0f));
+                                            Color(0.5f, 0.0f, 0.5f, 1.0f));
 
     cube->AddComponent(renderer);
 
@@ -89,7 +89,7 @@ void Gio::Game::Update(float deltaTime)
         
             trans.position = Vector3::Up() * sinAnim;
 
-            //entity->GetTransform().Rotate(Vector3::Forward() * (720.0f * deltaTime));
+            entity->GetTransform().Rotate(Vector3::Forward() * (360.0f * deltaTime));
         
             //Debug::Log("Entity's up: " + up.to_string() + " rotation: " + entity->GetTransform().rotation.to_string());
         }

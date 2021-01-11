@@ -42,7 +42,7 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
     /* Make the window's context current */
     glfwMakeContextCurrent(_window);
 
-    glfwSwapInterval(1);
+    //glfwSwapInterval(1);
 
     GLenum returnValue = glewInit();
 
