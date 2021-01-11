@@ -1,5 +1,6 @@
 #pragma once
 #include "Color.h"
+#include "Transform.h"
 #include "Vector3.h"
 #include "Rendering/VertexArray.h"
 #include "Rendering/IndexBuffer.h"
@@ -16,16 +17,22 @@ namespace Gio
         
         ~Renderer();
 
-        inline static glm::mat4 projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);;
+        inline static glm::mat4 projectionMatrix;
+        inline static glm::mat4 viewProjectionMatrix;
+
+        static void CalculateViewProjectionMatrix();
+    
     public:
-        static glm::mat4 GetProjectionMatrix() { return projectionMatrix; }
+        static void SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight);
         
-        static void Draw(Rendering::VertexArray& vertexArray, Rendering::IndexBuffer& indexBuffer, Rendering::Shader& shader);
+        static void Draw(Transform& transform, Rendering::VertexArray& vertexArray, Rendering::IndexBuffer& indexBuffer, Rendering::Shader& shader);
 
         static void Clear();
 
         static void DrawRay(Vector3 origin, Vector3 direction, Color color);
-        
+
         static void DrawRay(Vector2 origin, Vector2 direction, Color color);
+        
+        static void BeforeDraw();
     };
 }

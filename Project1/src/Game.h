@@ -10,9 +10,6 @@ namespace Gio
     private:
         std::vector<ECS::Entity*> _entities;
 
-        void RunUpdate(float deltaTime);
-
-        void RunLateUpdate(float deltaTime);
     public:
         Game();
         
@@ -23,5 +20,7 @@ namespace Gio
         void RemoveEntity(ECS::Entity* entity);
         
         void Update(float deltaTime);
+        
+        void Draw();
     };
 }

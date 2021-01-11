@@ -1,3 +1,4 @@
+#include "Camera.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "Time.h"
@@ -9,9 +10,16 @@ int main()
 {
     Window window;
 
-    if (!window.TryToInitialize("Gio's OpenGL", 800, 600))
+    unsigned int screenWidth = 960;
+    unsigned int screenHeight = 540;
+    
+    if (!window.TryToInitialize("Gio's OpenGL", screenWidth, screenHeight))
         return -1;
 
+    Renderer::SetupProjectionMatrix(screenWidth, screenHeight);
+
+    Camera::Initialize();
+    
     Game game = Game();
 
     while (!window.ShouldClose())
@@ -21,14 +29,17 @@ int main()
         /*Debug::Log(std::to_string(Time::GetTimeSinceStartSeconds()) + " | DeltaTime: " +
             std::to_string(Time::GetDeltaTimeSeconds()) + " | FPS: " + std::to_string(Time::GetFPSApprox())); */
         
-        /* Render here */
         Renderer::Clear();
 
         float deltaTime = Time::GetDeltaTimeSeconds();
 
         game.Update(deltaTime);
+
+        Renderer::BeforeDraw();
         
-        window.Update();
+        game.Draw();
+        
+        window.SwapBuffers();
     }
 
     return 0;

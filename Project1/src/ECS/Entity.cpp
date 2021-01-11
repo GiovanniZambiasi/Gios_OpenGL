@@ -2,7 +2,7 @@
 #include "Component.h"
 
 Gio::ECS::Entity::Entity()
-    : _transform(Transform())
+    : _transform(new Transform())
     , _components(std::vector<Component*>())
 { }
 
@@ -39,11 +39,11 @@ void Gio::ECS::Entity::Update(float deltaTime)
     }
 }
 
-void Gio::ECS::Entity::LateUpdate(float deltaTime)
+void Gio::ECS::Entity::Draw()
 {
     for (unsigned int i = 0; i < _components.size(); i++)
     {
         auto component = _components[i];
-        component->LateUpdate(deltaTime);
+        component->Draw();
     }
 }

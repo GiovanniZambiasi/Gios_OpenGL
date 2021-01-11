@@ -18,6 +18,6 @@ namespace Gio
         
         bool ShouldClose();
 
-        void Update();
+        void SwapBuffers();
     };
 }

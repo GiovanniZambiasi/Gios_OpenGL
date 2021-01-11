@@ -24,6 +24,6 @@ namespace Gio::ECS
 
         ~ObjectRenderer();
         
-        void LateUpdate(float deltaTime) override;
+        void Draw() override;
     };
 }

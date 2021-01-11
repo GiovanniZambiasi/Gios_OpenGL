@@ -50,7 +50,7 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
 
 bool Gio::Window::ShouldClose() { return glfwWindowShouldClose(_window); }
 
-void Gio::Window::Update()
+void Gio::Window::SwapBuffers()
 {
     /* Swap front and back buffers */
     glfwSwapBuffers(_window);

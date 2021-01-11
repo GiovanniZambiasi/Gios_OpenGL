@@ -1,5 +1,6 @@
 #include "Rendering/OpenGLUtilities.h"
 #include "Renderer.h"
+#include "Camera.h"
 
 using namespace Gio::Rendering;
 
@@ -11,6 +12,11 @@ namespace Gio
 
     Renderer::~Renderer()
     {
+    }
+
+    void Renderer::SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight)
+    {
+        projectionMatrix = glm::ortho(.0f,  float(screenWidth), .0f, float(screenHeight), -1.0f, 1.0f);;
     }
 
     void Renderer::DrawRay(Vector3 origin, Vector3 direction, Color color)
@@ -40,13 +46,34 @@ namespace Gio
         glEnd();
     }
 
-    void Renderer::Draw(VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
+    void Renderer::BeforeDraw()
+    {
+        CalculateViewProjectionMatrix();
+    }
+
+    void Renderer::Draw(Transform& transform, VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
     {
         shader.Bind();
+
+        glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(transform.position.x, transform.position.y, transform.position.z));
+        
+        shader.SetUniformMat4f("u_MVP", viewProjectionMatrix * model);
+        
         vertexArray.Bind();
         indexBuffer.Bind();
         
         GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr));
+    }
+
+    void Renderer::CalculateViewProjectionMatrix()
+    {
+        auto cameraTransform = Camera::GetTransform();
+        
+        auto cameraPosition = cameraTransform.position;
+        
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
+
+        viewProjectionMatrix = projectionMatrix * view;
     }
 
     void Renderer::Clear()

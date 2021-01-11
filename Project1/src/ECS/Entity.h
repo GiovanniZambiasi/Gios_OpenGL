@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <vector>
-#include "Transform.h"
+#include "../Transform.h"
 
 namespace Gio::ECS
 {
@@ -10,7 +10,7 @@ namespace Gio::ECS
     class Entity sealed
     {
     private:
-        Transform _transform;
+        Transform* _transform;
         std::vector<Component*> _components;
     
     public:
@@ -18,7 +18,7 @@ namespace Gio::ECS
 
         ~Entity();
 
-        Transform* GetTransform() { return &_transform; }
+        Transform& GetTransform() { return *_transform; }
 
         void AddComponent(Component* component);
 
@@ -26,6 +26,6 @@ namespace Gio::ECS
         
         void Update(float deltaTime);
 
-        void LateUpdate(float deltaTime);
+        void Draw();
     };
 }
