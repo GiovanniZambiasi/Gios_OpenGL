@@ -3,7 +3,8 @@
 
 Gio::Transform::Transform()
     : position(Vector3())
-    , rotation(Vector3())
+    , rotationEuler(Vector3())
+    , _scale(Vector3::One())
 {
 }
 
@@ -15,7 +16,7 @@ Gio::Vector3 Gio::Transform::GetUp()
 {
     Vector3 up = Vector3::Up();
     
-    float angle = rotation.z;
+    float angle = rotationEuler.z;
     
     up.Rotate(angle);
  
@@ -38,5 +39,5 @@ void Gio::Transform::Translate(Vector3 translation)
 
 void Gio::Transform::Rotate(Vector3 rotation)
 {
-    this->rotation = this->rotation + rotation;
+    this->rotationEuler = this->rotationEuler + rotation;
 }

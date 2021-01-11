@@ -1,4 +1,5 @@
 #include "Camera.h"
+#include "Debug.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "Time.h"
@@ -19,6 +20,16 @@ int main()
     Renderer::SetupProjectionMatrix(screenWidth, screenHeight);
 
     Camera::Initialize();
+    
+    Transform& camTrans = Camera::GetTransform();
+    
+    auto camPos = camTrans.position;
+    camPos.x = int((screenWidth/2));
+    camPos.y = int((screenHeight/2));
+
+    Debug::Log("New Cam pos will be" + camPos.to_string());
+    
+    camTrans.position = camPos;
     
     Game game = Game();
 

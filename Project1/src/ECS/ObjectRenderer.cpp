@@ -46,17 +46,9 @@ void Gio::ECS::ObjectRenderer::Draw()
 {    
     //glPushMatrix();
 
-    auto transform = entity->GetTransform();
-
-    Vector3 position = transform.position;
-
-    glRotatef(transform.rotation.x, 1.0f, .0f, .0f);
-    glRotatef(transform.rotation.y, .0f, 1.0f, .0f);
-    glRotatef(transform.rotation.z, .0f, .0f, 1.0f);
-
     //glTranslatef(position.x, position.y, position.z);
 
-    Renderer::Draw(transform, *_vertexArray, *_indexBuffer, *_shader);
+    Renderer::Draw(entity->GetTransform(), *_vertexArray, *_indexBuffer, *_shader);
     
     //glColor3f(_color.r, _color.g, _color.b);
 
