@@ -14,7 +14,9 @@ namespace Gio
         ~Transform();
         
         Vector3 GetUp();
-
+        
+        Vector3 GetForward();
+        
         void Translate(Vector3 translation);
         
         void Rotate(Vector3 rotation);

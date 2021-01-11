@@ -45,7 +45,7 @@ namespace Gio
         shader.Bind();
         vertexArray.Bind();
         indexBuffer.Bind();
-
+        
         GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr));
     }
 

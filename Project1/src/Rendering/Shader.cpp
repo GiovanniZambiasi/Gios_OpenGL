@@ -4,6 +4,8 @@
 #include "OpenGLUtilities.h"
 #include "Shader.h"
 
+#include "../Renderer.h"
+
 namespace Gio::Rendering 
 {
     Shader::Shader(const std::string& filePath)
@@ -36,6 +38,11 @@ namespace Gio::Rendering
     void Shader::SetUniform1f(const std::string& name, float v0)
     {
         GLCall(glUniform1f(GetUniformLocation(name), v0));
+    }
+
+    void Shader::SetUniformMat4f(const std::string& name, glm::mat4 matrix)
+    {
+        GLCall(glUniformMatrix4fv(GetUniformLocation(name),1, GL_FALSE, &matrix[0][0]));
     }
 
     int Shader::GetUniformLocation(const std::string& name)

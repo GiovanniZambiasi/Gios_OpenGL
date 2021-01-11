@@ -4,6 +4,8 @@
 #include "Rendering/VertexArray.h"
 #include "Rendering/IndexBuffer.h"
 #include "Rendering/Shader.h"
+#include "vendor/glm/glm.hpp"
+#include "vendor/glm/gtc/matrix_transform.hpp"
 
 namespace Gio
 {
@@ -13,7 +15,11 @@ namespace Gio
         Renderer();
         
         ~Renderer();
+
+        inline static glm::mat4 projectionMatrix = glm::ortho(-2.0f, 2.0f, -1.5f, 1.5f, -1.0f, 1.0f);;
     public:
+        static glm::mat4 GetProjectionMatrix() { return projectionMatrix; }
+        
         static void Draw(Rendering::VertexArray& vertexArray, Rendering::IndexBuffer& indexBuffer, Rendering::Shader& shader);
 
         static void Clear();

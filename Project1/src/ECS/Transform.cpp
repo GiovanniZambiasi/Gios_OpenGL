@@ -1,4 +1,5 @@
 ﻿#include "Transform.h"
+#include "../Debug.h"
 
 Gio::Transform::Transform()
     : position(Vector3())
@@ -19,6 +20,15 @@ Gio::Vector3 Gio::Transform::GetUp()
     up.Rotate(angle);
  
     return up;
+}
+
+Gio::Vector3 Gio::Transform::GetForward()
+{
+    Vector3 fwd = Vector3::Forward();
+
+    Debug::LogWarning("Transform.GetForward() not implemented!");
+    
+    return fwd;    
 }
 
 void Gio::Transform::Translate(Vector3 translation)

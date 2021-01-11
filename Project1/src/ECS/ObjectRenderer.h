@@ -1,11 +1,9 @@
 ﻿#pragma once
 
-#include <vector>
 #include "Component.h"
 #include "../Color.h";
 #include "Entity.h"
 #include "IndexBuffer.h"
-#include "../Vector2.h";
 #include "../Renderer.h"
 
 namespace Gio::ECS
@@ -13,14 +11,16 @@ namespace Gio::ECS
     class ObjectRenderer : public Component
     {
     private:
-        /*Rendering::IndexBuffer* _indexBuffer;
+        Rendering::IndexBuffer* _indexBuffer;
         Rendering::VertexArray* _vertexArray;
-        Rendering::VertexArray* _vertexArray;*/
-        std::vector<Vector2> _vertices;
+        Rendering::VertexBuffer* _vertexBuffer;
+        Rendering::VertexBufferLayout* _bufferLayout;
+        Rendering::Shader* _shader;
+        
         Color _color;
         
     public:
-        ObjectRenderer(Entity* entity, std::vector<Vector2> vertices, Color color);
+        ObjectRenderer(Entity* entity, float vertices[], float vertexBufferSize, unsigned int indices[], unsigned indexCount, Color color);
 
         ~ObjectRenderer();
         

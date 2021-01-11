@@ -7,25 +7,29 @@
 
 Gio::Game::Game()
 {
-    ECS::Entity* square = new ECS::Entity();
+    ECS::Entity* go = new ECS::Entity();
 
-    std::vector<Vector2> vec = std::vector<Vector2>
-    {
-        Vector2(.0f, 1.0f),
-        Vector2(-.5f, -.5f),
-        Vector2(.5f, -.5f),
-        /*Vector2(.5f, .5f),
-        Vector2(.5f, -.5f),
-        Vector2(-.5f, -.5f),*/
-    };
+    float vertices[] =
+        {
+            -.5f, .5f,
+            .5f, .5f,
+            .5f, -.5f,
+            -.5f, -.5f,
+        };
 
-    auto renderer = new ECS::ObjectRenderer(square, vec, Color(0.0f, 0.7f, 0.3f, 1.0f));
+    unsigned int indices[] =
+        {
+            0, 1, 2,
+            2, 3, 0
+        };
 
-    square->AddComponent(renderer);
+    auto renderer = new ECS::ObjectRenderer(go, vertices, 4* 2 * sizeof(float), indices, 6, Color(0.0f, 0.7f, 0.3f, 1.0f));
 
-    square->GetTransform()->Rotate(Vector3::Forward() * (45.0f));
-    
-    AddEntity(square);
+    go->AddComponent(renderer);
+    go->GetTransform()->Rotate(Vector3::Forward() * 45);
+    go->GetTransform()->Translate(Vector3::Right() * .2f);
+
+    AddEntity(go);
 }
 
 Gio::Game::~Game()
