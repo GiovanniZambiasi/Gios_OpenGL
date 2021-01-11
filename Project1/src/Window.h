@@ -14,7 +14,7 @@ namespace Gio
 
         ~Window();
 
-        bool TryToInitialize();
+        bool TryToInitialize(const char* title, int width, int height);
         
         bool ShouldClose();
 

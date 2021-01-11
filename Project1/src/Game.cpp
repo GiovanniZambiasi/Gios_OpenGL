@@ -1,24 +1,31 @@
 ﻿#include "Game.h"
 
 #include "Debug.h"
+#include "Math.h"
+#include "Renderer.h"
 #include "ECS/ObjectRenderer.h"
 
 Gio::Game::Game()
 {
-    ECS::Entity* _object = new ECS::Entity();
+    ECS::Entity* square = new ECS::Entity();
 
     std::vector<Vector2> vec = std::vector<Vector2>
     {
-        Vector2(0.0f, .5f),
+        Vector2(.0f, 1.0f),
         Vector2(-.5f, -.5f),
         Vector2(.5f, -.5f),
+        /*Vector2(.5f, .5f),
+        Vector2(.5f, -.5f),
+        Vector2(-.5f, -.5f),*/
     };
 
-    auto renderer = new ECS::ObjectRenderer(_object, vec, Color(0.0f, 0.7f, 0.3f, 1.0f));
+    auto renderer = new ECS::ObjectRenderer(square, vec, Color(0.0f, 0.7f, 0.3f, 1.0f));
 
-    _object->AddComponent(renderer);
+    square->AddComponent(renderer);
+
+    square->GetTransform()->Rotate(Vector3::Forward() * (45.0f));
     
-    AddEntity(_object);
+    AddEntity(square);
 }
 
 Gio::Game::~Game()
@@ -53,9 +60,11 @@ void Gio::Game::RunUpdate(float deltaTime)
 
         entity->Update(deltaTime);
 
-        entity->GetTransform()->Rotate(Vector3::Forward() * (30.0f * deltaTime));
+        entity->GetTransform()->Rotate(Vector3::Forward() * (10.0f * deltaTime));
+
+        auto up = entity->GetTransform()->GetUp();
         
-        Debug::Log(entity->GetTransform()->rotation.to_string() + " | up: " + entity->GetTransform()->GetUp().to_string());
+        Debug::Log(entity->GetTransform()->rotation.to_string() + " | up: " + up.to_string() + " : Mag: " + std::to_string(up.GetMagnitude()));
     }
 }
 

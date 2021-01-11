@@ -9,7 +9,7 @@ Gio::Window::~Window()
     glfwTerminate();
 }
 
-bool Gio::Window::TryToInitialize()
+bool Gio::Window::TryToInitialize(const char* title, int width, int height)
 {
     /* Initialize the library */
     if (!glfwInit())
@@ -20,7 +20,7 @@ bool Gio::Window::TryToInitialize()
     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    _window = glfwCreateWindow(800, 600, "New Window", NULL, NULL);
+    _window = glfwCreateWindow(width, height, title, NULL, NULL);
     if (!_window)
     {
         glfwTerminate();

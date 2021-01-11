@@ -1,5 +1,4 @@
-﻿#include <valarray>
-#include "Vector2.h"
+﻿#include "Vector2.h"
 #include "Math.h"
 
 Gio::Vector2::Vector2(float x, float y)
@@ -20,19 +19,23 @@ Gio::Vector2::~Vector2()
 
 void Gio::Vector2::Rotate(float degrees)
 {
-    x = x * std::cos(Math::RadiansToDegrees(degrees)) - y * std::sin(Math::RadiansToDegrees(degrees));
-    y = x * std::sin(Math::RadiansToDegrees(degrees)) + y * std::cos(Math::RadiansToDegrees(degrees));
+    float rX = x * Math::Cos(degrees) - y * Math::Sin(degrees);
+    float rY = x * Math::Sin(degrees) + y * Math::Cos(degrees);
+
+    x = rX;
+    y = rY;
 }
 
 float Gio::Vector2::GetMagnitude()
 {
-    return std::abs(x) + std::abs(y);
+    return Math::Sqrt(Math::Pow(x, 2) + Math::Pow(y, 2));
 }
 
-Gio::Vector2 Gio::Vector2::GetNormalized()
+void Gio::Vector2::Normalize()
 {
     float magnitude = GetMagnitude();
-    return Vector2(x/magnitude, y/magnitude);
+    x /= magnitude;
+    y /= magnitude;
 }
 
 std::string Gio::Vector2::to_string()

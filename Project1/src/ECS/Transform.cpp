@@ -1,7 +1,7 @@
 ﻿#include "Transform.h"
 
 Gio::Transform::Transform()
-    : position(Vector2())
+    : position(Vector3())
     , rotation(Vector3())
 {
 }
@@ -10,18 +10,18 @@ Gio::Transform::~Transform()
 {
 }
 
-Gio::Vector2 Gio::Transform::GetUp()
+Gio::Vector3 Gio::Transform::GetUp()
 {
-    Vector2 forward = Vector2::Up();
+    Vector3 up = Vector3::Up();
     
     float angle = rotation.z;
     
-    forward.Rotate(angle);
-    
-    return forward.GetNormalized();
+    up.Rotate(angle);
+ 
+    return up;
 }
 
-void Gio::Transform::Translate(Vector2 translation)
+void Gio::Transform::Translate(Vector3 translation)
 {
     position = position + translation;
 }

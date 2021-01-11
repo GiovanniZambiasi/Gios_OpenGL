@@ -9,7 +9,7 @@ int main()
 {
     Window window;
 
-    if (!window.TryToInitialize())
+    if (!window.TryToInitialize("Gio's OpenGL", 800, 800))
         return -1;
 
     Game game = Game();

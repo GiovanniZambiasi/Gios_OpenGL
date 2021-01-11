@@ -31,8 +31,10 @@ void Gio::ECS::ObjectRenderer::LateUpdate(float deltaTime)
     
     Vector2 position = transform->position;
 
+    glRotatef(transform->rotation.x, 1.0f, .0f, .0f);
+    glRotatef(transform->rotation.y, .0f, 1.0f, .0f);
     glRotatef(transform->rotation.z, .0f, .0f, 1.0f);
-    
+
     glTranslatef(position.x, position.y, 0.0f);
 
     glColor3f(_color.r, _color.g, _color.b);

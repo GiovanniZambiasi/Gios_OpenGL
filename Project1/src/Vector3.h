@@ -14,12 +14,12 @@ namespace Gio
 
         ~Vector3();
 
-        Vector3 GetNormalized();
-        
         float GetMagnitude() override;
-        
+
         std::string to_string() override;
         
+        void Normalize() override;
+
         Vector3& operator+(const Vector3& other)
         {
             x+=other.x;
@@ -49,5 +49,9 @@ namespace Gio
         static Vector3 Forward() { return Vector3(.0f, .0f, 1.0f); }
         
         static Vector3 Back() { return Vector3(.0f, .0f, -1.0f); }
+        
+        static Vector3 Zero() { return Vector3(.0f, .0f, .0f); }
+        
+        static Vector3 One() { return Vector3(1.0f, 1.0f, 1.0f); }
     };
 }

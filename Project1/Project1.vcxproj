@@ -376,7 +376,6 @@
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Math.cpp" />
-    <ClCompile Include="src\Object2D.cpp" />
     <ClCompile Include="src\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -465,7 +464,6 @@
     <ClInclude Include="src\ECS\Transform.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Math.h" />
-    <ClInclude Include="src\Object2D.h" />
     <ClInclude Include="src\Debug.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Rendering\IndexBuffer.h" />
