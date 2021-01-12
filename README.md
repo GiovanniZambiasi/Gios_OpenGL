@@ -9,14 +9,15 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Rendering pipeline
 - [X] Time and deltaTime
 - [X] Vector structs and maths
+- [X] Create wrapper for Mesh
 - [ ] Input system
 - [ ] Gizmos
     - [ ] Gizmos shader
     - [ ] Gizmos drawer
-- [ ] Create wrapper for Mesh
 - [ ] Create wrapper for Material
 - [ ] Component inspectors
 - [ ] Camera rotation
+- [ ] Camera translate GUI
 
 ## Fixes
 - [ ] Fix projection when res changed in runtime 

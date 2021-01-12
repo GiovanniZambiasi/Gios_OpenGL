@@ -51,7 +51,7 @@ void Gio::Game::RemoveEntity(ECS::Entity* entity)
 }
 
 void Gio::Game::Update(float deltaTime)
-{
+{    
     float time = Time::GetTimeSinceStartSeconds();
     float sinOfTime =Math::Sin(time * 100.0f); 
     float sinAnim = sinOfTime * 150.0f;

@@ -512,6 +512,7 @@
     </ClCompile>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GUI.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Math.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -951,6 +952,8 @@
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GUI.h" />
+    <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Input\Key.h" />
     <ClInclude Include="src\Math.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Rendering\IndexBuffer.h" />

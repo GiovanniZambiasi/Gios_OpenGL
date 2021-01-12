@@ -5,6 +5,8 @@
 #include "Renderer.h"
 #include "Time.h"
 #include "Window.h"
+#include "Input/Input.h"
+#include "Input/Key.h"
 
 using namespace Gio;
 
@@ -36,6 +38,8 @@ int main()
         return -1;
 
     GUI::Initialize(*window);
+
+    Input::Input::Initialize(*window);
     
     Camera::Initialize();
 
@@ -47,6 +51,11 @@ int main()
     
     while (!window->ShouldClose())
     {
+        if(Input::Input::GetKeyDown(Input::Key::Space))
+        {
+            Debug::Log("Space down");
+        }
+        
         Time::RecordFrameTime();
         
         GUI::Clear();
