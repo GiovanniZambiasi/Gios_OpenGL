@@ -2,6 +2,7 @@
 #include "Color.h"
 #include "Transform.h"
 #include "Vector3.h"
+#include "Rendering/Mesh.h"
 #include "Rendering/IndexBuffer.h"
 #include "Rendering/Shader.h"
 #include "Rendering/VertexArray.h"
@@ -33,6 +34,8 @@ namespace Gio
         static void SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight);
         
         static void Draw(Transform& transform, Rendering::VertexArray& vertexArray, Rendering::IndexBuffer& indexBuffer, Rendering::Shader& shader);
+        
+        static void Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Shader& shader);
 
         static void Clear();
 

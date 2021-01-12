@@ -1,28 +1,27 @@
 ﻿#pragma once
 
 #include "../Component.h"
-#include "../Color.h";
 #include "../Entity.h"
-#include "IndexBuffer.h"
-#include "../Renderer.h"
+#include "../../Color.h"
+#include "../../Rendering/Mesh.h"
+#include "../../Rendering/Shader.h"
 
 namespace Gio::ECS::Components
 {
     class ObjectRenderer : public Component
     {
     private:
-        Rendering::VertexBuffer _vertexBuffer;
-        Rendering::VertexBufferLayout _bufferLayout;
-        Rendering::VertexArray _vertexArray;
-        Rendering::IndexBuffer _indexBuffer;
+        Rendering::Mesh& _mesh;
         Rendering::Shader _shader;
         
         Color _color;
         
     public:
-        ObjectRenderer(Entity& entity, float vertices[], float vertexBufferSize, unsigned int indices[], unsigned indexCount, Color color);
+        ObjectRenderer(Entity& entity, Rendering::Mesh& mesh, Color color);
 
         ~ObjectRenderer();
+
+        void SetColor(Color color);
         
         void Draw() override;
     };

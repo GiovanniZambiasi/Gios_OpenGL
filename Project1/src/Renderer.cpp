@@ -1,7 +1,10 @@
-#include "Rendering/OpenGLUtilities.h"
 #include "Renderer.h"
+#include "Rendering/OpenGLUtilities.h"
+#include "Rendering/Mesh.h"
+#include "Rendering/IndexBuffer.h"
+#include "Rendering/Shader.h"
+#include "Rendering/VertexArray.h"
 #include "Camera.h"
-#include "Debug.h"
 
 using namespace Gio::Rendering;
 
@@ -27,10 +30,6 @@ namespace Gio
 
     void Renderer::DrawLine(Vector3 start, Vector3 end, Color color)
     {
-        /*sceneGizmosShader->Bind();
-        sceneGizmosShader->SetUniform4f("u_Color", color.r, color.g, color.b, color.a);
-        sceneGizmosShader->SetUniformMat4f("u_MVP", viewProjectionMatrix);*/
-
         glBegin(GL_LINE);
         
         glColor3f(color.r, color.g, color.b);
@@ -40,8 +39,6 @@ namespace Gio
         glVertex3f(end.x, end.y, end.z);
         
         glEnd();
-
-        //sceneGizmosShader->UnBind();
     }
 
     void Renderer::BeforeDraw()
@@ -60,6 +57,17 @@ namespace Gio
         indexBuffer.Bind();
         
         GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr));
+    }
+
+    void Renderer::Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Shader& shader)
+    {
+        shader.Bind();
+
+        shader.SetUniformMat4f("u_MVP", viewProjectionMatrix * CalculateModelMatrix(transform));
+
+        mesh.Bind();
+        
+        GLCall(glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, nullptr));
     }
 
     void Renderer::CalculateViewProjectionMatrix()

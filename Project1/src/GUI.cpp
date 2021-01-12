@@ -1,11 +1,10 @@
-﻿#include "GUI.h"
-#include <string>
+﻿#include <string>
+#include "GUI.h"
 #include "Game.h"
-#include "Math.h"
 #include "time.h"
 #include "Window.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_glfw_gl3.h"
+#include "vendor/imgui/imgui.h"
+#include "vendor/imgui/imgui_impl_glfw_gl3.h"
 
 void Gio::GUI::Initialize(Window& window)
 {

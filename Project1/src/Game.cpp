@@ -5,6 +5,7 @@
 #include "Renderer.h"
 #include "time.h"
 #include "ECS/Components/ObjectRenderer.h"
+#include "Rendering/Primitives/Square.h"
 
 Gio::Game::Game()
 {
@@ -12,22 +13,9 @@ Gio::Game::Game()
     
     ECS::Entity* cube = new ECS::Entity("Green Cube");
 
-    float vertices[] =
-    {
-        -1.0f, -1.0f,
-        -1.0f, 1.0f,
-        1.0f, 1.0f,
-        1.0f, -1.0f,
-    };
-
-    unsigned int indices[] =
-    {
-        0, 1, 2,
-        2, 3, 0
-    };
-
-    auto renderer = new ECS::Components::ObjectRenderer(*cube, vertices, 4 * 2 * sizeof(float), indices, 6,
-                                            Color(0.5f, 0.0f, 0.5f, 1.0f));
+    auto mesh = new Rendering::Primitives::Square(1.0f, 1.0f);
+    
+    auto renderer = new ECS::Components::ObjectRenderer(*cube, *mesh, Color(0.0f, 0.4f, 0.0f, 1.0f));
 
     cube->AddComponent(renderer);
 

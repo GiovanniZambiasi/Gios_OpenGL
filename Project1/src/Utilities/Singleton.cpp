@@ -3,7 +3,7 @@
 #include "../Debug.h"
 
 template <class T>
-Gio::Utilities::Singleton<T>::Singleton()
+Gio::Utilities::Singleton<T>::Singleton<T>()
 {
     if(instance != nullptr)
     {
@@ -14,7 +14,7 @@ Gio::Utilities::Singleton<T>::Singleton()
 }
 
 template <class T>
-Gio::Utilities::Singleton<T>::~Singleton()
+Gio::Utilities::Singleton<T>::~Singleton<T>()
 {
     if(instance == this)
     {
