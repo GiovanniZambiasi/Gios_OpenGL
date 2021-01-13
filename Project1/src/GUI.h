@@ -1,31 +1,36 @@
 ﻿#pragma once
+#include "Game.h"
 #include "Window.h"
+#include "Input/IInputDevice.h"
+#include "Input/Input.h"
 
 namespace Gio
 {
     class GUI
     {
     private:
-        GUI();
+        Window& _window;
+        Game& _game;
+        Input::Input& _input;
+        std::vector<Input::IInputDevice*> _devices;
+        std::vector<Input::IInputElement*> _inputElements;
+        bool _shouldShowDebugInfo = false;
+        bool _shouldShowEntities = false;
+        bool _shouldShowInput = false;
+        int _windowHeight = 0;
+        int _windowWidth = 0;
+        
+    public:
+        GUI(Game& game, Window& window, Input::Input& input);
 
         ~GUI();
 
-        inline static bool _shouldShowDebugInfo = false;
-        inline static bool _shouldShowEntities = false;
-        inline static int _windowHeight = 0;
-        inline static int _windowWidth = 0;
-    public:
-
-        static void Initialize(Window& window);
-
-        static void Clear();
+        void Clear();
         
-        static void Draw();
-        
-        static void Shutdown();
+        void Draw();
 
-        static void DrawSettingsWindow();
+        void DrawSettingsWindow();
 
-        inline static GUI* instance;
+        void DrawInputDevices();
     };
 }

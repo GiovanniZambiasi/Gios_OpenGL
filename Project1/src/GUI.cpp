@@ -3,14 +3,26 @@
 #include "Game.h"
 #include "time.h"
 #include "Window.h"
+#include "Input/IInputDevice.h"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
+#include "vendor/imgui/imgui_internal.h"
 
-void Gio::GUI::Initialize(Window& window)
-{
+Gio::GUI::GUI(Game& game, Window& window, Input::Input& input)
+    : _window(window)
+    , _game(game)
+    , _input(input)
+{   
     ImGui::CreateContext();
     ImGui_ImplGlfwGL3_Init(window.GetGLFWWindow(), true);
     ImGui::StyleColorsDark();
+}
+
+Gio::GUI::~GUI()
+{
+    ImGui_ImplGlfwGL3_Shutdown();
+    ImGui::DestroyContext();
+    glfwTerminate();
 }
 
 void Gio::GUI::Clear()
@@ -44,11 +56,9 @@ void DrawEntity(Gio::ECS::Entity* entity)
     }
 }
 
-void DrawEntities()
+void DrawEntities(Gio::Game& game)
 {
     ImGui::Begin("Entities");
-
-    Gio::Game& game = *Gio::Game::instance;
 
     std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
     
@@ -65,13 +75,17 @@ void DrawEntities()
 
 void Gio::GUI::Draw()
 {
-    instance->DrawSettingsWindow();
+    DrawSettingsWindow();
     
-    if(instance->_shouldShowDebugInfo)
+    if(_shouldShowDebugInfo)
         DrawDebugInfo();
     
-    if(instance->_shouldShowEntities)
-        DrawEntities();
+    if(_shouldShowEntities)
+        DrawEntities(_game);
+
+    if(_shouldShowInput)
+        DrawInputDevices();
+    
     /*
     bool show_demo_window = true;
     bool show_another_window = false;
@@ -101,18 +115,12 @@ void Gio::GUI::Draw()
     ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void Gio::GUI::Shutdown()
-{
-    ImGui_ImplGlfwGL3_Shutdown();
-    ImGui::DestroyContext();
-    glfwTerminate();
-}
-
 void Gio::GUI::DrawSettingsWindow()
 {
     ImGui::Begin("Settings");
     ImGui::Checkbox("Show Debug Info", &_shouldShowDebugInfo);
     ImGui::Checkbox("Show Entities", &_shouldShowEntities);
+    ImGui::Checkbox("Show Input Devices", &_shouldShowInput);
     
     ImGui::Text("Video:");
     ImGui::Indent(1);
@@ -123,8 +131,59 @@ void Gio::GUI::DrawSettingsWindow()
 
     if(ImGui::Button("Apply"))
     {
-        Gio::Window::instance->SetSize(_windowWidth, _windowHeight);
+        _window.SetSize(_windowWidth, _windowHeight);
     }
     
+    ImGui::End();
+}
+
+void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vector<Gio::Input::IInputElement*> elements)
+{
+    std::string index = std::to_string(iteration);
+    
+    ImGui::Text(("[" + index + "] " +  device->GetName()).c_str());
+
+    auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
+    ImGui::BeginChild(index.c_str(), ImVec2(currentWindowSize.x - 25, currentWindowSize.y / 2));
+    
+    ImGui::Indent(20);
+    
+    device->GetElements(elements);
+    
+    for (int j = 0; j < elements.size(); j++)
+    {
+        auto element = elements[j];
+
+        ImVec4 color = element->IsPressed()
+            ? (element->WasPressedThisFrame() ? ImVec4(.0f, .0f, .7f, 1.0f) : ImVec4(.0f, .7f, .0f, 1.0f))
+            : (element->WasReleasedThisFrame() ? ImVec4(1.0f, 0.0f, 0.0f, 1.0f) : ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+        std::string log = "[" + std::to_string(j) + "] " + element->GetName();
+
+        ImGui::TextColored(color, log.c_str());
+    }
+
+    ImGui::EndChild();
+}
+
+void Gio::GUI::DrawInputDevices()
+{
+    ImGui::Begin("Input Devices:");
+
+    _devices.clear();
+    _input.GetDevices(_devices);
+
+    for(int i = 0; i < _devices.size(); i++)
+    {
+        Input::IInputDevice* device = _devices[i];
+
+        _inputElements.clear();
+
+        if(i != 0)
+            ImGui::Separator();
+        
+        DrawInputDevice(i, device, _inputElements);
+    }
+
     ImGui::End();
 }

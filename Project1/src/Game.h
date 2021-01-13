@@ -1,8 +1,9 @@
 ﻿#pragma once
 #include <vector>
 
+
+#include "Renderer.h"
 #include "ECS/Entity.h"
-#include "Utilities/Singleton.h"
 
 namespace Gio
 {
@@ -24,8 +25,6 @@ namespace Gio
         
         void Update(float deltaTime);
         
-        void Draw();
-
-        inline static Game* instance = nullptr; 
+        void Draw(Renderer& renderer);
     };
 }

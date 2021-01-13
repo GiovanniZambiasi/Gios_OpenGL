@@ -50,12 +50,12 @@ void Gio::ECS::Entity::Update(float deltaTime)
     }
 }
 
-void Gio::ECS::Entity::Draw()
+void Gio::ECS::Entity::Draw(Renderer& renderer)
 {
     for (unsigned int i = 0; i < _components.size(); i++)
     {
         auto component = _components[i];
-        component->Draw();
+        component->Draw(renderer);
     }
 }
 

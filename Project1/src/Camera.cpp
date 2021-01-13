@@ -1,5 +1,9 @@
 ﻿#include "Camera.h"
 
-void Gio::Camera::Initialize()
+Gio::Camera::Camera()
+{
+}
+
+Gio::Camera::~Camera()
 {
 }

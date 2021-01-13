@@ -22,7 +22,7 @@ void Gio::ECS::Components::ObjectRenderer::SetColor(Color color)
     _shader.UnBind();
 }
 
-void Gio::ECS::Components::ObjectRenderer::Draw()
+void Gio::ECS::Components::ObjectRenderer::Draw(Renderer& renderer)
 {    
-    Renderer::Draw(entity.GetTransform(), _mesh, _shader);
+    renderer.Draw(entity.GetTransform(), _mesh, _shader);
 }

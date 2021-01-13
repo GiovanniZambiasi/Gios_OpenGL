@@ -9,8 +9,6 @@
 
 Gio::Game::Game()
 {
-    instance = this;
-    
     ECS::Entity* cube = new ECS::Entity("Green Cube");
 
     auto mesh = new Rendering::Primitives::Square(1.0f, 1.0f);
@@ -84,12 +82,12 @@ void Gio::Game::Update(float deltaTime)
     }
 }
 
-void Gio::Game::Draw()
+void Gio::Game::Draw(Renderer& renderer)
 {
     for (int i = 0; i < _entities.size(); i++)
     {
         auto entity = _entities[i];
 
-        entity->Draw();
+        entity->Draw(renderer);
     }
 }

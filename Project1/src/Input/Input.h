@@ -1,20 +1,23 @@
 ﻿#pragma once
-#include "Key.h"
-#include "../Window.h"
+
+#include <vector>
+#include "IInputDevice.h"
+#include "IInputDeviceFactory.h"
 
 namespace Gio::Input
 {
-    class Input
+    class Input /*: public Utilities::Singleton<Input>*/
     {
     private:
-        Input();
+        std::vector<IInputDevice*> _devices;
+    
+    public:
+        Input(IInputDeviceFactory& deviceFactory);
         
         ~Input();
-        
-        inline static Window* _window = nullptr;
-    public:
-        static void Initialize(Window& window);
 
-        static bool GetKeyDown(Key key);
+        void Update();
+        
+        void GetDevices(std::vector<IInputDevice*>& collection);
     };
 }

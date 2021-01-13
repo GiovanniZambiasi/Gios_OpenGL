@@ -1,6 +1,8 @@
 ﻿#pragma once
 
 #include <vector>
+
+#include "../Renderer.h"
 #include "../Transform.h"
 
 namespace Gio::ECS
@@ -32,7 +34,7 @@ namespace Gio::ECS
         
         void Update(float deltaTime);
 
-        void Draw();
+        void Draw(Renderer& renderer);
 
         void Delete();
     };

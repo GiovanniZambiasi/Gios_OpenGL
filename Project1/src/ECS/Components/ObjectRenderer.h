@@ -23,6 +23,6 @@ namespace Gio::ECS::Components
 
         void SetColor(Color color);
         
-        void Draw() override;
+        void Draw(Renderer& renderer) override;
     };
 }

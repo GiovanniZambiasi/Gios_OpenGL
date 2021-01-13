@@ -10,7 +10,8 @@ using namespace Gio::Rendering;
 
 namespace Gio
 {
-    Renderer::Renderer()
+    Renderer::Renderer(Camera* camera)
+        : _camera(camera), projectionMatrix(), viewProjectionMatrix()
     {
     }
 
@@ -44,14 +45,15 @@ namespace Gio
     void Renderer::BeforeDraw()
     {
         CalculateViewProjectionMatrix();
-        DrawSceneGizmos();
     }
 
     void Renderer::Draw(Transform& transform, VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
     {
         shader.Bind();
 
-        shader.SetUniformMat4f("u_MVP", viewProjectionMatrix * CalculateModelMatrix(transform));
+        auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
+        
+        shader.SetUniformMat4f("u_MVP", modelViewProjectionMatrix);
         
         vertexArray.Bind();
         indexBuffer.Bind();
@@ -63,7 +65,9 @@ namespace Gio
     {
         shader.Bind();
 
-        shader.SetUniformMat4f("u_MVP", viewProjectionMatrix * CalculateModelMatrix(transform));
+        auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
+        
+        shader.SetUniformMat4f("u_MVP", modelViewProjectionMatrix);
 
         mesh.Bind();
         
@@ -72,19 +76,13 @@ namespace Gio
 
     void Renderer::CalculateViewProjectionMatrix()
     {
-        Transform& cameraTransform = Camera::GetTransform();
+        Transform& cameraTransform = _camera->GetTransform();
         
         auto cameraPosition = cameraTransform.position;
         
         glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
 
         viewProjectionMatrix = projectionMatrix * view;
-    }
-
-    void Renderer::DrawSceneGizmos()
-    {
-        Renderer::DrawLine(Vector3::Left() * 1000.0f, Vector3::Right() * 1000.0f, Color::Red());
-        Renderer::DrawLine(Vector3::Up() * 1000.0f, Vector3::Down() * 1000.0f, Color::Green());
     }
 
     glm::mat4 Renderer::CalculateModelMatrix(Transform& transform)

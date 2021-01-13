@@ -1,13 +1,31 @@
 ﻿#include "Input.h"
 
-void Gio::Input::Input::Initialize(Window& window)
+#include "IInputDeviceFactory.h"
+
+Gio::Input::Input::Input(IInputDeviceFactory& deviceFactory)
 {
-    _window = &window;
+    deviceFactory.CreateDevices(_devices);
 }
 
-bool Gio::Input::Input::GetKeyDown(Key key)
+Gio::Input::Input::~Input()
 {
-    int keyState = glfwGetKey(_window->GetGLFWWindow(), key);
-    if(keyState == GLFW_PRESS)
-        return true;
+}
+
+void Gio::Input::Input::Update()
+{
+    for (int i = 0; i < _devices.size(); i++)
+    {
+        IInputDevice* device = _devices[i];
+        device->Update();
+    }
+}
+
+void Gio::Input::Input::GetDevices(std::vector<IInputDevice*>& collection)
+{
+    for (int i = 0; i < _devices.size(); i++)
+    {
+        IInputDevice* device = _devices[i];
+
+        collection.push_back(device);
+    }
 }

@@ -11,9 +11,17 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Vector structs and maths
 - [X] Create wrapper for Mesh
 - [ ] Input system
+  - [ ] Device interface
+  - [ ] Key interface
+  - [ ] Device factory
+  - [ ] ``GetDevice<T>``
+  - [ ] ``Device.GetKey<T>``
+  - [ ] Input Actions. Configured externally in file
+  - [ ] Input Actions to be mapped to device key name
+  - [ ] Fast mapping of device name to device ref
 - [ ] Gizmos
-    - [ ] Gizmos shader
-    - [ ] Gizmos drawer
+  - [ ] Gizmos shader
+  - [ ] Gizmos drawer
 - [ ] Create wrapper for Material
 - [ ] Component inspectors
 - [ ] Camera rotation
