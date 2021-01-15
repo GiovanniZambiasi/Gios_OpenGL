@@ -118,12 +118,14 @@ void Gio::GUI::Draw()
 void Gio::GUI::DrawSettingsWindow()
 {
     ImGui::Begin("Settings");
-    ImGui::Checkbox("Show Debug Info", &_shouldShowDebugInfo);
-    ImGui::Checkbox("Show Entities", &_shouldShowEntities);
-    ImGui::Checkbox("Show Input Devices", &_shouldShowInput);
+    ImGui::Checkbox("Debug Info", &_shouldShowDebugInfo);
+    ImGui::Checkbox("Entities", &_shouldShowEntities);
+    ImGui::Checkbox("Input Devices", &_shouldShowInput);
+
+    ImGui::Separator();
     
     ImGui::Text("Video:");
-    ImGui::Indent(1);
+    ImGui::Indent(10);
     
     ImGui::InputInt("Width", &_windowWidth);
     
@@ -146,7 +148,7 @@ void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vecto
     auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
     ImGui::BeginChild(index.c_str(), ImVec2(currentWindowSize.x - 25, currentWindowSize.y / 2));
     
-    ImGui::Indent(20);
+    ImGui::Indent(10);
     
     device->GetElements(elements);
     

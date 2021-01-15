@@ -1,7 +1,8 @@
 ﻿#pragma once
-#include <unordered_map>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <unordered_map>
 #include "../IInputElement.h"
 
 namespace Gio::Input::Devices
