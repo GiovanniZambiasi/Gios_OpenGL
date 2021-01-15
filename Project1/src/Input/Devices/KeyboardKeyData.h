@@ -9,16 +9,23 @@ namespace Gio::Input::Devices
     struct KeyboardKeyData
     {
     public:
-        KeyboardKeyData(const std::string& name, KeyboardKey::Types type, int glfw_key_id)
+        KeyboardKeyData(const std::string& name, KeyboardKey::Types type, int glfwKeyID)
             : name(name),
               type(type),
-              glfwKeyID(glfw_key_id)
-        {
-        }
+              glfwKeyID(glfwKeyID)
+        { }
 
+        KeyboardKeyData()
+            :name("NULL")
+            ,type(KeyboardKey::Unknown)
+            ,glfwKeyID(0)
+        { }
+        
         std::string name;
         KeyboardKey::Types type;
         int glfwKeyID;
+        
+        std::string to_string() const { return name + " Gio's Type ID: " + std::to_string(type) + " GLFW Type ID: " + std::to_string(glfwKeyID); }
     };
 
     void to_json(nlohmann::json& j, const Gio::Input::Devices::KeyboardKeyData& keyData);

@@ -106,7 +106,7 @@ namespace Gio::Rendering
 
     ShaderProgramSource Shader::ParseShader(const std::string& filePath)
     {
-        std::ifstream __stream(filePath);
+        std::ifstream stream(filePath);
 
         enum class ShaderType
         {
@@ -116,7 +116,7 @@ namespace Gio::Rendering
         std::string __line;
         std::stringstream __ss[2];
         ShaderType __type = ShaderType::NONE;
-        while (getline(__stream, __line))
+        while (getline(stream, __line))
         {
             if (__line.find("#shader") != std::string::npos)
             {

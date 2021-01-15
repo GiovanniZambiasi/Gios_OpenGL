@@ -1485,7 +1485,7 @@
     <None Include="res\Shaders\Basic.shader" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="res\Input\KeyboardMapping.json" />
+    <Content Include="res\Input\GLFW\Map_Keyboard.json" />
     <Content Include="src\vendor\glm\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -1496,9 +1496,9 @@
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ItemGroup>
-    <_CopyItems Include="$(ProjectDir)res\**\*.*"/>
+    <_CopyItems Include="$(ProjectDir)res\**\*.*" />
   </ItemGroup>
   <Target Name="AfterBuild">
-    <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(OutDir)\res\%(RecursiveDir)"/>
+    <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(OutDir)\res\%(RecursiveDir)" />
   </Target>
 </Project>

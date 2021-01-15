@@ -10,7 +10,7 @@ namespace Gio::Input::Devices
     class Keyboard : public IInputDevice
     {
     private:
-        std::vector<KeyboardKey> _keys;
+        std::vector<KeyboardKey*> _keys;
     
     public:
         Keyboard(GLFWwindow* window);
@@ -22,5 +22,7 @@ namespace Gio::Input::Devices
         void Update() override;
         
         void GetElements(std::vector<IInputElement*>& elements) override;
+
+        KeyboardKey* GetKey(KeyboardKey::Types type);
     };
 }
