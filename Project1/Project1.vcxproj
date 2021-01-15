@@ -1495,4 +1495,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <_CopyItems Include="$(ProjectDir)res\**\*.*"/>
+  </ItemGroup>
+  <Target Name="AfterBuild">
+    <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(OutDir)\res\%(RecursiveDir)"/>
+  </Target>
 </Project>
