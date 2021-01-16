@@ -1,10 +1,8 @@
 ﻿#include "Game.h"
-#include "Camera.h"
 #include "Debug.h"
-#include "Math.h"
 #include "Renderer.h"
-#include "time.h"
 #include "ECS/Components/ObjectRenderer.h"
+#include "ECS/Components/Rotator.h"
 #include "Rendering/Primitives/Square.h"
 
 Gio::Game::Game()
@@ -14,8 +12,10 @@ Gio::Game::Game()
     auto mesh = new Rendering::Primitives::Square(1.0f, 1.0f);
     
     auto renderer = new ECS::Components::ObjectRenderer(*cube, *mesh, Color(0.0f, 0.4f, 0.0f, 1.0f));
+    auto rotator = new ECS::Components::Rotator(*cube);
 
     cube->AddComponent(renderer);
+    cube->AddComponent(rotator);
 
     Transform& cubeTransform = cube->GetTransform();
     cubeTransform.SetScale(Vector3::One() * 100.0f);
@@ -50,11 +50,7 @@ void Gio::Game::RemoveEntity(ECS::Entity* entity)
 
 void Gio::Game::Update(float deltaTime)
 {    
-    float time = Time::GetTimeSinceStartSeconds();
-    float sinOfTime =Math::Sin(time * 100.0f); 
-    float sinAnim = sinOfTime * 150.0f;
-
-    for (int i = _entities.size() - 1; i >= 0; i--)        // Loops in reverse because entities can get destroyed, and removed from the collection
+    for (int i = _entities.size() - 1; i >= 0; i--)        // Loops in reverse because entities can get destroyed and removed from the collection
     {
         auto entity = _entities[i];
             
@@ -65,19 +61,6 @@ void Gio::Game::Update(float deltaTime)
         else
         {
             entity->Update(deltaTime);
-
-            Transform& trans = entity->GetTransform();
-
-            //auto scale = trans.GetScale();
-            //scale.y = 100.0f * scaleAnim;
-
-            //trans.SetScale(scale);
-        
-            trans.position = Vector3::Up() * sinAnim;
-
-            entity->GetTransform().Rotate(Vector3::Forward() * (360.0f * deltaTime));
-        
-            //Debug::Log("Entity's up: " + up.to_string() + " rotation: " + entity->GetTransform().rotation.to_string());
         }
     }
 }

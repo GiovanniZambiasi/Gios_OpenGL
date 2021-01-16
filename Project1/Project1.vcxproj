@@ -442,6 +442,7 @@
       <AdditionalIncludeDirectories>src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\ECS\Components\Rotator.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1026,6 +1027,7 @@
     <ClInclude Include="src\Debug.h" />
     <ClInclude Include="src\ECS\Component.h" />
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
+    <ClInclude Include="src\ECS\Components\Rotator.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GUI.h" />

@@ -11,7 +11,8 @@ namespace Gio::ECS
         Component(Entity& entity);
 
     public:
-        
+        virtual ~Component();
+
         virtual void Update(float deltaTime) {}
 
         virtual void Draw(Renderer& renderer) {}

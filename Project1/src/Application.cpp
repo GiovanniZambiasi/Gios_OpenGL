@@ -45,13 +45,13 @@ bool Gio::Application::Run(std::string name, unsigned int windowWidth, unsigned 
     while (!_window->ShouldClose())
     {
         Time::RecordFrameTime();
-
+        
+        float deltaTime = Time::GetDeltaTimeSeconds();
+        
         _gui->Clear();
 
         _renderer->Clear();
         
-        float deltaTime = Time::GetDeltaTimeSeconds();
-
         _input->Update();
         
         _game->Update(deltaTime);
