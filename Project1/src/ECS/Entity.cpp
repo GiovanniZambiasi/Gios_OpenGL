@@ -43,6 +43,8 @@ void Gio::ECS::Entity::RemoveComponent(Component* component)
 
 void Gio::ECS::Entity::Update(float deltaTime)
 {
+    OnUpdate(deltaTime);
+    
     for (unsigned int i = 0; i < _components.size(); i++)
     {
         auto component = _components[i];

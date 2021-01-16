@@ -2,25 +2,17 @@
 #include "Debug.h"
 #include "Renderer.h"
 #include "ECS/Components/ObjectRenderer.h"
-#include "ECS/Components/Rotator.h"
-#include "Rendering/Primitives/Square.h"
+#include "ECS/Entities/RotatingSquare.h"
 
 Gio::Game::Game()
 {
-    ECS::Entity* cube = new ECS::Entity("Green Cube");
-
-    auto mesh = new Rendering::Primitives::Square(1.0f, 1.0f);
+    ECS::Entities::RotatingSquare* square = new ECS::Entities::RotatingSquare(Color::Red(), Vector3(-200.0f, 0.0f, 0.0f));
     
-    auto renderer = new ECS::Components::ObjectRenderer(*cube, *mesh, Color(0.0f, 0.4f, 0.0f, 1.0f));
-    auto rotator = new ECS::Components::Rotator(*cube);
-
-    cube->AddComponent(renderer);
-    cube->AddComponent(rotator);
-
-    Transform& cubeTransform = cube->GetTransform();
-    cubeTransform.SetScale(Vector3::One() * 100.0f);
+    AddEntity(square);
     
-    AddEntity(cube);
+    square = new ECS::Entities::RotatingSquare(Color::Blue(), Vector3(200.0f, 0.0f, 0.0f));
+
+    AddEntity(square);
 }
 
 Gio::Game::~Game()

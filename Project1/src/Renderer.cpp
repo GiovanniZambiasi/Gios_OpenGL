@@ -5,6 +5,7 @@
 #include "Rendering/Shader.h"
 #include "Rendering/VertexArray.h"
 #include "Camera.h"
+#include "Rendering/ShaderManager.h"
 
 using namespace Gio::Rendering;
 
@@ -13,6 +14,7 @@ namespace Gio
     Renderer::Renderer(Camera* camera)
         : _camera(camera), projectionMatrix(), viewProjectionMatrix()
     {
+        ShaderManager::LoadShaders();
     }
 
     Renderer::~Renderer()

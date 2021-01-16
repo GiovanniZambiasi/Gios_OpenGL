@@ -6,7 +6,6 @@
 #include "../../Renderer.h"
 #include "../../Rendering/Material.h"
 #include "../../Rendering/Mesh.h"
-#include "../../Rendering/Shader.h"
 
 namespace Gio::ECS::Components
 {
@@ -15,7 +14,6 @@ namespace Gio::ECS::Components
     private:
         Rendering::Mesh& _mesh;
         Rendering::Material* _material;
-        Rendering::Shader _shader;
         
         Color _color;
         

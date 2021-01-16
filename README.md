@@ -11,6 +11,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Vector structs and maths
 - [X] Create wrapper for Mesh
 - [X] Create wrapper for Material
+- [X] Shader manager for shader reuse
 - [ ] Input system
   - [X] Device interface
   - [X] Key interface
@@ -23,7 +24,6 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer
-- [ ] Shader manager for shader reuse
 - [ ] Component inspectors
 - [ ] Camera rotation
 - [ ] Camera translate GUI

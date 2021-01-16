@@ -1,5 +1,5 @@
 #include <fstream>
-#include <sstream>
+#include <filesystem>
 #include "../Debug.h"
 #include "OpenGLUtilities.h"
 #include "Shader.h"
@@ -8,11 +8,15 @@
 
 namespace Gio::Rendering 
 {
-    Shader::Shader(const std::string& filePath)
-        : _filePath(filePath), _rendererID(0)
+    Shader::Shader(ShaderProgramSource source)
+        : Shader(source.name, source.vertexSource, source.fragmentSource)
     {
-        ShaderProgramSource __source = ParseShader("res/Shaders/Basic.shader");
-        _rendererID = CreateShader(__source.vertexSource, __source.fragmentSource);
+    }
+
+    Shader::Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
+        : _name(name)
+    {
+        _rendererID = CreateShader(vertexSource, fragmentSource);
     }
 
     Shader::~Shader()
@@ -116,35 +120,5 @@ namespace Gio::Rendering
     void Shader::SetUniformMat4f(const std::string& name, glm::mat4 matrix)
     {
         Debug::LogError("Not implemented");
-    }
-
-    ShaderProgramSource Shader::ParseShader(const std::string& filePath)
-    {
-        std::ifstream stream(filePath);
-
-        enum class ShaderType
-        {
-            NONE = -1, VERTEX = 0, FRAGMENT = 1
-        };
-
-        std::string __line;
-        std::stringstream __ss[2];
-        ShaderType __type = ShaderType::NONE;
-        while (getline(stream, __line))
-        {
-            if (__line.find("#shader") != std::string::npos)
-            {
-                if (__line.find("vertex") != std::string::npos)
-                    __type = ShaderType::VERTEX;
-                else if (__line.find("fragment") != std::string::npos)
-                    __type = ShaderType::FRAGMENT;
-            }
-            else
-            {
-                __ss[(int)__type] << __line << "\n";
-            }
-        }
-
-        return { __ss[(int)ShaderType::VERTEX].str(), __ss[(int)ShaderType::FRAGMENT].str() };
     }
 }

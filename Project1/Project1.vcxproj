@@ -443,6 +443,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\ECS\Components\Rotator.cpp" />
+    <ClCompile Include="src\ECS\Entities\RotatingSquare.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -735,6 +736,7 @@
     <ClCompile Include="src\Rendering\OpenGLUtilities.cpp" />
     <ClCompile Include="src\Rendering\Primitives\Square.cpp" />
     <ClCompile Include="src\Rendering\Shader.cpp" />
+    <ClCompile Include="src\Rendering\ShaderManager.cpp" />
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Rendering\VertexBuffer.cpp" />
     <ClCompile Include="src\Time.cpp">
@@ -1029,6 +1031,7 @@
     <ClInclude Include="src\ECS\Component.h" />
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
     <ClInclude Include="src\ECS\Components\Rotator.h" />
+    <ClInclude Include="src\ECS\Entities\RotatingSquare.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\GUI.h" />
@@ -1049,12 +1052,14 @@
     <ClInclude Include="src\Rendering\OpenGLUtilities.h" />
     <ClInclude Include="src\Rendering\Primitives\Square.h" />
     <ClInclude Include="src\Rendering\Shader.h" />
+    <ClInclude Include="src\Rendering\ShaderManager.h" />
     <ClInclude Include="src\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\Rendering\VertexBufferLayout.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\Utilities\Singleton.h" />
+    <ClInclude Include="src\Utilities\StringUtilities.h" />
     <ClInclude Include="src\Vector2.h" />
     <ClInclude Include="src\Vector3.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
@@ -1493,7 +1498,6 @@
     <Content Include="src\vendor\glm\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\ECS\Entities" />
     <Folder Include="src\Input\Elements" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
