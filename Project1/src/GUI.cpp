@@ -139,14 +139,13 @@ void Gio::GUI::DrawSettingsWindow()
     ImGui::End();
 }
 
-void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vector<Gio::Input::IInputElement*> elements)
+void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vector<Gio::Input::IInputElement*> elements, ImVec2 size)
 {
     std::string index = std::to_string(iteration);
     
     ImGui::Text(("[" + index + "] " +  device->GetName()).c_str());
 
-    auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
-    ImGui::BeginChild(index.c_str(), ImVec2(currentWindowSize.x - 25, currentWindowSize.y / 2));
+    ImGui::BeginChild(index.c_str(), size);
     
     ImGui::Indent(10);
     
@@ -175,6 +174,14 @@ void Gio::GUI::DrawInputDevices()
     _devices.clear();
     _input.GetDevices(_devices);
 
+    int devicesPerPage = Gio::Math::Clamp(_devices.size(), 1, 2);
+    
+    auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
+    
+    float windowHeightPerDevice = currentWindowSize.y / devicesPerPage;
+
+    ImVec2 deviceDisplaySize = ImVec2(currentWindowSize.x - 25, windowHeightPerDevice);
+    
     for(int i = 0; i < _devices.size(); i++)
     {
         Input::IInputDevice* device = _devices[i];
@@ -184,7 +191,7 @@ void Gio::GUI::DrawInputDevices()
         if(i != 0)
             ImGui::Separator();
         
-        DrawInputDevice(i, device, _inputElements);
+        DrawInputDevice(i, device, _inputElements, deviceDisplaySize);
     }
 
     ImGui::End();
