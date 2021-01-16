@@ -10,11 +10,12 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Time and deltaTime
 - [X] Vector structs and maths
 - [X] Create wrapper for Mesh
+- [X] Create wrapper for Material
 - [ ] Input system
-  - [ ] Device interface
-  - [ ] Key interface
-  - [ ] Device factory
-  - [ ] ``GetDevice<T>``
+  - [X] Device interface
+  - [X] Key interface
+  - [X] Device factory
+  - [X] ``GetDevice<T>``
   - [ ] ``Device.GetKey<T>``
   - [ ] Input Actions. Configured externally in file
   - [ ] Input Actions to be mapped to device key name
@@ -22,7 +23,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer
-- [ ] Create wrapper for Material
+- [ ] Shader manager for shader reuse
 - [ ] Component inspectors
 - [ ] Camera rotation
 - [ ] Camera translate GUI

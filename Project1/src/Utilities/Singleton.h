@@ -1,14 +1,30 @@
 ﻿#pragma once
+#include "../Debug.h"
 
 namespace Gio::Utilities
 {
-    template <class T> class Singleton
+    template <class T>
+    class Singleton
     {
     public:
-        Singleton<T>();
+        Singleton<T>()
+        {
+            if (instance != nullptr)
+            {
+                Debug::LogError("New instance of Singleton has been created");
+            }
+            else
+                instance = (T*)this;
+        }
 
-        ~Singleton<T>();
-    
-        inline static T* instance = nullptr;
+        ~Singleton<T>()
+        {
+            if (instance == (T*)this)
+            {
+                instance = nullptr;
+            }
+        }
+
+        inline static T* instance;
     };
 }

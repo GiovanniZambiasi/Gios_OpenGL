@@ -61,14 +61,15 @@ namespace Gio
         GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr));
     }
 
-    void Renderer::Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Shader& shader)
+    void Renderer::Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Material& material)
     {
-        shader.Bind();
+        material.Bind();
 
         auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
-        
-        shader.SetUniformMat4f("u_MVP", modelViewProjectionMatrix);
 
+        Shader& shader = material.GetShader();
+        shader.SetUniform("u_MVP", modelViewProjectionMatrix);
+        
         mesh.Bind();
         
         GLCall(glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, nullptr));

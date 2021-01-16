@@ -3,8 +3,8 @@
 #include "../Debug.h"
 #include "OpenGLUtilities.h"
 #include "Shader.h"
-
 #include "../Renderer.h"
+#include "../Color.h"
 
 namespace Gio::Rendering 
 {
@@ -30,21 +30,30 @@ namespace Gio::Rendering
         GLCall(glUseProgram(0));
     }
 
-    void Shader::SetUniform4f(const std::string& name, float v0, float v1, float v2, float v3)
+    template <typename TUniform>
+    void Shader::SetUniform(const std::string& name, TUniform val)
     {
-        GLCall(glUniform4f(GetUniformLocation(name), v0, v1, v2, v3));
+        Debug::LogError("Uniform type not specialized for property '" + name + "'");
     }
 
-    void Shader::SetUniform1f(const std::string& name, float v0)
+    template<>
+    void Shader::SetUniform(const std::string& name, float val)
     {
-        GLCall(glUniform1f(GetUniformLocation(name), v0));
+        GLCall(glUniform1f(GetUniformLocation(name), val));
+    }
+    
+    template<>
+    void Shader::SetUniform(const std::string& name, Color val)
+    {
+        GLCall(glUniform4f(GetUniformLocation(name), val.r, val.g, val.b, val.a));
     }
 
-    void Shader::SetUniformMat4f(const std::string& name, glm::mat4 matrix)
+    template<>
+    void Shader::SetUniform(const std::string& name, glm::mat4 val)
     {
-        GLCall(glUniformMatrix4fv(GetUniformLocation(name),1, GL_FALSE, &matrix[0][0]));
+        GLCall(glUniformMatrix4fv(GetUniformLocation(name),1, GL_FALSE, &val[0][0]));
     }
-
+    
     int Shader::GetUniformLocation(const std::string& name)
     {
         if (_uniformLocationCache.find(name) != _uniformLocationCache.end())
@@ -61,7 +70,7 @@ namespace Gio::Rendering
 
         return location;
     }
-
+    
     unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
     {
         unsigned int __id = glCreateShader(type);
@@ -102,6 +111,11 @@ namespace Gio::Rendering
         GLCall(glDeleteShader(__fs));
 
         return __program;
+    }
+
+    void Shader::SetUniformMat4f(const std::string& name, glm::mat4 matrix)
+    {
+        Debug::LogError("Not implemented");
     }
 
     ShaderProgramSource Shader::ParseShader(const std::string& filePath)

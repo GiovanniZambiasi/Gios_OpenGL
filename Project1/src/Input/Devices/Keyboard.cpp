@@ -20,8 +20,6 @@ Gio::Input::Devices::Keyboard::Keyboard(GLFWwindow* window)
         KeyboardKey* key = new KeyboardKey(keyData.name, keyData.type, keyData.glfwKeyID, window);
         
         _keys.push_back(key);
-        
-        Gio::Debug::Log(keyData.to_string());
     }
 }
 
