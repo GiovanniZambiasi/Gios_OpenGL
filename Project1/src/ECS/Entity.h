@@ -37,11 +37,13 @@ namespace Gio::ECS
         
         void Update(float deltaTime);
 
-        virtual void OnUpdate(float deltaTime) {}
-        
         void Draw(Renderer& renderer);
 
         void Delete();
+
+        virtual void OnUpdate(float deltaTime) {}
+
+        virtual void OnDraw(Renderer& renderer) {}
     };
 
     template <typename TComponent>

@@ -5,9 +5,12 @@ namespace Gio::ECS::Components
 {
     class Rotator : public Component
     {
+    private:
+        float _rotationSpeed;
     public:
-        Rotator(Entity& entity)
+        Rotator(Entity& entity, float rotationSpeed)
             : Component(entity)
+            , _rotationSpeed(rotationSpeed)
         {
         }
 

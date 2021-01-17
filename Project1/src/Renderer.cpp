@@ -1,11 +1,11 @@
 #include "Renderer.h"
-#include "Rendering/OpenGLUtilities.h"
-#include "Rendering/Mesh.h"
-#include "Rendering/IndexBuffer.h"
-#include "Rendering/Shader.h"
-#include "Rendering/VertexArray.h"
 #include "Camera.h"
+#include "Rendering/IndexBuffer.h"
+#include "Rendering/Mesh.h"
+#include "Rendering/OpenGLUtilities.h"
+#include "Rendering/Shader.h"
 #include "Rendering/ShaderManager.h"
+#include "Rendering/VertexArray.h"
 
 using namespace Gio::Rendering;
 
@@ -47,20 +47,6 @@ namespace Gio
     void Renderer::BeforeDraw()
     {
         CalculateViewProjectionMatrix();
-    }
-
-    void Renderer::Draw(Transform& transform, VertexArray& vertexArray, IndexBuffer& indexBuffer, Shader& shader)
-    {
-        shader.Bind();
-
-        auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
-        
-        shader.SetUniformMat4f("u_MVP", modelViewProjectionMatrix);
-        
-        vertexArray.Bind();
-        indexBuffer.Bind();
-        
-        GLCall(glDrawElements(GL_TRIANGLES, indexBuffer.GetCount(), GL_UNSIGNED_INT, nullptr));
     }
 
     void Renderer::Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Material& material)

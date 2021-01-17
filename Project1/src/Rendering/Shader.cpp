@@ -1,10 +1,10 @@
-#include <fstream>
-#include <filesystem>
-#include "../Debug.h"
-#include "OpenGLUtilities.h"
 #include "Shader.h"
-#include "../Renderer.h"
+
+#include <filesystem>
+
+#include "OpenGLUtilities.h"
 #include "../Color.h"
+#include "../Debug.h"
 
 namespace Gio::Rendering 
 {

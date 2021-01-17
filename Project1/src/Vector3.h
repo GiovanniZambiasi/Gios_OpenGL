@@ -53,5 +53,7 @@ namespace Gio
         static Vector3 Zero() { return Vector3(.0f, .0f, .0f); }
         
         static Vector3 One() { return Vector3(1.0f, 1.0f, 1.0f); }
+
+        static Vector3 ClampMagnitude(Vector3 vector, float magnitude);
     };
 }

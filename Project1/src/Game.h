@@ -1,7 +1,5 @@
 ﻿#pragma once
 #include <vector>
-
-
 #include "Renderer.h"
 #include "ECS/Entity.h"
 

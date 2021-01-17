@@ -2,11 +2,8 @@
 #include "Camera.h"
 #include "Transform.h"
 #include "Vector3.h"
-#include "Rendering/Mesh.h"
-#include "Rendering/IndexBuffer.h"
 #include "Rendering/Material.h"
-#include "Rendering/Shader.h"
-#include "Rendering/VertexArray.h"
+#include "Rendering/Mesh.h"
 #include "vendor/glm/glm.hpp"
 #include "vendor/glm/gtc/matrix_transform.hpp"
 
@@ -27,8 +24,6 @@ namespace Gio
         Renderer(Camera* camera);
         
         ~Renderer();
-        
-        void Draw(Transform& transform, Rendering::VertexArray& vertexArray, Rendering::IndexBuffer& indexBuffer, Rendering::Shader& shader);
         
         void Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Material& material);
 

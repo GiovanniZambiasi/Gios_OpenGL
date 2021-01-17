@@ -32,3 +32,14 @@ void Gio::Vector3::Normalize()
     y /= magnitude;
     z /= magnitude;
 }
+
+Gio::Vector3 Gio::Vector3::ClampMagnitude(Vector3 vector, float magnitude)
+{
+    if(vector.GetMagnitude() > magnitude)
+    {
+        vector.Normalize();
+        vector = vector * magnitude;
+    }
+
+    return vector;
+}

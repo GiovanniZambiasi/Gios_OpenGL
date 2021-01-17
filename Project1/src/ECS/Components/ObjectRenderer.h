@@ -2,7 +2,6 @@
 
 #include "../Component.h"
 #include "../Entity.h"
-#include "../../Color.h"
 #include "../../Renderer.h"
 #include "../../Rendering/Material.h"
 #include "../../Rendering/Mesh.h"
@@ -13,17 +12,15 @@ namespace Gio::ECS::Components
     {
     private:
         Rendering::Mesh& _mesh;
-        Rendering::Material* _material;
-        
-        Color _color;
+        Rendering::Material& _material;
         
     public:
-        ObjectRenderer(Entity& entity, Rendering::Mesh& mesh, Color color);
+        ObjectRenderer(Entity& entity, Rendering::Mesh& mesh, Rendering::Material& material);
 
         ~ObjectRenderer();
 
         void Draw(Renderer& renderer) override;
 
-        Gio::Rendering::Material& GetMaterial() { return *_material; }
+        Gio::Rendering::Material& GetMaterial() { return _material; }
     };
 }

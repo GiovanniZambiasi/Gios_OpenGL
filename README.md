@@ -18,8 +18,10 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
   - [X] Device factory
   - [X] ``GetDevice<T>``
   - [ ] ``Device.GetKey<T>``
-  - [ ] Input Actions. Configured externally in file
-  - [ ] Input Actions to be mapped to device key name
+  - [ ] Input Actions. Configured externally in file (JSON)
+    - [ ] Button Actions (onDown, onUp, etc..)
+    - [ ] Axis Actions (value, previous value)
+  - [ ] Input Actions to be mapped to device name and element name (changed to int in runtime?)
   - [ ] Fast mapping of device name to device ref
 - [ ] Gizmos
   - [ ] Gizmos shader
@@ -27,6 +29,8 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] Component inspectors
 - [ ] Camera rotation
 - [ ] Camera translate GUI
+- [ ] Save material as file
+- [ ] Random utility
 
 ## Fixes
 - [ ] Fix projection when res changed in runtime 

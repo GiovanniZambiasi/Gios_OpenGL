@@ -54,6 +54,8 @@ void Gio::ECS::Entity::Update(float deltaTime)
 
 void Gio::ECS::Entity::Draw(Renderer& renderer)
 {
+    OnDraw(renderer);
+    
     for (unsigned int i = 0; i < _components.size(); i++)
     {
         auto component = _components[i];
