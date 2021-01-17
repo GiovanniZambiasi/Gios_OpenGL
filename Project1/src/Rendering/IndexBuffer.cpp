@@ -7,7 +7,6 @@ namespace Gio::Rendering
     IndexBuffer::IndexBuffer(const unsigned int* data, unsigned int count)
         : _count(count) // Initializer list. Initializes parameters before calling the constructor method
     {
-        Debug::Log("Index buffer created with id " + std::to_string(count) + " current: " + std::to_string(_count));
         ASSERT(sizeof(unsigned int) == sizeof(GLuint));
 
         GLCall(glGenBuffers(1, &_rendererID));
