@@ -31,6 +31,10 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] Camera translate GUI
 - [ ] Save material as file
 - [ ] Random utility
+- [ ] Separate modules so that:
+  - They're all accessible to the dev via static interface classes (like ``Renderer::Draw`` or ``Input::GetDevice``)
+  - Their implementation is actually concrete, but hidden (like ``OpenGLRenderer`` or ``GLFWInput``)
+  - The static interface classes are initialized by the application with a specialized concrete implementation (``Input::Initialize(new GLFWInput())``)
 
 ## Fixes
 - [ ] Fix projection when res changed in runtime 

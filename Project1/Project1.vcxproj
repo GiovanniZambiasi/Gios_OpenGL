@@ -660,6 +660,7 @@
       <AdditionalIncludeDirectories>src\vendor;src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Random.cpp" />
     <ClCompile Include="src\Renderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1045,6 +1046,7 @@
     <ClInclude Include="src\Input\Factories\GLFWPCInputDeviceFactory.h" />
     <ClInclude Include="src\Main.h" />
     <ClInclude Include="src\Math.h" />
+    <ClInclude Include="src\Random.h" />
     <ClInclude Include="src\Renderer.h" />
     <ClInclude Include="src\Rendering\IndexBuffer.h" />
     <ClInclude Include="src\Rendering\Material.h" />

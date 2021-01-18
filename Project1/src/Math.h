@@ -58,5 +58,58 @@ namespace Gio
             else
                 return v;
         }
+
+        static float Round(float v)
+        {
+            int valueWithNoDecimal = (int)v;
+            
+            float decimal = v - valueWithNoDecimal;
+
+            if(decimal < .5f)
+                return valueWithNoDecimal;
+            else
+                return valueWithNoDecimal + 1;
+        }
+
+        static int RoundToInt(float v)
+        {
+            return Round(v);
+        }
+
+        static float Floor(float v)
+        {
+            return (int)v;
+        }
+
+        static int FloorToInt(float v)
+        {
+            return Floor(v);
+        }
+
+        static float Ceil(float v)
+        {
+            int valueWithNoDecimal = (int)v;
+            float decimal = v - valueWithNoDecimal;
+
+            if(decimal == 0.0f)
+                return v;
+            else
+                return v + 1;
+        }
+
+        static int CeilToInt(float v)
+        {
+            return Ceil(v);
+        }
+
+        static float Lerp(float x, float y, float t)
+        {
+            return LerpUnclamped(x, y, Clamp(t, 0.0f, 1.0f));
+        }
+
+        static float LerpUnclamped(float x, float y, float t)
+        {
+            return x * (1 - t) + y * t;
+        }
     };
 }

@@ -1,5 +1,6 @@
 ﻿#include "RotatingSquare.h"
 
+#include "../../Random.h"
 #include "../../Input/Input.h"
 #include "../../Input/Devices/Keyboard.h"
 #include "../../Input/Devices/KeyboardKey.h"
@@ -42,7 +43,7 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
     {
         if(keyboard->GetKey(Input::Devices::KeyboardKey::Space)->WasPressedThisFrame())
         {
-            renderer->GetMaterial().SetColor("u_Color", Color::White());
+            renderer->GetMaterial().SetColor("u_Color", Random::Color());
         }
 
         Vector3 movement;
@@ -55,7 +56,6 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
             movement.y =  keyboard->GetKey(Input::Devices::KeyboardKey::W)->IsPressed() ? 1 : -1; 
         }
 
-        
         movement = Vector3::ClampMagnitude(movement, 1.0f);
 
         GetTransform().Translate(movement * _movementSpeed);
