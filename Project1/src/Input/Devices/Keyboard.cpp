@@ -19,43 +19,20 @@ Gio::Input::Devices::Keyboard::Keyboard(GLFWwindow* window)
 
         KeyboardKey* key = new KeyboardKey(keyData.name, keyData.type, keyData.glfwKeyID, window);
         
-        _keys.push_back(key);
+        elements.push_back(key);
     }
 }
 
 Gio::Input::Devices::Keyboard::~Keyboard()
 {
-    for (int i = 0; i < _keys.size(); i++)
-    {
-        KeyboardKey* key = _keys[i];
-        
-        delete key;
-    }
-}
-
-void Gio::Input::Devices::Keyboard::Update()
-{
-    for (int i = 0; i < _keys.size(); i++)
-    {
-        KeyboardKey* key = _keys[i];
-        key->Update();
-    }
-}
-
-void Gio::Input::Devices::Keyboard::GetElements(std::vector<IInputElement*>& elements)
-{
-    for (int i = 0; i < _keys.size(); i++)
-    {
-        KeyboardKey* key = _keys[i];
-        elements.push_back(key);
-    }
 }
 
 Gio::Input::Devices::KeyboardKey* Gio::Input::Devices::Keyboard::GetKey(KeyboardKey::Types type)
 {
-    for (int i =0; i < _keys.size(); i++)
+    for (int i = 0; i < elements.size(); i++)
     {
-        auto key = _keys[i];
+        auto key = dynamic_cast<KeyboardKey*>(elements[i]);
+        
         if(key->GetType() == type)
             return key;
     }

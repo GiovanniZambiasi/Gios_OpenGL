@@ -5,8 +5,7 @@ Gio::Input::Devices::KeyboardKey::KeyboardKey(std::string name, Types type, int 
     , _name(name)
     , _glfwKeyID(glfwKeyID)
     , _window(window)
-    , _isPressed(false)
-    , _wasPressedThisFrame(false)
+    , _value(0.0f)
 {
 }
 
@@ -15,10 +14,7 @@ Gio::Input::Devices::KeyboardKey::~KeyboardKey()
 
 void Gio::Input::Devices::KeyboardKey::Update()
 {
-    bool wasPressed = _isPressed;
-    
-    _isPressed = glfwGetKey(_window, _glfwKeyID);
+    bool isPressed = glfwGetKey(_window, _glfwKeyID);
 
-    _wasPressedThisFrame = _isPressed && !wasPressed;
-    _wasReleasedThisFrame = wasPressed && !_isPressed;
+    _value = isPressed ? 1.0f : 0.0f;
 }

@@ -4,9 +4,7 @@ Gio::Input::Devices::MouseButton::MouseButton(GLFWwindow* window, unsigned int i
     : _window(window)
     , _id(id)
     , _name("Mouse Button " + std::to_string(_id))
-    , _isPressed(false)
-    , _wasPressedThisFrame(false)
-    , _wasReleasedThisFrame(false)
+    , _value(0.0f)
 {
 }
 
@@ -16,10 +14,7 @@ Gio::Input::Devices::MouseButton::~MouseButton()
 
 void Gio::Input::Devices::MouseButton::Update()
 {
-    bool wasPressed = _isPressed;
-    
-    _isPressed = glfwGetMouseButton(_window, _id);
-    
-    _wasPressedThisFrame = _isPressed && !wasPressed;
-    _wasReleasedThisFrame = wasPressed && !_isPressed;
+    bool isPressed = glfwGetMouseButton(_window, _id);
+
+    _value = isPressed ? 1.0f : 0.0f;
 }

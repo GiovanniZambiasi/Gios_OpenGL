@@ -4,6 +4,7 @@
 #include "time.h"
 #include "Window.h"
 #include "Input/IInputDevice.h"
+#include "Input/InputAction.h"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 #include "vendor/imgui/imgui_internal.h"
@@ -83,8 +84,11 @@ void Gio::GUI::Draw()
     if(_shouldShowEntities)
         DrawEntities(_game);
 
-    if(_shouldShowInput)
+    if(_shouldShowInputDevices)
         DrawInputDevices();
+
+    if(_shouldShowInputActions)
+        DrawInputActions();
     
     /*
     bool show_demo_window = true;
@@ -120,7 +124,8 @@ void Gio::GUI::DrawSettingsWindow()
     ImGui::Begin("Settings");
     ImGui::Checkbox("Debug Info", &_shouldShowDebugInfo);
     ImGui::Checkbox("Entities", &_shouldShowEntities);
-    ImGui::Checkbox("Input Devices", &_shouldShowInput);
+    ImGui::Checkbox("Input Devices", &_shouldShowInputDevices);
+    ImGui::Checkbox("Input Actions", &_shouldShowInputActions);
 
     ImGui::Separator();
     
@@ -155,11 +160,13 @@ void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vecto
     {
         auto element = elements[j];
 
-        ImVec4 color = element->IsPressed()
-            ? (element->WasPressedThisFrame() ? ImVec4(.0f, .0f, .7f, 1.0f) : ImVec4(.0f, .7f, .0f, 1.0f))
-            : (element->WasReleasedThisFrame() ? ImVec4(1.0f, 0.0f, 0.0f, 1.0f) : ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+        float val = element->GetValue();
+        
+        ImVec4 color = val > .1f
+            ? ImVec4(.0f, .7f, .0f, 1.0f)
+            : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
 
-        std::string log = "[" + std::to_string(j) + "] " + element->GetName();
+        std::string log = "[" + std::to_string(j) + "] " + element->GetName() + " (" + std::to_string(val) + ")";
 
         ImGui::TextColored(color, log.c_str());
     }
@@ -194,5 +201,30 @@ void Gio::GUI::DrawInputDevices()
         DrawInputDevice(i, device, _inputElements, deviceDisplaySize);
     }
 
+    ImGui::End();
+}
+
+void DrawInputAction(Gio::Input::InputAction& action)
+{
+    ImGui::Text(action.GetName().c_str());
+}
+
+void Gio::GUI::DrawInputActions()
+{
+    ImGui::Begin("Input Actions:");
+
+    std::vector<Input::InputAction*> actions;
+
+    _input.GetActions(actions);
+
+    for(int i = 0; i < actions.size(); i++)
+    {
+        auto action = actions[i];
+        if(i != 0)
+            ImGui::Separator();
+
+        DrawInputAction(*action);
+    }
+    
     ImGui::End();
 }

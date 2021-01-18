@@ -3,6 +3,8 @@
 #include <vector>
 #include "IInputDevice.h"
 #include "IInputDeviceFactory.h"
+#include "InputAction.h"
+#include "InputActionBinding.h"
 #include "../Utilities/Singleton.h"
 
 namespace Gio::Input
@@ -11,7 +13,8 @@ namespace Gio::Input
     {
     private:
         std::vector<IInputDevice*> _devices;
-
+        std::vector<InputAction*> _actions;
+    
     public:
         Input(IInputDeviceFactory& deviceFactory);
 
@@ -21,6 +24,12 @@ namespace Gio::Input
 
         void GetDevices(std::vector<IInputDevice*>& collection);
 
+        void RegisterInputAction(InputActionBinding binding);
+
+        void GetActions(std::vector<InputAction*>& collection);
+        
+        IInputDevice* GetDevice(const std::string& name);
+        
         template <typename TDevice>
         TDevice* GetDevice();
     };

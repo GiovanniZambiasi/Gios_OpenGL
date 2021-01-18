@@ -26,6 +26,11 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
     Transform& transform = GetTransform();
     transform.position = position;
     transform.SetScale(Vector3::One() * 50.0f);
+
+    Input::Input::instance->RegisterInputAction(InputActionBinding("ColorChange", {
+        DeviceElementPair("Keyboard", "Spacebar"),
+        DeviceElementPair("Mouse", "Mouse Button 0"),
+    }));
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
@@ -38,8 +43,8 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
 {
     auto renderer = GetComponent<Components::ObjectRenderer>();
     
-    Input::Devices::Keyboard* keyboard = Input::Input::instance->GetDevice<Input::Devices::Keyboard>();
-    if(keyboard != nullptr)
+    //Input::Devices::Keyboard* keyboard = Input::Input::instance->GetDevice<Input::Devices::Keyboard>();
+    /*if(keyboard != nullptr)
     {
         if(keyboard->GetKey(Input::Devices::KeyboardKey::Space)->WasPressedThisFrame())
         {
@@ -59,7 +64,7 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
         movement = Vector3::ClampMagnitude(movement, 1.0f);
 
         GetTransform().Translate(movement * _movementSpeed);
-    }
+    }*/
 }
 
 void Gio::ECS::Entities::RotatingSquare::OnDraw(Renderer& renderer)

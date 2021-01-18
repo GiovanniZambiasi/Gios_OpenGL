@@ -139,9 +139,7 @@ namespace Gio::Input::Devices
         std::string _name;
         int _glfwKeyID;
         GLFWwindow* _window;
-        bool _isPressed;
-        bool _wasPressedThisFrame;
-        bool _wasReleasedThisFrame;
+        float _value;
 
     public:
         KeyboardKey(std::string name, Types type, int glfwKeyID, GLFWwindow* window);
@@ -152,11 +150,7 @@ namespace Gio::Input::Devices
 
         Types GetType() { return _type; }
 
-        bool IsPressed() override { return _isPressed; }
-
-        bool WasPressedThisFrame() override { return _wasPressedThisFrame; }
-        
-        bool WasReleasedThisFrame() override { return _wasReleasedThisFrame; }
+        float GetValue() override { return _value; }
         
         void Update() override;
     };

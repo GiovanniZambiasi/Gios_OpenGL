@@ -16,7 +16,8 @@ namespace Gio
         std::vector<Input::IInputElement*> _inputElements;
         bool _shouldShowDebugInfo = false;
         bool _shouldShowEntities = false;
-        bool _shouldShowInput = false;
+        bool _shouldShowInputDevices = false;
+        bool _shouldShowInputActions = false;
         int _windowHeight = 0;
         int _windowWidth = 0;
         
@@ -26,11 +27,13 @@ namespace Gio
         ~GUI();
 
         void Clear();
-        
+
         void Draw();
 
         void DrawSettingsWindow();
 
         void DrawInputDevices();
+        
+        void DrawInputActions();
     };
 }

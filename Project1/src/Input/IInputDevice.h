@@ -14,5 +14,7 @@ namespace Gio::Input
         virtual void Update() = 0;
 
         virtual void GetElements(std::vector<IInputElement*>& elements) = 0;
+
+        virtual IInputElement* GetElement(const std::string& name) = 0;
     };
 }

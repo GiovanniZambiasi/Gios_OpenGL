@@ -11,10 +11,8 @@ namespace Gio::Input::Devices
         GLFWwindow* _window;
         unsigned int _id;
         std::string _name;
-        bool _isPressed;
-        bool _wasPressedThisFrame;
-        bool _wasReleasedThisFrame;
-
+        float _value;
+    
     public:
         MouseButton(GLFWwindow* window, unsigned int id);
 
@@ -22,11 +20,7 @@ namespace Gio::Input::Devices
         
         std::string GetName() { return _name; }
         
-        bool IsPressed() override { return _isPressed; }
-        
-        bool WasPressedThisFrame() override { return _wasPressedThisFrame; }
-        
-        bool WasReleasedThisFrame() override { return _wasReleasedThisFrame; }
+        float GetValue() override {return _value;}
         
         void Update() override;
     };
