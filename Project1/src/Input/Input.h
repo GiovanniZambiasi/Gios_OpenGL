@@ -26,7 +26,7 @@ namespace Gio::Input
     };
 
     template <typename TDevice>
-    TDevice* Gio::Input::Input::GetDevice()
+    TDevice* Input::GetDevice()
     {
         for (int i = 0; i < _devices.size(); i++)
         {

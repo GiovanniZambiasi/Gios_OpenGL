@@ -38,7 +38,7 @@ bool Gio::Application::Run(std::string name, unsigned int windowWidth, unsigned 
 
     HandleWindowSizeChanged(windowWidth, windowHeight);
     
-    _game = new Game();
+    _game = new Scene();
 
     _gui = new GUI(*_game, *_window, *_input);
     

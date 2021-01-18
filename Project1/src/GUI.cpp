@@ -1,6 +1,6 @@
 ﻿#include <string>
 #include "GUI.h"
-#include "Game.h"
+#include "Scene.h"
 #include "time.h"
 #include "Window.h"
 #include "Input/IInputDevice.h"
@@ -8,7 +8,7 @@
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 #include "vendor/imgui/imgui_internal.h"
 
-Gio::GUI::GUI(Game& game, Window& window, Input::Input& input)
+Gio::GUI::GUI(Scene& game, Window& window, Input::Input& input)
     : _window(window)
     , _game(game)
     , _input(input)
@@ -56,7 +56,7 @@ void DrawEntity(Gio::ECS::Entity* entity)
     }
 }
 
-void DrawEntities(Gio::Game& game)
+void DrawEntities(Gio::Scene& game)
 {
     ImGui::Begin("Entities");
 

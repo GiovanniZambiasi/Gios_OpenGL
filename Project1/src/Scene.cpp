@@ -1,10 +1,10 @@
-﻿#include "Game.h"
+﻿#include "Scene.h"
 #include "Debug.h"
 #include "Renderer.h"
 #include "ECS/Components/ObjectRenderer.h"
 #include "ECS/Entities/RotatingSquare.h"
 
-Gio::Game::Game()
+Gio::Scene::Scene()
 {
     ECS::Entities::RotatingSquare* square = new ECS::Entities::RotatingSquare(Color::Red(), Vector3(-200.0f, 0.0f, 0.0f));
     
@@ -15,16 +15,16 @@ Gio::Game::Game()
     AddEntity(square);
 }
 
-Gio::Game::~Game()
+Gio::Scene::~Scene()
 {
 }
 
-void Gio::Game::AddEntity(ECS::Entity* entity)
+void Gio::Scene::AddEntity(ECS::Entity* entity)
 {
     _entities.push_back(entity);
 }
 
-void Gio::Game::RemoveEntity(ECS::Entity* entity)
+void Gio::Scene::RemoveEntity(ECS::Entity* entity)
 {
     for (int i = 0; i < _entities.size(); i++)
     {
@@ -40,7 +40,7 @@ void Gio::Game::RemoveEntity(ECS::Entity* entity)
     delete entity;
 }
 
-void Gio::Game::Update(float deltaTime)
+void Gio::Scene::Update(float deltaTime)
 {    
     for (int i = _entities.size() - 1; i >= 0; i--)        // Loops in reverse because entities can get destroyed and removed from the collection
     {
@@ -57,7 +57,7 @@ void Gio::Game::Update(float deltaTime)
     }
 }
 
-void Gio::Game::Draw(Renderer& renderer)
+void Gio::Scene::Draw(Renderer& renderer)
 {
     for (int i = 0; i < _entities.size(); i++)
     {

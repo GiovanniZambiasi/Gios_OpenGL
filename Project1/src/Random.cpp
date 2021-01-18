@@ -34,8 +34,3 @@ void Gio::Random::SetSeed(unsigned int seed)
     _seed = seed;
     srand(_seed);
 }
-
-Gio::Color Gio::Random::Color()
-{
-    return Gio::Color(Scalar(), Scalar(), Scalar(), 1.0f);
-}

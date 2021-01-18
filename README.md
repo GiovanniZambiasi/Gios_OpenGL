@@ -12,6 +12,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Create wrapper for Mesh
 - [X] Create wrapper for Material
 - [X] Shader manager for shader reuse
+  - [X] Random utility
 - [ ] Input system
   - [X] Device interface
   - [X] Key interface
@@ -30,7 +31,6 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] Camera rotation
 - [ ] Camera translate GUI
 - [ ] Save material as file
-- [ ] Random utility
 - [ ] Separate modules so that:
   - They're all accessible to the dev via static interface classes (like ``Renderer::Draw`` or ``Input::GetDevice``)
   - Their implementation is actually concrete, but hidden (like ``OpenGLRenderer`` or ``GLFWInput``)

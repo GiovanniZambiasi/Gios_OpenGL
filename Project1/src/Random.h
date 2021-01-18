@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "Color.h"
 
 namespace Gio
 {
@@ -21,7 +20,5 @@ namespace Gio
         static int Between(int min, int max);
 
         static void SetSeed(unsigned int seed);
-
-        static Color Color();
     };
 }

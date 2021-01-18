@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Game.h"
+#include "Scene.h"
 #include "Window.h"
 #include "Input/IInputDevice.h"
 #include "Input/Input.h"
@@ -10,7 +10,7 @@ namespace Gio
     {
     private:
         Window& _window;
-        Game& _game;
+        Scene& _game;
         Input::Input& _input;
         std::vector<Input::IInputDevice*> _devices;
         std::vector<Input::IInputElement*> _inputElements;
@@ -21,7 +21,7 @@ namespace Gio
         int _windowWidth = 0;
         
     public:
-        GUI(Game& game, Window& window, Input::Input& input);
+        GUI(Scene& game, Window& window, Input::Input& input);
 
         ~GUI();
 

@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "Game.h"
+#include "Scene.h"
 #include "GUI.h"
 #include "Renderer.h"
 #include "Window.h"
@@ -12,7 +12,7 @@ namespace Gio
     private:
         Window* _window;
         Renderer* _renderer;
-        Game* _game;
+        Scene* _game;
         GUI* _gui;
         Camera* _camera;
         Input::Input* _input;

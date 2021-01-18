@@ -43,7 +43,7 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
     {
         if(keyboard->GetKey(Input::Devices::KeyboardKey::Space)->WasPressedThisFrame())
         {
-            renderer->GetMaterial().SetColor("u_Color", Random::Color());
+            renderer->GetMaterial().SetColor("u_Color", Color::Random());
         }
 
         Vector3 movement;

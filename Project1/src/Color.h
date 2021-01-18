@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include "Random.h"
 
 namespace Gio
 {
@@ -21,5 +22,6 @@ namespace Gio
         static Color Blue() { return Color(0.0f, 0.0f, 1.0f, 1.0f); }
         static Color White() { return Color(1.0f, 1.0f, 1.0f, 1.0f); }
         static Color Black() { return Color(.0f, .0f, .0f, 1.0f); }
+        static Color Random(){return Gio::Color(Random::Scalar(), Random::Scalar(), Random::Scalar(), 1.0f);}
     };
 }

@@ -5,15 +5,15 @@
 
 namespace Gio
 {
-    class Game
+    class Scene
     {
     private:
         std::vector<ECS::Entity*> _entities;
 
     public:
-        Game();
+        Scene();
         
-        ~Game();
+        ~Scene();
 
         std::vector<ECS::Entity*>& GetEntities() { return _entities; }
         
