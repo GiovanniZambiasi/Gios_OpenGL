@@ -1,6 +1,6 @@
 ﻿#include "Keyboard.h"
 #include "json.hpp"
-#include "KeyboardKeyData.h"
+#include "GLFWKeyboardKeyData.h"
 #include <fstream>
 #include "../../Debug.h"
 
@@ -11,7 +11,7 @@ Gio::Input::Devices::Keyboard::Keyboard(GLFWwindow* window)
     std::ifstream inputFile("res/Input/GLFW/Map_Keyboard.json");
     inputFile >> j;
 
-    auto keyDataIn = j.get<std::vector<Gio::Input::Devices::KeyboardKeyData>>();
+    auto keyDataIn = j.get<std::vector<Gio::Input::Devices::GLFWKeyboardKeyData>>();
 
     for (int i= 0; i < keyDataIn.size(); i++)
     {

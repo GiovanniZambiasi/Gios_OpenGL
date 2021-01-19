@@ -1,6 +1,6 @@
-﻿#include "KeyboardKeyData.h"
+﻿#include "GLFWKeyboardKeyData.h"
 
-void Gio::Input::Devices::to_json(nlohmann::json& j, const Gio::Input::Devices::KeyboardKeyData& keyData)
+void Gio::Input::Devices::to_json(nlohmann::json& j, const GLFWKeyboardKeyData& keyData)
 {
     j = nlohmann::json{
         {"name", keyData.name},
@@ -9,7 +9,7 @@ void Gio::Input::Devices::to_json(nlohmann::json& j, const Gio::Input::Devices::
     };
 }
 
-void Gio::Input::Devices::from_json(const nlohmann::json& j, Gio::Input::Devices::KeyboardKeyData& keyData)
+void Gio::Input::Devices::from_json(const nlohmann::json& j, GLFWKeyboardKeyData& keyData)
 {
     j.at("name").get_to(keyData.name);
     j.at("KeyboardKeyType").get_to(keyData.type);

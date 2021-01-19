@@ -25,5 +25,8 @@ namespace Gio
         ~Application();
 
         bool Run();
+
+    private:
+        void Update();
     };
 }

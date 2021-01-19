@@ -2,7 +2,6 @@
 
 #include "../../Input/Input.h"
 #include "../../Input/InputAxisBindings.h"
-#include "../../Input/Devices/KeyboardKey.h"
 #include "../../Rendering/ShaderManager.h"
 #include "../../Rendering/Primitives/Square.h"
 #include "../Components/ObjectRenderer.h"
@@ -40,47 +39,9 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
         _colorChange = Input::Input::instance->GetAction("ColorChange");
     }
 
-    _moveHorizontal = Input::Input::instance->GetAxis("MoveHorizontal");
+    _moveHorizontal = Input::Input::instance->GetAxis("Horizontal");
 
-    if(_moveHorizontal == nullptr)
-    {
-        Input::Input::instance->RegisterInputAxis(
-            Input::InputAxisBindings
-            {
-                "MoveHorizontal",
-                {
-                    Input::DeviceElementPair("Keyboard", "D"),
-                    Input::DeviceElementPair("Keyboard", "Arrow Right"),
-                },
-                {
-                    Input::DeviceElementPair("Keyboard", "A"),
-                    Input::DeviceElementPair("Keyboard", "Arrow Left"),
-                }
-            });
-
-        _moveHorizontal = Input::Input::instance->GetAxis("MoveHorizontal");
-    }
-
-    _moveVertical = Input::Input::instance->GetAxis("MoveVertical");
-
-    if(_moveVertical == nullptr)
-    {
-        Input::Input::instance->RegisterInputAxis(
-            Input::InputAxisBindings
-            {
-                "MoveVertical",
-                {
-                    Input::DeviceElementPair("Keyboard", "W"),
-                    Input::DeviceElementPair("Keyboard", "Arrow Up"),
-                },
-                {
-                    Input::DeviceElementPair("Keyboard", "S"),
-                    Input::DeviceElementPair("Keyboard", "Arrow Down"),
-                }
-            });
-
-        _moveVertical = Input::Input::instance->GetAxis("MoveVertical");
-    }
+    _moveVertical = Input::Input::instance->GetAxis("Vertical");
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
@@ -98,9 +59,12 @@ void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
         renderer->GetMaterial().SetColor("u_Color", Color::Random());
     }
 
-    Vector3 movement = Vector3(_moveHorizontal->GetValue(), _moveVertical->GetValue(), 0.0f);
-    movement = Vector3::ClampMagnitude(movement, 1.0f);
-    GetTransform().Translate(movement * _movementSpeed);
+    if(_moveHorizontal!= nullptr && _moveVertical != nullptr)
+    {
+        Vector3 movement = Vector3(_moveHorizontal->GetValue(), _moveVertical->GetValue(), 0.0f);
+        movement = Vector3::ClampMagnitude(movement, 1.0f);
+        GetTransform().Translate(movement * _movementSpeed);
+    }
 }
 
 void Gio::ECS::Entities::RotatingSquare::OnDraw(Renderer& renderer)

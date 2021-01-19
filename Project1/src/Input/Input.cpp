@@ -1,11 +1,16 @@
 ﻿#include "Input.h"
 
+#include <fstream>
+
+
 #include "IInputDeviceFactory.h"
 #include "../Debug.h"
 
 Gio::Input::Input::Input(IInputDeviceFactory& deviceFactory)
 {
     deviceFactory.CreateDevices(_devices);
+
+    LoadBindings();
 }
 
 Gio::Input::Input::~Input()
@@ -150,5 +155,76 @@ void Gio::Input::Input::GetDeviceElements(std::vector<DeviceElementPair> pairs, 
         }
 
         collection.push_back(element);
+    }
+}
+
+void Gio::Input::Input::SaveBindings()
+{
+    nlohmann::json j;
+    
+    auto action  = InputActionBinding(
+        "ColorChange",
+        {
+            DeviceElementPair("Keyboard", "Spacebar"),
+        });
+    
+    auto bindings = InputAxisBindings();
+    bindings.axisName ="MoveHorizontal";
+    bindings.positiveContributors = {
+        DeviceElementPair("Keyboard", "D"),
+        DeviceElementPair("Keyboard", "Arrow Right"),
+    };
+    bindings.negativeContributors = {
+        DeviceElementPair("Keyboard", "A"),
+        DeviceElementPair("Keyboard", "Arrow Left"),
+    };
+
+    j["Actions"] = std::vector<InputActionBinding>{
+        action
+    };
+
+    j["Axes"] = std::vector<InputAxisBindings>{
+        bindings
+    };
+    
+    std::fstream file = std::fstream("res/Input/Bindings.json");
+    auto dump = j.dump();
+    file.write(dump.c_str(), dump.length());
+    file.close();
+}
+
+void Gio::Input::Input::LoadBindings()
+{
+    try
+    {
+        nlohmann::json j;
+    
+        std::fstream bindingsFile = std::fstream("res/Input/Bindings.json");
+        bindingsFile >> j;
+
+        auto actions = j["Actions"];
+    
+        std::vector<InputActionBinding> actionBindings;
+        actionBindings = actions.get<std::vector<InputActionBinding>>();
+
+        for (auto i = 0; i < actionBindings.size(); i++)
+        {
+            auto binding = actionBindings[i];
+            RegisterInputAction(binding);
+        }
+    
+        auto axes = j["Axes"];
+        std::vector<InputAxisBindings> axisBindings;
+        axisBindings = axes.get<std::vector<InputAxisBindings>>();
+
+        for (auto i = 0; i < axisBindings.size(); i++)
+        {
+            auto binding = axisBindings[i];
+            RegisterInputAxis(binding);
+        }
+    }
+    catch(std::exception e)
+    {
+        Debug::LogError("An exception was caught while loading input bindings: '" + std::string(e.what()) + "'");
     }
 }

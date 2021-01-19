@@ -29,6 +29,9 @@ namespace Gio::Input
 
         IInputDevice* GetDevice(const std::string& name);
         
+        template <typename TDevice>
+        TDevice* GetDevice();
+        
         void RegisterInputAction(InputActionBinding binding);
 
         void GetActions(std::vector<InputAction*>& collection);
@@ -41,8 +44,9 @@ namespace Gio::Input
 
         InputAxis* GetAxis(const std::string name);
 
-        template <typename TDevice>
-        TDevice* GetDevice();
+        void SaveBindings();
+
+        void LoadBindings();
     
     private:
         void GetDeviceElements(std::vector<DeviceElementPair> pairs, std::vector<IInputElement*>& collection);    

@@ -1,0 +1,38 @@
+{
+  "Actions":
+  [
+    {"Action Name":"ColorChange", 
+      "Elements":
+      [
+        {"Device":"Keyboard","Element":"Spacebar"}
+      ]
+    }
+  ],
+  "Axes":
+  [
+    {"Axis Name":"Horizontal", 
+      "+":
+      [
+        {"Device":"Keyboard","Element":"D"},
+        {"Device":"Keyboard","Element":"Arrow Right"}
+      ],
+      "-":
+      [
+        {"Device":"Keyboard","Element":"A"},
+        {"Device":"Keyboard","Element":"Arrow Left"}
+      ]
+    },
+    {"Axis Name":"Vertical",
+      "+":
+      [
+        {"Device":"Keyboard","Element":"W"},
+        {"Device":"Keyboard","Element":"Arrow Up"}
+      ],
+      "-":
+      [
+        {"Device":"Keyboard","Element":"S"},
+        {"Device":"Keyboard","Element":"Arrow Down"}
+      ]
+    }
+  ]
+}

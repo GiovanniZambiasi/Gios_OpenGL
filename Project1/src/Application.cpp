@@ -45,28 +45,40 @@ bool Gio::Application::Run()
     
     while (!_window->ShouldClose())
     {
-        Time::RecordFrameTime();
-        
-        float deltaTime = Time::GetDeltaTimeSeconds();
-        
-        _gui->Clear();
-
-        _renderer->Clear();
-        
-        _input->Update();
-        
-        _scene->Update(deltaTime);
-
-        _renderer->BeforeDraw();
-        
-        _scene->Draw(*_renderer);
-
-        _gui->Draw();
-        
-        _window->SwapBuffers();
+        try
+        {
+            Update();
+        }
+        catch(std::exception e)
+        {
+            Debug::LogError("Exception thrown during Update: '" + std::string(e.what()) + "'");
+        }
     }
 
     return true;
+}
+
+void Gio::Application::Update()
+{
+    Time::RecordFrameTime();
+        
+    float deltaTime = Time::GetDeltaTimeSeconds();
+        
+    _gui->Clear();
+
+    _renderer->Clear();
+        
+    _input->Update();
+        
+    _scene->Update(deltaTime);
+
+    _renderer->BeforeDraw();
+        
+    _scene->Draw(*_renderer);
+
+    _gui->Draw();
+        
+    _window->SwapBuffers();
 }
 
 void Gio::Application::HandleWindowSizeChanged(unsigned int width, unsigned int height)

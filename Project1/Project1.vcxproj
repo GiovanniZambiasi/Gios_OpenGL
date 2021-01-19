@@ -515,6 +515,7 @@
       <AdditionalIncludeDirectories>src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Input\DeviceManager.cpp" />
     <ClCompile Include="src\Input\Devices\Device.cpp" />
     <ClCompile Include="src\Input\Devices\Mouse.cpp" />
     <ClCompile Include="src\Input\Devices\MouseButton.cpp" />
@@ -591,7 +592,7 @@
       <AdditionalIncludeDirectories>D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="src\Input\Devices\KeyboardKeyData.cpp" />
+    <ClCompile Include="src\Input\Devices\GLFWKeyboardKeyData.cpp" />
     <ClCompile Include="src\Input\Devices\Keyboard.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\Input\Factories\GLFWPCInputDeviceFactory.cpp" />
@@ -1041,6 +1042,7 @@
     <ClInclude Include="src\ECS\Entities\RotatingSquare.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\Input\DeviceElementPair.h" />
+    <ClInclude Include="src\Input\DeviceManager.h" />
     <ClInclude Include="src\Input\Devices\Device.h" />
     <ClInclude Include="src\Input\Devices\Mouse.h" />
     <ClInclude Include="src\Input\Devices\MouseButton.h" />
@@ -1051,7 +1053,7 @@
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\GUI.h" />
     <ClInclude Include="src\Input\Devices\KeyboardKey.h" />
-    <ClInclude Include="src\Input\Devices\KeyboardKeyData.h" />
+    <ClInclude Include="src\Input\Devices\GLFWKeyboardKeyData.h" />
     <ClInclude Include="src\Input\IInputDeviceFactory.h" />
     <ClInclude Include="src\Input\Devices\Keyboard.h" />
     <ClInclude Include="src\Input\IInputDevice.h" />
