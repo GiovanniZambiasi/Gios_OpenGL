@@ -29,6 +29,8 @@ namespace Gio::Input
         bool WasReleasedThisFrame() { return _wasReleasedThisFrame; }
 
         void Update();
+
+        void GetElements(std::vector<IInputElement*>& collection);
     
     private:
         bool AreAnyElementsPressed();

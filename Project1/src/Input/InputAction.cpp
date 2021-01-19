@@ -39,3 +39,12 @@ void Gio::Input::InputAction::Update()
     _wasPressedThisFrame = _isPressed && !wasPressed;
     _wasReleasedThisFrame = wasPressed && !_isPressed;
 }
+
+void Gio::Input::InputAction::GetElements(std::vector<IInputElement*>& collection)
+{
+    for (int i = 0; i < _elements.size(); i++)
+    {
+        auto element = _elements[i];
+        collection.push_back(element);
+    }
+}

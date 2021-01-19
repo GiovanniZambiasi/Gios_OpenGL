@@ -3,15 +3,17 @@
 #include <vector>
 
 #include "DeviceElementPair.h"
-
-struct InputActionBinding
+namespace Gio::Input
 {
-    std::string actionName;
-    std::vector<DeviceElementPair> elements;
-
-    InputActionBinding(const std::string& actionName, const std::vector<DeviceElementPair>& elements)
-        : actionName(actionName),
-          elements(elements)
+    struct InputActionBinding
     {
-    }
-};
+        std::string actionName;
+        std::vector<DeviceElementPair> elements;
+
+        InputActionBinding(const std::string& actionName, const std::vector<DeviceElementPair>& elements)
+            : actionName(actionName),
+              elements(elements)
+        {
+        }
+    };
+}

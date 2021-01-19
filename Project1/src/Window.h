@@ -10,12 +10,12 @@ namespace Gio
     {
     private:
         GLFWwindow* _window;
-
         unsigned int _width;
         unsigned int _height;
+        bool _isValid;
     
     public:
-        Window(); 
+        Window(const char* title, int width, int height); 
 
         ~Window();
 
@@ -27,7 +27,7 @@ namespace Gio
         
         unsigned int GetHeight() { return _height; }
         
-        bool TryToInitialize(const char* title, int width, int height);
+        bool GetIsValid() { return _isValid; }
         
         bool ShouldClose();
 
@@ -35,6 +35,7 @@ namespace Gio
 
         void SetSize(unsigned int width, unsigned int height);
 
-        inline static Window* instance = nullptr;
+    private:
+        bool TryToInitialize(const char* title, int width, int height);
     };
 }

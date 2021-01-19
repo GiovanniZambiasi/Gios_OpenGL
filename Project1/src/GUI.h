@@ -14,10 +14,12 @@ namespace Gio
         Input::Input& _input;
         std::vector<Input::IInputDevice*> _devices;
         std::vector<Input::IInputElement*> _inputElements;
+        char _log[24];
         bool _shouldShowDebugInfo = false;
         bool _shouldShowEntities = false;
         bool _shouldShowInputDevices = false;
         bool _shouldShowInputActions = false;
+        bool _shouldShowInputAxes = false;
         int _windowHeight = 0;
         int _windowWidth = 0;
         
@@ -35,5 +37,7 @@ namespace Gio
         void DrawInputDevices();
         
         void DrawInputActions();
+        
+        void DrawInputAxes();
     };
 }

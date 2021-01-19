@@ -1,31 +1,22 @@
 ﻿#include "Application.h"
+
 #include "Debug.h"
 #include "Time.h"
 #include "Input/IInputDeviceFactory.h"
 #include "Input/Input.h"
 #include "Input/Factories/GLFWPCInputDeviceFactory.h"
 
-Gio::Application::Application()
-    : _window(nullptr)
-      , _renderer(nullptr)
-      , _game(nullptr)
-      , _gui(nullptr)
-      , _camera(nullptr)
-      , _input(nullptr)
+Gio::Application::Application(std::string name, unsigned int windowWidth, unsigned int windowHeight)
+    : _scene(nullptr)
+    , _gui(nullptr)
 {
-}
+    _window = new Window(name.c_str(), windowWidth, windowHeight);
 
-Gio::Application::~Application()
-{
-}
-
-bool Gio::Application::Run(std::string name, unsigned int windowWidth, unsigned int windowHeight)
-{
-    _window = new Window();
+    if(!_window->GetIsValid())
+    {
+        return;
+    }
     
-    if (!_window->TryToInitialize(name.c_str(), windowWidth, windowHeight))
-        return false;
-
     Input::IInputDeviceFactory* _inputDeviceFactory = new Input::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
     
     _input = new Input::Input(*_inputDeviceFactory);
@@ -33,14 +24,24 @@ bool Gio::Application::Run(std::string name, unsigned int windowWidth, unsigned 
     _camera = new Camera();
 
     _renderer = new Renderer(_camera);
+
+    _scene = new Scene();
+
+    _gui = new GUI(*_scene, *_window, *_input);
+}
+
+Gio::Application::~Application()
+{
+}
+
+bool Gio::Application::Run()
+{
+    if(!_window->GetIsValid())
+        return false;
     
     //_window->onSizeChanged = HandleWindowSizeChanged;
 
-    HandleWindowSizeChanged(windowWidth, windowHeight);
-    
-    _game = new Scene();
-
-    _gui = new GUI(*_game, *_window, *_input);
+    HandleWindowSizeChanged(_window->GetWidth(), _window->GetHeight());
     
     while (!_window->ShouldClose())
     {
@@ -54,11 +55,11 @@ bool Gio::Application::Run(std::string name, unsigned int windowWidth, unsigned 
         
         _input->Update();
         
-        _game->Update(deltaTime);
+        _scene->Update(deltaTime);
 
         _renderer->BeforeDraw();
         
-        _game->Draw(*_renderer);
+        _scene->Draw(*_renderer);
 
         _gui->Draw();
         

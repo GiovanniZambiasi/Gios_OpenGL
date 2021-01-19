@@ -1,5 +1,4 @@
 ﻿#pragma once
-#include "../Debug.h"
 
 namespace Gio::Utilities
 {
@@ -11,7 +10,7 @@ namespace Gio::Utilities
         {
             if (instance != nullptr)
             {
-                Debug::LogError("New instance of Singleton has been created");
+                delete this;
             }
             else
                 instance = (T*)this;

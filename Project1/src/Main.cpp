@@ -3,9 +3,9 @@
 
 int main()
 {
-    Gio::Application application = Gio::Application();
+    Gio::Application application = Gio::Application("Gio's OpenGL", 1240, 720);
 
-    if(application.Run("Gio's OpenGL", 1240, 720))
+    if(application.Run())
     {
         return 0;
     }

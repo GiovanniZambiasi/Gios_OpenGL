@@ -5,6 +5,8 @@
 #include "IInputDeviceFactory.h"
 #include "InputAction.h"
 #include "InputActionBinding.h"
+#include "InputAxis.h"
+#include "InputAxisBindings.h"
 #include "../Utilities/Singleton.h"
 
 namespace Gio::Input
@@ -14,6 +16,7 @@ namespace Gio::Input
     private:
         std::vector<IInputDevice*> _devices;
         std::vector<InputAction*> _actions;
+        std::vector<InputAxis*> _axes;
     
     public:
         Input(IInputDeviceFactory& deviceFactory);
@@ -24,14 +27,25 @@ namespace Gio::Input
 
         void GetDevices(std::vector<IInputDevice*>& collection);
 
+        IInputDevice* GetDevice(const std::string& name);
+        
         void RegisterInputAction(InputActionBinding binding);
 
         void GetActions(std::vector<InputAction*>& collection);
-        
-        IInputDevice* GetDevice(const std::string& name);
-        
+
+        InputAction* GetAction(const std::string name);
+
+        void RegisterInputAxis(InputAxisBindings binding);
+
+        void GetAxes(std::vector<InputAxis*>& collection);
+
+        InputAxis* GetAxis(const std::string name);
+
         template <typename TDevice>
         TDevice* GetDevice();
+    
+    private:
+        void GetDeviceElements(std::vector<DeviceElementPair> pairs, std::vector<IInputElement*>& collection);    
     };
 
     template <typename TDevice>

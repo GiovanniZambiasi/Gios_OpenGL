@@ -4,6 +4,7 @@
 #include "time.h"
 #include "Window.h"
 #include "Input/IInputDevice.h"
+#include "Input/IInputElement.h"
 #include "Input/InputAction.h"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
@@ -90,6 +91,9 @@ void Gio::GUI::Draw()
     if(_shouldShowInputActions)
         DrawInputActions();
     
+    if(_shouldShowInputAxes)
+        DrawInputAxes();
+    
     /*
     bool show_demo_window = true;
     bool show_another_window = false;
@@ -126,6 +130,7 @@ void Gio::GUI::DrawSettingsWindow()
     ImGui::Checkbox("Entities", &_shouldShowEntities);
     ImGui::Checkbox("Input Devices", &_shouldShowInputDevices);
     ImGui::Checkbox("Input Actions", &_shouldShowInputActions);
+    ImGui::Checkbox("Input Axes", &_shouldShowInputAxes);
 
     ImGui::Separator();
     
@@ -140,8 +145,30 @@ void Gio::GUI::DrawSettingsWindow()
     {
         _window.SetSize(_windowWidth, _windowHeight);
     }
+
+    ImGui::Separator();
+
+    ImGui::InputText("Log", _log, 24);
+    
+    if(ImGui::Button("Test Log"))
+    {
+        Debug::Log(_log);
+    }
     
     ImGui::End();
+}
+
+void DrawInputElement(unsigned int index, Gio::Input::IInputElement* element)
+{
+    float val = element->GetValue();
+        
+    ImVec4 color = val > .1f
+        ? ImVec4(.0f, .7f, .0f, 1.0f)
+        : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+    std::string log = "[" + std::to_string(index) + "] " + element->GetName() + " (" + std::to_string(val) + ")";
+
+    ImGui::TextColored(color, log.c_str());
 }
 
 void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vector<Gio::Input::IInputElement*> elements, ImVec2 size)
@@ -156,19 +183,11 @@ void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vecto
     
     device->GetElements(elements);
     
-    for (int j = 0; j < elements.size(); j++)
+    for (auto j = 0; j < elements.size(); j++)
     {
         auto element = elements[j];
 
-        float val = element->GetValue();
-        
-        ImVec4 color = val > .1f
-            ? ImVec4(.0f, .7f, .0f, 1.0f)
-            : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
-
-        std::string log = "[" + std::to_string(j) + "] " + element->GetName() + " (" + std::to_string(val) + ")";
-
-        ImGui::TextColored(color, log.c_str());
+        DrawInputElement(j, element);
     }
 
     ImGui::EndChild();
@@ -206,7 +225,23 @@ void Gio::GUI::DrawInputDevices()
 
 void DrawInputAction(Gio::Input::InputAction& action)
 {
-    ImGui::Text(action.GetName().c_str());
+    ImVec4 color = action.IsPressed()
+            ? ImVec4(.0f, .7f, .0f, 1.0f)
+            : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+
+    ImGui::TextColored(color, action.GetName().c_str());
+
+    ImGui::Indent(20);
+    std::vector<Gio::Input::IInputElement*> inputElements;
+    action.GetElements(inputElements);
+
+    for (auto i = 0; i < inputElements.size(); i++)
+    {
+        auto element = inputElements[i];
+        DrawInputElement(i, element);
+    }
+
+    ImGui::Unindent();
 }
 
 void Gio::GUI::DrawInputActions()
@@ -217,13 +252,83 @@ void Gio::GUI::DrawInputActions()
 
     _input.GetActions(actions);
 
-    for(int i = 0; i < actions.size(); i++)
+    for(auto i = 0; i < actions.size(); i++)
     {
         auto action = actions[i];
         if(i != 0)
             ImGui::Separator();
 
         DrawInputAction(*action);
+    }
+    
+    ImGui::End();
+}
+
+void DrawInputAxis(Gio::Input::InputAxis& axis)
+{
+    float value = axis.GetValue();
+
+    ImVec4 color = value == 0.0f
+                       ? ImVec4(1.0f, 1.0f, 1.0f, 1.0f)
+                       : value > 0
+                            ? ImVec4(.0f, .7f, .0f, 1.0f)
+                            : ImVec4(.7f, .0f, .0f, 1.0f);
+                            
+    std::string entry = axis.GetName() + " (" + std::to_string(value) + ")";
+    
+    ImGui::TextColored(color, entry.c_str());
+
+    ImGui::Indent(20);
+    
+    ImGui::Text("+");
+    
+    ImGui::Indent(10);
+    
+    std::vector<Gio::Input::IInputElement*> inputElements;
+    axis.GetPositiveContributors(inputElements);
+
+    for (auto i = 0; i < inputElements.size(); i++)
+    {
+        auto element = inputElements[i];
+        DrawInputElement(i, element);
+    }
+
+    ImGui::Unindent(10);
+    
+    ImGui::Text("-");
+    
+    ImGui::Indent(10);
+
+    inputElements.clear();
+    axis.GetNegativeContributors(inputElements);
+
+    for (auto i = 0; i < inputElements.size(); i++)
+    {
+        auto element = inputElements[i];
+        DrawInputElement(i, element);
+    }
+    
+    ImGui::Unindent(10);
+    
+    ImGui::Unindent();
+}
+
+void Gio::GUI::DrawInputAxes()
+{
+    ImGui::Begin("Input Axes:");
+
+    std::vector<Input::InputAxis*> axes;
+
+    _input.GetAxes(axes);
+
+    for(int i = 0; i < axes.size(); i++)
+    {
+        auto axis = axes[i];
+        
+        if(i != 0)
+            ImGui::Separator();
+
+        DrawInputAxis(*axis);
     }
     
     ImGui::End();

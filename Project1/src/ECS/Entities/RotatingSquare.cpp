@@ -1,8 +1,7 @@
 ﻿#include "RotatingSquare.h"
 
-#include "../../Random.h"
 #include "../../Input/Input.h"
-#include "../../Input/Devices/Keyboard.h"
+#include "../../Input/InputAxisBindings.h"
 #include "../../Input/Devices/KeyboardKey.h"
 #include "../../Rendering/ShaderManager.h"
 #include "../../Rendering/Primitives/Square.h"
@@ -27,10 +26,61 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
     transform.position = position;
     transform.SetScale(Vector3::One() * 50.0f);
 
-    Input::Input::instance->RegisterInputAction(InputActionBinding("ColorChange", {
-        DeviceElementPair("Keyboard", "Spacebar"),
-        DeviceElementPair("Mouse", "Mouse Button 0"),
-    }));
+    _colorChange = Input::Input::instance->GetAction("ColorChange");
+    
+    if(_colorChange == nullptr)
+    {
+        Input::Input::instance->RegisterInputAction(
+            Input::InputActionBinding(
+                "ColorChange",
+                {
+                    Input::DeviceElementPair("Keyboard", "Spacebar"),
+                }));
+
+        _colorChange = Input::Input::instance->GetAction("ColorChange");
+    }
+
+    _moveHorizontal = Input::Input::instance->GetAxis("MoveHorizontal");
+
+    if(_moveHorizontal == nullptr)
+    {
+        Input::Input::instance->RegisterInputAxis(
+            Input::InputAxisBindings
+            {
+                "MoveHorizontal",
+                {
+                    Input::DeviceElementPair("Keyboard", "D"),
+                    Input::DeviceElementPair("Keyboard", "Arrow Right"),
+                },
+                {
+                    Input::DeviceElementPair("Keyboard", "A"),
+                    Input::DeviceElementPair("Keyboard", "Arrow Left"),
+                }
+            });
+
+        _moveHorizontal = Input::Input::instance->GetAxis("MoveHorizontal");
+    }
+
+    _moveVertical = Input::Input::instance->GetAxis("MoveVertical");
+
+    if(_moveVertical == nullptr)
+    {
+        Input::Input::instance->RegisterInputAxis(
+            Input::InputAxisBindings
+            {
+                "MoveVertical",
+                {
+                    Input::DeviceElementPair("Keyboard", "W"),
+                    Input::DeviceElementPair("Keyboard", "Arrow Up"),
+                },
+                {
+                    Input::DeviceElementPair("Keyboard", "S"),
+                    Input::DeviceElementPair("Keyboard", "Arrow Down"),
+                }
+            });
+
+        _moveVertical = Input::Input::instance->GetAxis("MoveVertical");
+    }
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
@@ -42,29 +92,15 @@ Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
 void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
 {
     auto renderer = GetComponent<Components::ObjectRenderer>();
-    
-    //Input::Devices::Keyboard* keyboard = Input::Input::instance->GetDevice<Input::Devices::Keyboard>();
-    /*if(keyboard != nullptr)
+
+    if(_colorChange->WasPressedThisFrame())
     {
-        if(keyboard->GetKey(Input::Devices::KeyboardKey::Space)->WasPressedThisFrame())
-        {
-            renderer->GetMaterial().SetColor("u_Color", Color::Random());
-        }
+        renderer->GetMaterial().SetColor("u_Color", Color::Random());
+    }
 
-        Vector3 movement;
-        if(keyboard->GetKey(Input::Devices::KeyboardKey::A)->IsPressed() || keyboard->GetKey(Input::Devices::KeyboardKey::D)->IsPressed())
-        {
-            movement.x =  keyboard->GetKey(Input::Devices::KeyboardKey::D)->IsPressed() ? 1 : -1; 
-        }
-        if(keyboard->GetKey(Input::Devices::KeyboardKey::W)->IsPressed() || keyboard->GetKey(Input::Devices::KeyboardKey::S)->IsPressed())
-        {
-            movement.y =  keyboard->GetKey(Input::Devices::KeyboardKey::W)->IsPressed() ? 1 : -1; 
-        }
-
-        movement = Vector3::ClampMagnitude(movement, 1.0f);
-
-        GetTransform().Translate(movement * _movementSpeed);
-    }*/
+    Vector3 movement = Vector3(_moveHorizontal->GetValue(), _moveVertical->GetValue(), 0.0f);
+    movement = Vector3::ClampMagnitude(movement, 1.0f);
+    GetTransform().Translate(movement * _movementSpeed);
 }
 
 void Gio::ECS::Entities::RotatingSquare::OnDraw(Renderer& renderer)
