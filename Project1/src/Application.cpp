@@ -2,9 +2,9 @@
 
 #include "Debug.h"
 #include "Time.h"
-#include "Input/IInputDeviceFactory.h"
-#include "Input/Input.h"
-#include "Input/Factories/GLFWPCInputDeviceFactory.h"
+#include "InputSystem/IInputDeviceFactory.h"
+#include "Input.h"
+#include "InputSystem/Factories/GLFWPCInputDeviceFactory.h"
 
 Gio::Application::Application(std::string name, unsigned int windowWidth, unsigned int windowHeight)
     : _scene(nullptr)
@@ -17,9 +17,9 @@ Gio::Application::Application(std::string name, unsigned int windowWidth, unsign
         return;
     }
     
-    Input::IInputDeviceFactory* _inputDeviceFactory = new Input::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
+    InputSystem::IInputDeviceFactory* _inputDeviceFactory = new InputSystem::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
     
-    _input = new Input::Input(*_inputDeviceFactory);
+    _input = new Input(*_inputDeviceFactory);
     
     _camera = new Camera();
 

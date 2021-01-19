@@ -18,12 +18,11 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
   - [X] Key interface
   - [X] Device factory
   - [X] ``GetDevice<T>``
-  - [ ] ``Device.GetKey<T>``
-  - [ ] Input Actions. Configured externally in file (JSON)
-    - [ ] Button Actions (onDown, onUp, etc..)
-    - [ ] Axis Actions (value, previous value)
-  - [ ] Input Actions to be mapped to device name and element name (changed to int in runtime?)
-  - [ ] Fast mapping of device name to device ref
+  - [X] ``Device.GetKey<T>``
+  - [X] Input Actions. Configured externally in file (JSON)
+    - [X] Button Actions (onDown, onUp, etc..)
+    - [X] Axis Actions (value, previous value)
+  - [X] Input Actions to be mapped to device name and element name
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer

@@ -1,8 +1,8 @@
 ﻿#pragma once
+#include "Input.h"
 #include "Scene.h"
 #include "Window.h"
-#include "Input/IInputDevice.h"
-#include "Input/Input.h"
+#include "InputSystem/IInputDevice.h"
 
 namespace Gio
 {
@@ -11,9 +11,9 @@ namespace Gio
     private:
         Window& _window;
         Scene& _game;
-        Input::Input& _input;
-        std::vector<Input::IInputDevice*> _devices;
-        std::vector<Input::IInputElement*> _inputElements;
+        Input& _input;
+        std::vector<InputSystem::IInputDevice*> _devices;
+        std::vector<InputSystem::IInputElement*> _inputElements;
         char _log[24];
         bool _shouldShowDebugInfo = false;
         bool _shouldShowEntities = false;
@@ -24,7 +24,7 @@ namespace Gio
         int _windowWidth = 0;
         
     public:
-        GUI(Scene& game, Window& window, Input::Input& input);
+        GUI(Scene& game, Window& window, Input& input);
 
         ~GUI();
 

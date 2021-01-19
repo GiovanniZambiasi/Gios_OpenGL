@@ -1,16 +1,18 @@
 ﻿#include <string>
 #include "GUI.h"
+
+#include "Input.h"
 #include "Scene.h"
 #include "time.h"
 #include "Window.h"
-#include "Input/IInputDevice.h"
-#include "Input/IInputElement.h"
-#include "Input/InputAction.h"
+#include "InputSystem/IInputDevice.h"
+#include "InputSystem/IInputElement.h"
+#include "InputSystem/InputAction.h"
 #include "vendor/imgui/imgui.h"
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 #include "vendor/imgui/imgui_internal.h"
 
-Gio::GUI::GUI(Scene& game, Window& window, Input::Input& input)
+Gio::GUI::GUI(Scene& game, Window& window, Input& input)
     : _window(window)
     , _game(game)
     , _input(input)
@@ -158,7 +160,7 @@ void Gio::GUI::DrawSettingsWindow()
     ImGui::End();
 }
 
-void DrawInputElement(unsigned int index, Gio::Input::IInputElement* element)
+void DrawInputElement(unsigned int index, Gio::InputSystem::IInputElement* element)
 {
     float val = element->GetValue();
         
@@ -171,7 +173,7 @@ void DrawInputElement(unsigned int index, Gio::Input::IInputElement* element)
     ImGui::TextColored(color, log.c_str());
 }
 
-void DrawInputDevice(int iteration, Gio::Input::IInputDevice* device, std::vector<Gio::Input::IInputElement*> elements, ImVec2 size)
+void DrawInputDevice(int iteration, Gio::InputSystem::IInputDevice* device, std::vector<Gio::InputSystem::IInputElement*> elements, ImVec2 size)
 {
     std::string index = std::to_string(iteration);
     
@@ -198,7 +200,8 @@ void Gio::GUI::DrawInputDevices()
     ImGui::Begin("Input Devices:");
 
     _devices.clear();
-    _input.GetDevices(_devices);
+    
+    Input::GetDeviceManager()->GetDevices(_devices);
 
     int devicesPerPage = Gio::Math::Clamp(_devices.size(), 1, 2);
     
@@ -210,7 +213,7 @@ void Gio::GUI::DrawInputDevices()
     
     for(int i = 0; i < _devices.size(); i++)
     {
-        Input::IInputDevice* device = _devices[i];
+        InputSystem::IInputDevice* device = _devices[i];
 
         _inputElements.clear();
 
@@ -223,7 +226,7 @@ void Gio::GUI::DrawInputDevices()
     ImGui::End();
 }
 
-void DrawInputAction(Gio::Input::InputAction& action)
+void DrawInputAction(Gio::InputSystem::InputAction& action)
 {
     ImVec4 color = action.IsPressed()
             ? ImVec4(.0f, .7f, .0f, 1.0f)
@@ -232,7 +235,7 @@ void DrawInputAction(Gio::Input::InputAction& action)
     ImGui::TextColored(color, action.GetName().c_str());
 
     ImGui::Indent(20);
-    std::vector<Gio::Input::IInputElement*> inputElements;
+    std::vector<Gio::InputSystem::IInputElement*> inputElements;
     action.GetElements(inputElements);
 
     for (auto i = 0; i < inputElements.size(); i++)
@@ -248,9 +251,9 @@ void Gio::GUI::DrawInputActions()
 {
     ImGui::Begin("Input Actions:");
 
-    std::vector<Input::InputAction*> actions;
+    std::vector<InputSystem::InputAction*> actions;
 
-    _input.GetActions(actions);
+    Input::GetActionManager()->GetActions(actions);
 
     for(auto i = 0; i < actions.size(); i++)
     {
@@ -264,7 +267,7 @@ void Gio::GUI::DrawInputActions()
     ImGui::End();
 }
 
-void DrawInputAxis(Gio::Input::InputAxis& axis)
+void DrawInputAxis(Gio::InputSystem::InputAxis& axis)
 {
     float value = axis.GetValue();
 
@@ -284,7 +287,7 @@ void DrawInputAxis(Gio::Input::InputAxis& axis)
     
     ImGui::Indent(10);
     
-    std::vector<Gio::Input::IInputElement*> inputElements;
+    std::vector<Gio::InputSystem::IInputElement*> inputElements;
     axis.GetPositiveContributors(inputElements);
 
     for (auto i = 0; i < inputElements.size(); i++)
@@ -317,9 +320,9 @@ void Gio::GUI::DrawInputAxes()
 {
     ImGui::Begin("Input Axes:");
 
-    std::vector<Input::InputAxis*> axes;
+    std::vector<InputSystem::InputAxis*> axes;
 
-    _input.GetAxes(axes);
+    Input::GetActionManager()->GetAxes(axes);
 
     for(int i = 0; i < axes.size(); i++)
     {

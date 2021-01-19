@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "Scene.h"
-#include "GUI.h"
 #include "Renderer.h"
 #include "Window.h"
-#include "Input/Input.h"
+#include "Input.h"
+#include "GUI.h"
 
 namespace Gio
 {
@@ -15,7 +15,7 @@ namespace Gio
         Scene* _scene;
         GUI* _gui;
         Camera* _camera;
-        Input::Input* _input;
+        Input* _input;
 
         void HandleWindowSizeChanged(unsigned int width, unsigned int height);
     

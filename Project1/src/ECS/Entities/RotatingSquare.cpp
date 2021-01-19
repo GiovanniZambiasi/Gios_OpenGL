@@ -1,7 +1,6 @@
 ﻿#include "RotatingSquare.h"
 
-#include "../../Input/Input.h"
-#include "../../Input/InputAxisBindings.h"
+#include "../../Input.h"
 #include "../../Rendering/ShaderManager.h"
 #include "../../Rendering/Primitives/Square.h"
 #include "../Components/ObjectRenderer.h"
@@ -25,23 +24,11 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
     transform.position = position;
     transform.SetScale(Vector3::One() * 50.0f);
 
-    _colorChange = Input::Input::instance->GetAction("ColorChange");
+    _colorChange = Input::GetActionManager()->GetAction("ColorChange");
     
-    if(_colorChange == nullptr)
-    {
-        Input::Input::instance->RegisterInputAction(
-            Input::InputActionBinding(
-                "ColorChange",
-                {
-                    Input::DeviceElementPair("Keyboard", "Spacebar"),
-                }));
+    _moveHorizontal = Input::GetActionManager()->GetAxis("Horizontal");
 
-        _colorChange = Input::Input::instance->GetAction("ColorChange");
-    }
-
-    _moveHorizontal = Input::Input::instance->GetAxis("Horizontal");
-
-    _moveVertical = Input::Input::instance->GetAxis("Vertical");
+    _moveVertical = Input::GetActionManager()->GetAxis("Vertical");
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
