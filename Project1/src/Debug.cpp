@@ -1,28 +1,58 @@
 #include "Debug.h"
 #include<iostream>
 #include <string>
-#include <Windows.h>
+
+#include "Debug/LoggerFactory.h"
 
 namespace Gio
 {
-	void Debug::LogWarning(std::string message)
+    void Debug::LogWarning(std::string message)
     {
-        HANDLE __handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleTextAttribute(__handle, 14);
-        std::cout << "[Warning]: " << message << std::endl;
+        try
+        {
+            if(_logger == nullptr)
+                CreateLogger();
+            
+            _logger->LogWarning(message);
+        }
+        catch (std::invalid_argument e)
+        {
+            std::cout << "Logger exception " << e.what() << std::endl;
+        }
     }
 
     void Debug::Log(std::string message)
     {
-        HANDLE __handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleTextAttribute(__handle, 15);
-        std::cout << "[Log]: " << message << std::endl;
+        try
+        {
+            if(_logger == nullptr)
+                CreateLogger();
+            
+            _logger->Log(message);
+        }
+        catch (std::invalid_argument e)
+        {
+            std::cout << "Logger exception " << e.what() << std::endl;
+        }
     }
 
     void Debug::LogError(std::string message)
     {
-        HANDLE __handle = GetStdHandle(STD_OUTPUT_HANDLE);
-        SetConsoleTextAttribute(__handle, 12);
-        std::cout << "[Error]: " << message << std::endl;
+        try
+        {
+            if(_logger == nullptr)
+                CreateLogger();
+            
+            _logger->LogError(message);
+        }
+        catch (std::invalid_argument e)
+        {
+            std::cout << "Logger exception " << e.what() << std::endl;
+        }
+    }
+
+    void Debug::CreateLogger()
+    {
+        _logger = Debugging::LoggerFactory::CreateLogger();
     }
 }

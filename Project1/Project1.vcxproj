@@ -372,6 +372,8 @@
       <AdditionalIncludeDirectories>src\vendor;src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\Debug\LoggerFactory.cpp" />
+    <ClCompile Include="src\Debug\Loggers\ConsoleAndFileLogger.cpp" />
     <ClCompile Include="src\ECS\Component.cpp" />
     <ClCompile Include="src\ECS\Components\ObjectRenderer.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -1031,6 +1033,8 @@
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\Color.h" />
     <ClInclude Include="src\Debug.h" />
+    <ClInclude Include="src\Debug\LoggerFactory.h" />
+    <ClInclude Include="src\Debug\Loggers\ConsoleAndFileLogger.h" />
     <ClInclude Include="src\ECS\Component.h" />
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
     <ClInclude Include="src\ECS\Components\Rotator.h" />
@@ -1038,6 +1042,7 @@
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\Input\Devices\Mouse.h" />
     <ClInclude Include="src\Input\Devices\MouseButton.h" />
+    <ClInclude Include="src\Debug\ILogger.h" />
     <ClInclude Include="src\Scene.h" />
     <ClInclude Include="src\GUI.h" />
     <ClInclude Include="src\Input\Devices\KeyboardKey.h" />

@@ -14,6 +14,7 @@ namespace Gio
         Input::Input& _input;
         std::vector<Input::IInputDevice*> _devices;
         std::vector<Input::IInputElement*> _inputElements;
+        char _log[24];
         bool _shouldShowDebugInfo = false;
         bool _shouldShowEntities = false;
         bool _shouldShowInput = false;

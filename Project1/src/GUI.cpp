@@ -135,6 +135,15 @@ void Gio::GUI::DrawSettingsWindow()
     {
         _window.SetSize(_windowWidth, _windowHeight);
     }
+
+    ImGui::Separator();
+
+    ImGui::InputText("Log", _log, 24);
+    
+    if(ImGui::Button("Test Log"))
+    {
+        Debug::Log(_log);
+    }
     
     ImGui::End();
 }

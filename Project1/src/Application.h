@@ -12,7 +12,7 @@ namespace Gio
     private:
         Window* _window;
         Renderer* _renderer;
-        Scene* _game;
+        Scene* _scene;
         GUI* _gui;
         Camera* _camera;
         Input::Input* _input;
@@ -20,10 +20,10 @@ namespace Gio
         void HandleWindowSizeChanged(unsigned int width, unsigned int height);
     
     public:
-        Application();
+        Application(std::string name, unsigned int windowWidth, unsigned int windowHeight);
 
         ~Application();
 
-        bool Run(std::string name, unsigned int windowWidth, unsigned int windowHeight);
+        bool Run();
     };
 }

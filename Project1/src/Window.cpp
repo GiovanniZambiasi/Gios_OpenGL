@@ -1,15 +1,11 @@
 ﻿#include "Window.h"
 #include "Debug.h"
 
-Gio::Window::Window()
+Gio::Window::Window(const char* title, int width, int height)
+    : _window(nullptr)
+    , onSizeChanged(nullptr)
 {
-    if(instance != nullptr)
-    {
-        Debug::LogError("Multiple instances of window created!");
-        return;
-    }
-
-    instance = this;
+    _isValid = TryToInitialize(title, width, height);
 }
 
 Gio::Window::~Window()
