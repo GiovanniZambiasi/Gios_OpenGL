@@ -588,6 +588,7 @@
     <ClCompile Include="src\InputSystem\DeviceManager.cpp" />
     <ClCompile Include="src\InputSystem\Devices\Device.cpp" />
     <ClCompile Include="src\InputSystem\Devices\Mouse.cpp" />
+    <ClCompile Include="src\InputSystem\Devices\MouseAxis.cpp" />
     <ClCompile Include="src\InputSystem\Devices\MouseButton.cpp" />
     <ClCompile Include="src\InputSystem\InputAction.cpp" />
     <ClCompile Include="src\InputSystem\InputAxis.cpp" />
@@ -1118,6 +1119,7 @@
     <ClInclude Include="src\InputSystem\DeviceManager.h" />
     <ClInclude Include="src\InputSystem\Devices\Device.h" />
     <ClInclude Include="src\InputSystem\Devices\Mouse.h" />
+    <ClInclude Include="src\InputSystem\Devices\MouseAxis.h" />
     <ClInclude Include="src\InputSystem\Devices\MouseButton.h" />
     <ClInclude Include="src\InputSystem\InputAction.h" />
     <ClInclude Include="src\InputSystem\InputAxis.h" />

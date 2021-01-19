@@ -162,13 +162,15 @@ void Gio::GUI::DrawSettingsWindow()
 
 void DrawInputElement(unsigned int index, Gio::InputSystem::IInputElement* element)
 {
-    float val = element->GetValue();
+    float value = element->GetValue();
         
-    ImVec4 color = val > .1f
-        ? ImVec4(.0f, .7f, .0f, 1.0f)
-        : ImVec4(1.0f, 1.0f, 1.0f, 1.0f);
+    ImVec4 color = value == 0.0f
+                       ? ImVec4(1.0f, 1.0f, 1.0f, 1.0f)
+                       : value > 0
+                            ? ImVec4(.0f, .7f, .0f, 1.0f)
+                            : ImVec4(.7f, .0f, .0f, 1.0f);
 
-    std::string log = "[" + std::to_string(index) + "] " + element->GetName() + " (" + std::to_string(val) + ")";
+    std::string log = "[" + std::to_string(index) + "] " + element->GetName() + " (" + std::to_string(value) + ")";
 
     ImGui::TextColored(color, log.c_str());
 }

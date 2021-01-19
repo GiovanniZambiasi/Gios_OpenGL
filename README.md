@@ -13,7 +13,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Create wrapper for Material
 - [X] Shader manager for shader reuse
   - [X] Random utility
-- [ ] Input system
+- [X] Input system
   - [X] Device interface
   - [X] Key interface
   - [X] Device factory
@@ -23,6 +23,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
     - [X] Button Actions (onDown, onUp, etc..)
     - [X] Axis Actions (value, previous value)
   - [X] Input Actions to be mapped to device name and element name
+  - [ ] Implement Joystick
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer
