@@ -1,6 +1,7 @@
 ﻿#include "Camera.h"
 
 Gio::Camera::Camera()
+    : Singleton<Gio::Camera>()
 {
 }
 

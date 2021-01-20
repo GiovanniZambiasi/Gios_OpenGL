@@ -2,8 +2,8 @@
 #include "../Debug.h"
 
 Gio::Transform::Transform()
-    : position(Vector3())
-    , rotationEuler(Vector3())
+    : _position(Vector3())
+    , _rotationEuler(Vector3())
     , _scale(Vector3::One())
 {
 }
@@ -16,7 +16,7 @@ Gio::Vector3 Gio::Transform::GetUp()
 {
     Vector3 up = Vector3::Up();
     
-    float angle = rotationEuler.z;
+    float angle = _rotationEuler.z;
     
     up.Rotate(angle);
  
@@ -34,10 +34,10 @@ Gio::Vector3 Gio::Transform::GetForward()
 
 void Gio::Transform::Translate(Vector3 translation)
 {
-    position = position + translation;
+    _position = _position + translation;
 }
 
 void Gio::Transform::Rotate(Vector3 rotation)
 {
-    this->rotationEuler = this->rotationEuler + rotation;
+    this->_rotationEuler = this->_rotationEuler + rotation;
 }

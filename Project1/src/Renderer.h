@@ -15,7 +15,9 @@ namespace Gio
         Camera* _camera;
         glm::mat4 projectionMatrix;
         glm::mat4 viewProjectionMatrix;
-
+        unsigned int _screenWidth;
+        unsigned int _screenHeight;
+        
         glm::mat4 CalculateModelMatrix(Transform& transform);
         
         void CalculateViewProjectionMatrix();

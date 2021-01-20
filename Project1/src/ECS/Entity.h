@@ -30,6 +30,8 @@ namespace Gio::ECS
         virtual ~Entity();
 
         std::string GetName() { return _name; }
+
+        void SetName(const std::string& name) { _name = name; }
         
         Transform& GetTransform() { return _transform; }
 

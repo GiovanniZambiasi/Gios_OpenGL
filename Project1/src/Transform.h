@@ -8,26 +8,30 @@ namespace Gio
     {
     private:
         Vector3 _scale;
-        
+        Vector3 _position;
+        Vector3 _rotationEuler;
     public:
-        Vector3 position;
-        Vector3 rotationEuler;
+        
         
         Transform();
         
         ~Transform();
 
+        Vector3 GetPosition() { return _position; }
+
+        Vector3 GetRotationEuler() { return _rotationEuler; }
+        
         Vector3 GetScale() { return _scale; }
         
         Vector3 GetUp();
         
         Vector3 GetForward();
 
-        Vector3 GetRotationRadians() { return Vector3(Math::DegreesToRadians(rotationEuler.x), Math::DegreesToRadians(rotationEuler.y), Math::DegreesToRadians(rotationEuler.z)); }
+        Vector3 GetRotationRadians() { return Vector3(Math::DegreesToRadians(_rotationEuler.x), Math::DegreesToRadians(_rotationEuler.y), Math::DegreesToRadians(_rotationEuler.z)); }
 
         void Translate(Vector3 translation);
 
-        void SetPosition(Vector3 position) { this->position = position; }
+        void SetPosition(Vector3 position) { _position = position; }
         
         void Rotate(Vector3 rotation);
 

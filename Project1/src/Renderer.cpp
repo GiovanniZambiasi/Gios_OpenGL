@@ -1,11 +1,9 @@
 #include "Renderer.h"
 #include "Camera.h"
-#include "Rendering/IndexBuffer.h"
 #include "Rendering/Mesh.h"
 #include "Rendering/OpenGLUtilities.h"
 #include "Rendering/Shader.h"
 #include "Rendering/ShaderManager.h"
-#include "Rendering/VertexArray.h"
 
 using namespace Gio::Rendering;
 
@@ -13,6 +11,8 @@ namespace Gio
 {
     Renderer::Renderer(Camera* camera)
         : _camera(camera), projectionMatrix(), viewProjectionMatrix()
+        , _screenWidth(0)
+        , _screenHeight(0)
     {
         ShaderManager::LoadShaders();
     }
@@ -23,7 +23,10 @@ namespace Gio
 
     void Renderer::SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight)
     {
-        projectionMatrix = glm::ortho(.0f,  float(screenWidth), .0f, float(screenHeight), -1.0f, 1.0f);
+        _screenWidth = screenWidth;
+        _screenHeight = screenHeight;
+        
+        projectionMatrix = glm::ortho(.0f,  float(screenWidth), .0f, float(screenHeight), -100.0f, 100.0f);
     }
 
     void Renderer::DrawRay(Vector3 origin, Vector3 direction, Color color)
@@ -67,9 +70,11 @@ namespace Gio
     {
         Transform& cameraTransform = _camera->GetTransform();
         
-        auto cameraPosition = cameraTransform.position;
+        auto cameraPosition = cameraTransform.GetPosition();
+        cameraPosition.x = cameraPosition.x - (_screenWidth/2);
+        cameraPosition.y = cameraPosition.y - (_screenHeight/2);
         
-        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(cameraPosition.x, cameraPosition.y, cameraPosition.z));
+        glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-cameraPosition.x, -cameraPosition.y, cameraPosition.z));
 
         viewProjectionMatrix = projectionMatrix * view;
     }
@@ -77,8 +82,9 @@ namespace Gio
     glm::mat4 Renderer::CalculateModelMatrix(Transform& transform)
     {
         auto model = glm::mat4(1.0f);
-        
-        glm::mat4 translate = glm::translate(model, glm::vec3(transform.position.x, transform.position.y, transform.position.z));
+
+        auto position = transform.GetPosition();
+        glm::mat4 translate = glm::translate(model, glm::vec3(position.x, position.y, position.z));
         
         auto scale = transform.GetScale();
         glm::mat4 scaleMatrix = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));

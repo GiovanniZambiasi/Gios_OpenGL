@@ -130,6 +130,17 @@ void Gio::GUI::Draw()
     ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
+void DrawCamera()
+{
+    Gio::Transform& camTransform = Gio::Camera::instance->GetTransform();
+    auto position = camTransform.GetPosition();
+
+    ImGui::Text("Camera Position:");
+    ImGui::Text(position.to_string().c_str());
+
+    camTransform.SetPosition(position);
+}
+
 void Gio::GUI::DrawSettingsWindow()
 {
     ImGui::Begin("Settings");
@@ -139,6 +150,10 @@ void Gio::GUI::DrawSettingsWindow()
     ImGui::Checkbox("Input Actions", &_shouldShowInputActions);
     ImGui::Checkbox("Input Axes", &_shouldShowInputAxes);
 
+    ImGui::Separator();
+
+    DrawCamera();
+    
     ImGui::Separator();
     
     ImGui::Text("Video:");

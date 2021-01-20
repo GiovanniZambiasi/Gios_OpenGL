@@ -6,13 +6,15 @@
 #include "../Components/ObjectRenderer.h"
 #include "../Components/Rotator.h"
 
-Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position)
+Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position, float scale)
     : Entity("Rotating Square")
 {
-    auto mesh = new Rendering::Primitives::Square(1.0f, 1.0f);
-
+    auto mesh = Rendering::Primitives::Square::GetOneByOne();
+    
     auto material = new Rendering::Material(*Rendering::ShaderManager::GetShader("Basic"));
+    
     auto renderer = new Components::ObjectRenderer(*this, *mesh, *material);
+    
     auto rotator = new Components::Rotator(*this, 180.0f);
 
     AddComponent(renderer);
@@ -21,8 +23,8 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
     SetColor(color);
     
     Transform& transform = GetTransform();
-    transform.position = position;
-    transform.SetScale(Vector3::One() * 50.0f);
+    transform.SetPosition(position);
+    transform.SetScale(Vector3::One() * scale);
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()

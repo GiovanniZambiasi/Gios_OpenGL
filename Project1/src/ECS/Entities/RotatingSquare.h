@@ -6,7 +6,7 @@ namespace Gio::ECS::Entities
     class RotatingSquare : public Entity
     {
     public:
-        RotatingSquare(Color color, Vector3 position);
+        RotatingSquare(Color color, Vector3 position, float scale);
 
         ~RotatingSquare();
         

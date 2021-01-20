@@ -24,3 +24,13 @@ Gio::Rendering::Primitives::Square::~Square()
 {
     Debug::Log("Destroying square");
 }
+
+Gio::Rendering::Primitives::Square* Gio::Rendering::Primitives::Square::GetOneByOne()
+{
+    if(squareOneByOne == nullptr)
+    {
+        squareOneByOne = new Square(1.0f, 1.0f);
+    }
+
+    return squareOneByOne;
+}

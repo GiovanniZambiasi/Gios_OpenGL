@@ -87,7 +87,7 @@ void Gio::Application::HandleWindowSizeChanged(unsigned int width, unsigned int 
 
     _renderer->SetupProjectionMatrix(width, height);
 
-    Transform& camTrans = _camera->GetTransform();
+    /*Transform& camTrans = _camera->GetTransform();
     
     auto camPos = camTrans.position;
     camPos.x = int((width/2));
@@ -95,5 +95,5 @@ void Gio::Application::HandleWindowSizeChanged(unsigned int width, unsigned int 
 
     Debug::Log("Setting camPos to: " + camPos.to_string());
     
-    camTrans.SetPosition(camPos);
+    camTrans.SetPosition(camPos);*/
 }
