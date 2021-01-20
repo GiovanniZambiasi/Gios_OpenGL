@@ -15,9 +15,10 @@ namespace Gio::Rendering
 	class Shader
 	{
 	private:
+		std::unordered_map<std::string, int> _uniformLocationCache;
 		std::string _name;
 		unsigned int _rendererID;
-		std::unordered_map<std::string, int> _uniformLocationCache;
+		int _mvpUniformLocation;
 	
 	public:
 		Shader(ShaderProgramSource source);
@@ -33,6 +34,8 @@ namespace Gio::Rendering
 		std::string GetName() { return _name; }
 
 		unsigned int GetRendererID() {return _rendererID;}
+
+		int GetMVPLocation() { return _mvpUniformLocation; }
 		
 		template <typename TUniform>
 		void SetUniform(const std::string& name, TUniform val);

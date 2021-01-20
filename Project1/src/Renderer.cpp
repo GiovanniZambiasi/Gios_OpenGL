@@ -68,7 +68,7 @@ namespace Gio
 
         auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
 
-        shader.SetUniform("u_MVP", modelViewProjectionMatrix);
+        shader.SetUniformByLocation(shader.GetMVPLocation(), modelViewProjectionMatrix);
 
         if(_previousRenderedMesh == nullptr || _previousRenderedMesh != &mesh)
         {
