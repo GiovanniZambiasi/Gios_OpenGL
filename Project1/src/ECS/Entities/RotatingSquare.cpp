@@ -15,20 +15,14 @@ Gio::ECS::Entities::RotatingSquare::RotatingSquare(Color color, Vector3 position
     auto renderer = new Components::ObjectRenderer(*this, *mesh, *material);
     auto rotator = new Components::Rotator(*this, 180.0f);
 
-    material->SetColor("u_Color", color);
-    
     AddComponent(renderer);
     AddComponent(rotator);
 
+    SetColor(color);
+    
     Transform& transform = GetTransform();
     transform.position = position;
     transform.SetScale(Vector3::One() * 50.0f);
-
-    _colorChange = Input::GetActionManager()->GetAction("ColorChange");
-    
-    _moveHorizontal = Input::GetActionManager()->GetAxis("Horizontal");
-
-    _moveVertical = Input::GetActionManager()->GetAxis("Vertical");
 }
 
 Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
@@ -37,24 +31,13 @@ Gio::ECS::Entities::RotatingSquare::~RotatingSquare()
     delete &(renderer->GetMaterial());
 }
 
-void Gio::ECS::Entities::RotatingSquare::OnUpdate(float deltaTime)
-{
-    auto renderer = GetComponent<Components::ObjectRenderer>();
-
-    if(_colorChange->WasPressedThisFrame())
-    {
-        renderer->GetMaterial().SetColor("u_Color", Color::Random());
-    }
-
-    if(_moveHorizontal!= nullptr && _moveVertical != nullptr)
-    {
-        Vector3 movement = Vector3(_moveHorizontal->GetValue(), _moveVertical->GetValue(), 0.0f);
-        movement = Vector3::ClampMagnitude(movement, 1.0f);
-        GetTransform().Translate(movement * _movementSpeed);
-    }
-}
-
 void Gio::ECS::Entities::RotatingSquare::OnDraw(Renderer& renderer)
 {
     renderer.DrawLine(Vector3::Zero(), Vector3::Up() * 10000, Color::Red());
+}
+
+void Gio::ECS::Entities::RotatingSquare::SetColor(Color color)
+{
+    auto renderer = GetComponent<Components::ObjectRenderer>();
+    renderer->GetMaterial().SetColor("u_Color", color);
 }

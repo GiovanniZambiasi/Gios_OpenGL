@@ -4,6 +4,12 @@
     {"Action Name":"ColorChange", 
       "Elements":
       [
+        {"Device":"Keyboard","Element":"C"}
+      ]
+    },
+    {"Action Name":"SpawnCube",
+      "Elements":
+      [
         {"Device":"Keyboard","Element":"Spacebar"}
       ]
     }

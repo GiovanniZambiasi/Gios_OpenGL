@@ -16,7 +16,10 @@ Gio::GUI::GUI(Scene& game, Window& window, Input& input)
     : _window(window)
     , _game(game)
     , _input(input)
-{   
+{
+    _windowHeight = _window.GetHeight();
+    _windowWidth = _window.GetWidth();
+    
     ImGui::CreateContext();
     ImGui_ImplGlfwGL3_Init(window.GetGLFWWindow(), true);
     ImGui::StyleColorsDark();
@@ -70,8 +73,10 @@ void DrawEntities(Gio::Scene& game)
     
     for (int i = entities.size() - 1; i >=0 ; i--)
     {
+        ImGui::PushID(i);
         Gio::ECS::Entity* entity = entities[i];
         DrawEntity(entity);
+        ImGui::PopID();
     }
     
     ImGui::End();

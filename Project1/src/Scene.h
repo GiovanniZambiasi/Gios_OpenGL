@@ -2,10 +2,11 @@
 #include <vector>
 #include "Renderer.h"
 #include "ECS/Entity.h"
+#include "ECS/IEntitySpawnHandler.h"
 
 namespace Gio
 {
-    class Scene
+    class Scene : public ECS::IEntitySpawnHandler
     {
     private:
         std::vector<ECS::Entity*> _entities;
@@ -16,6 +17,8 @@ namespace Gio
         ~Scene();
 
         std::vector<ECS::Entity*>& GetEntities() { return _entities; }
+
+        void HandleEntitySpawned(ECS::Entity& entity) override;
         
         void AddEntity(ECS::Entity* entity);
         

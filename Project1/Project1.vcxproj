@@ -445,6 +445,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\ECS\Components\Rotator.cpp" />
+    <ClCompile Include="src\ECS\Entities\MovingRotatingSquare.cpp" />
     <ClCompile Include="src\ECS\Entities\RotatingSquare.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -515,6 +516,7 @@
       <AdditionalIncludeDirectories>src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\ECS\IEntitySpawnHandler.cpp" />
     <ClCompile Include="src\Input.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -954,6 +956,7 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\Utilities\Singleton.cpp" />
+    <ClCompile Include="src\Utilities\StdVectorUtilities.cpp" />
     <ClCompile Include="src\Vector2.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1109,8 +1112,10 @@
     <ClInclude Include="src\ECS\Component.h" />
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
     <ClInclude Include="src\ECS\Components\Rotator.h" />
+    <ClInclude Include="src\ECS\Entities\MovingRotatingSquare.h" />
     <ClInclude Include="src\ECS\Entities\RotatingSquare.h" />
     <ClInclude Include="src\ECS\Entity.h" />
+    <ClInclude Include="src\ECS\IEntitySpawnHandler.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\InputSystem\ActionManager.h" />
     <ClInclude Include="src\InputSystem\Actions\InputActionBinding.h" />
@@ -1149,6 +1154,7 @@
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\Utilities\Singleton.h" />
+    <ClInclude Include="src\Utilities\StdVectorUtilities.h" />
     <ClInclude Include="src\Utilities\StringUtilities.h" />
     <ClInclude Include="src\Vector2.h" />
     <ClInclude Include="src\Vector3.h" />

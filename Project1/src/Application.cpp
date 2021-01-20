@@ -16,7 +16,17 @@ Gio::Application::Application(std::string name, unsigned int windowWidth, unsign
     {
         return;
     }
-    
+}
+
+Gio::Application::~Application()
+{
+}
+
+bool Gio::Application::Run()
+{
+    if(!_window->GetIsValid())
+        return false;
+
     InputSystem::IInputDeviceFactory* _inputDeviceFactory = new InputSystem::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
     
     _input = new Input(*_inputDeviceFactory);
@@ -28,16 +38,6 @@ Gio::Application::Application(std::string name, unsigned int windowWidth, unsign
     _scene = new Scene();
 
     _gui = new GUI(*_scene, *_window, *_input);
-}
-
-Gio::Application::~Application()
-{
-}
-
-bool Gio::Application::Run()
-{
-    if(!_window->GetIsValid())
-        return false;
     
     //_window->onSizeChanged = HandleWindowSizeChanged;
 

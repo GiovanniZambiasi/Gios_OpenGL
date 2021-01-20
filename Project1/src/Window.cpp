@@ -79,7 +79,7 @@ void Gio::Window::SetSize(unsigned int width, unsigned int height)
 
     _width = width;
     _height = height;
-    
+
     if(onSizeChanged != nullptr)
         onSizeChanged(width, height);
 }

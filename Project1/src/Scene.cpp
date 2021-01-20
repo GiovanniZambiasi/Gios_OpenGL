@@ -1,26 +1,32 @@
 ﻿#include "Scene.h"
 #include "Debug.h"
 #include "Renderer.h"
+#include "ECS/Entity.h"
 #include "ECS/Components/ObjectRenderer.h"
-#include "ECS/Entities/RotatingSquare.h"
+#include "ECS/Entities/MovingRotatingSquare.h"
+#include "Utilities/StdVectorUtilities.h"
 
 Gio::Scene::Scene()
 {
-    ECS::Entities::RotatingSquare* square = new ECS::Entities::RotatingSquare(Color::Red(), Vector3(-200.0f, 0.0f, 0.0f));
+    ECS::Entity::RegisterSpawnHandler(this);
     
-    AddEntity(square);
-    
-    square = new ECS::Entities::RotatingSquare(Color::Blue(), Vector3(200.0f, 0.0f, 0.0f));
-
-    AddEntity(square);
+    new ECS::Entities::MovingRotatingSquare(Color::Red(), Vector3(.0f, 0.0f, 0.0f), 10.0f);
 }
 
 Gio::Scene::~Scene()
 {
 }
 
+void Gio::Scene::HandleEntitySpawned(ECS::Entity& entity)
+{
+    AddEntity(&entity);
+}
+
 void Gio::Scene::AddEntity(ECS::Entity* entity)
 {
+    if(Utilities::Contains(entity, _entities))
+        return;
+    
     _entities.push_back(entity);
 }
 

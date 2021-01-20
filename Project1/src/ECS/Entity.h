@@ -2,6 +2,7 @@
 
 #include <vector>
 
+#include "IEntitySpawnHandler.h"
 #include "../Renderer.h"
 #include "../Transform.h"
 
@@ -11,6 +12,12 @@ namespace Gio::ECS
 
     class Entity
     {
+    private:
+        static IEntitySpawnHandler* spawnHandler;
+
+    public:
+        static void RegisterSpawnHandler(IEntitySpawnHandler* handler);
+    
     private:
         std::string _name;
         Transform _transform;
