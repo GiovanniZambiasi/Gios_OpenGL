@@ -15,6 +15,7 @@ namespace Gio::Rendering
 
     Shader::Shader(const std::string& name, const std::string& vertexSource, const std::string& fragmentSource)
         : _name(name)
+        , _rendererID(0)
     {
         _rendererID = CreateShader(vertexSource, fragmentSource);
     }

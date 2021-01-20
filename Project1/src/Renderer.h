@@ -17,6 +17,9 @@ namespace Gio
         glm::mat4 viewProjectionMatrix;
         unsigned int _screenWidth;
         unsigned int _screenHeight;
+
+        Rendering::Mesh* _previousRenderedMesh;
+        Rendering::Shader* _previousRenderedShader;
         
         glm::mat4 CalculateModelMatrix(Transform& transform);
         

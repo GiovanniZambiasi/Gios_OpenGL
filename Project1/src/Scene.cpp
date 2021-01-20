@@ -10,12 +10,11 @@ Gio::Scene::Scene()
 {
     ECS::Entity::RegisterSpawnHandler(this);
     
-    for (auto i = 0; i < 100; i++)
+    for (auto i = 0; i < 200; i++)
     {
-        auto position = Vector3(Random::Between(-1000.0f, 1000.0f), Random::Between(-1000.0f, 1000.0f), 0.0f);
-        new ECS::Entities::RotatingSquare(Color::White(), position,  Random::Between(3.0f, 7.0f));    
+        auto position = Vector3(Random::Between(-2000.0f, 2000.0f), Random::Between(-2000.0f, 2000.0f), 0.0f);
+        new ECS::Entities::RotatingSquare(Color::White(), position,  Random::Between(2.0f, 5.0f));    
     }
-
     
     new ECS::Entities::MovingRotatingSquare(Color::Red(), Vector3(.0f, 0.0f, 0.0f), 10.0f);
 }

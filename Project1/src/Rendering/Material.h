@@ -25,11 +25,10 @@ namespace Gio::Rendering
         
         void SetColor(const std::string& propertyName, Color color);
         
-        
         void SetFloat(const std::string& propertyName, float v);
 
         Shader& GetShader() { return _shader; }
 
-        void Bind();
+        void ApplyProperties();
     };
 }

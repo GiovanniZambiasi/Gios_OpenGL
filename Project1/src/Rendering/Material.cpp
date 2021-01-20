@@ -21,10 +21,8 @@ void Gio::Rendering::Material::SetFloat(const std::string& propertyName, float v
     SetProperty(_floatProperties, propertyName, v);
 }
 
-void Gio::Rendering::Material::Bind()
-{
-    _shader.Bind();
-
+void Gio::Rendering::Material::ApplyProperties()
+{   
     ApplyProperties(_colorProperties);
     ApplyProperties(_floatProperties);
 }

@@ -13,6 +13,8 @@ namespace Gio
         : _camera(camera), projectionMatrix(), viewProjectionMatrix()
         , _screenWidth(0)
         , _screenHeight(0)
+        , _previousRenderedMesh(nullptr)
+        , _previousRenderedShader(nullptr)
     {
         ShaderManager::LoadShaders();
     }
@@ -54,14 +56,25 @@ namespace Gio
 
     void Renderer::Draw(Transform& transform, Rendering::Mesh& mesh, Rendering::Material& material)
     {
-        material.Bind();
+        Shader& shader = material.GetShader();
+        
+        if(_previousRenderedShader == nullptr || _previousRenderedShader != &shader)
+        {
+            shader.Bind();            
+            _previousRenderedShader = &shader;
+        }
+        
+        material.ApplyProperties();
 
         auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
 
-        Shader& shader = material.GetShader();
         shader.SetUniform("u_MVP", modelViewProjectionMatrix);
-        
-        mesh.Bind();
+
+        if(_previousRenderedMesh == nullptr || _previousRenderedMesh != &mesh)
+        {
+            mesh.Bind();
+            _previousRenderedMesh = &mesh;
+        }
         
         GLCall(glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, nullptr));
     }
@@ -92,9 +105,7 @@ namespace Gio
         auto rotationRadians = transform.GetRotationRadians();
         //glm::mat4 rotationMatrix = glm::radians(glm::);
         glm::mat4 rotationMatrix = glm::rotate(model, rotationRadians.z, glm::vec3(0, 0, 1));
-        rotationMatrix *= glm::rotate(model, rotationRadians.x, glm::vec3(1, 0, 0));
-        rotationMatrix *= glm::rotate(model, rotationRadians.y, glm::vec3(0, 1, 0));
-
+        
         return translate * scaleMatrix * rotationMatrix;
     }
 

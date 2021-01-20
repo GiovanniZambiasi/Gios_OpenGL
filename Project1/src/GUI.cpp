@@ -65,9 +65,13 @@ void DrawEntity(Gio::ECS::Entity* entity)
 
 void DrawEntities(Gio::Scene& game)
 {
+    std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
+    
     ImGui::Begin("Entities");
 
-    std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
+    ImGui::Text(("Count: " + std::to_string(entities.size())).c_str());
+    
+    ImGui::BeginChild("entities");
     
     ImGui::Indent(1);
     
@@ -78,6 +82,8 @@ void DrawEntities(Gio::Scene& game)
         DrawEntity(entity);
         ImGui::PopID();
     }
+
+    ImGui::EndChild();
     
     ImGui::End();
 }
