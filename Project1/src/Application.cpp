@@ -86,14 +86,4 @@ void Gio::Application::HandleWindowSizeChanged(unsigned int width, unsigned int 
     Debug::Log("Window size changed to: " + std::to_string(width) + "x" + std::to_string(height));
 
     _renderer->SetupProjectionMatrix(width, height);
-
-    /*Transform& camTrans = _camera->GetTransform();
-    
-    auto camPos = camTrans.position;
-    camPos.x = int((width/2));
-    camPos.y = int((height/2));
-
-    Debug::Log("Setting camPos to: " + camPos.to_string());
-    
-    camTrans.SetPosition(camPos);*/
 }

@@ -2,8 +2,8 @@
 
 Gio::Rendering::Material::Material(Shader& shader)
     : _shader(shader)
-    , _colorProperties(std::unordered_map<std::string, Color>())
-    , _floatProperties(std::unordered_map<std::string, float>())
+    , _colorProperties(std::unordered_map<int, Color>())
+    , _floatProperties(std::unordered_map<int, float>())
 {
 }
 
@@ -28,21 +28,22 @@ void Gio::Rendering::Material::ApplyProperties()
 }
 
 template <typename TProperty>
-void Gio::Rendering::Material::SetProperty(std::unordered_map<std::string, TProperty>& map, const std::string& propertyName, TProperty val)
+void Gio::Rendering::Material::SetProperty(std::unordered_map<int, TProperty>& map, const std::string& propertyName, TProperty val)
 {
-    map[propertyName] = val;
+    int location = _shader.GetUniformLocation(propertyName);
+    map[location] = val;
 }
 
 template <typename TProperty>
-void Gio::Rendering::Material::ApplyProperties(std::unordered_map<std::string, TProperty>& map)
+void Gio::Rendering::Material::ApplyProperties(std::unordered_map<int, TProperty>& map)
 {
-    typename std::unordered_map<std::string, TProperty>::iterator it;
+    typename std::unordered_map<int, TProperty>::iterator it;
 
     for (it = map.begin(); it != map.end(); it++)
     {
-        std::string name = it->first;
+        int location = it->first;
         TProperty val = it->second;
 
-        _shader.SetUniform(name, val);
+        _shader.SetUniformByLocation(location, val);
     }
 }

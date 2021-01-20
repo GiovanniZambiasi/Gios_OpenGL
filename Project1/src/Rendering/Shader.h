@@ -18,7 +18,7 @@ namespace Gio::Rendering
 		std::string _name;
 		unsigned int _rendererID;
 		std::unordered_map<std::string, int> _uniformLocationCache;
-
+	
 	public:
 		Shader(ShaderProgramSource source);
 		
@@ -36,14 +36,22 @@ namespace Gio::Rendering
 		
 		template <typename TUniform>
 		void SetUniform(const std::string& name, TUniform val);
+
+		template <typename TUniform>
+        void SetUniformByLocation(int location, TUniform val);
 		
-		void SetUniformMat4f(const std::string& name, glm::mat4 matrix);
+		int GetUniformLocation(const std::string& name);
 
 	private:
 		unsigned int CreateShader(const std::string& vertexShader, const std::string& fragmentShader);
 
 		unsigned int CompileShader(unsigned int type, const std::string& source);
-
-		int GetUniformLocation(const std::string& name);
 	};
+
+	template <typename TUniform>
+	void Shader::SetUniform(const std::string& name, TUniform val)
+	{
+		SetUniformByLocation(GetUniformLocation(name), val);
+	}
+
 }

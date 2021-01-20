@@ -9,14 +9,14 @@ namespace Gio::Rendering
     {
     private:
         Shader& _shader;
-        std::unordered_map<std::string, Color> _colorProperties;
-        std::unordered_map<std::string, float> _floatProperties;
+        std::unordered_map<int, Color> _colorProperties;
+        std::unordered_map<int, float> _floatProperties;
 
         template <typename  TProperty>
-        void SetProperty(std::unordered_map<std::string, TProperty>& map, const std::string& propertyName, TProperty val);
+        void SetProperty(std::unordered_map<int, TProperty>& map, const std::string& propertyName, TProperty val);
 
         template <typename  TProperty>
-        void ApplyProperties(std::unordered_map<std::string, TProperty>& map);
+        void ApplyProperties(std::unordered_map<int, TProperty>& map);
     
     public:
         Material(Shader& shader);

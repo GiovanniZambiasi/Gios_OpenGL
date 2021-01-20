@@ -36,29 +36,29 @@ namespace Gio::Rendering
     }
 
     template <typename TUniform>
-    void Shader::SetUniform(const std::string& name, TUniform val)
+    void Shader::SetUniformByLocation(int location, TUniform val)
     {
-        Debug::LogError("Uniform type not specialized for property '" + name + "'");
+        Debug::LogError("Uniform type not specialized for property at'" + std::to_string(location) + "'");
     }
 
     template<>
-    void Shader::SetUniform(const std::string& name, float val)
+    void Shader::SetUniformByLocation(int location, float val)
     {
-        GLCall(glUniform1f(GetUniformLocation(name), val));
+        GLCall(glUniform1f(location, val));
     }
     
     template<>
-    void Shader::SetUniform(const std::string& name, Color val)
+    void Shader::SetUniformByLocation(int location, Color val)
     {
-        GLCall(glUniform4f(GetUniformLocation(name), val.r, val.g, val.b, val.a));
+        GLCall(glUniform4f(location, val.r, val.g, val.b, val.a));
     }
 
     template<>
-    void Shader::SetUniform(const std::string& name, glm::mat4 val)
+    void Shader::SetUniformByLocation(int location, glm::mat4 val)
     {
-        GLCall(glUniformMatrix4fv(GetUniformLocation(name),1, GL_FALSE, &val[0][0]));
+        GLCall(glUniformMatrix4fv(location,1, GL_FALSE, &val[0][0]));
     }
-    
+
     int Shader::GetUniformLocation(const std::string& name)
     {
         if (_uniformLocationCache.find(name) != _uniformLocationCache.end())
@@ -75,7 +75,7 @@ namespace Gio::Rendering
 
         return location;
     }
-    
+
     unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
     {
         unsigned int __id = glCreateShader(type);
@@ -116,10 +116,5 @@ namespace Gio::Rendering
         GLCall(glDeleteShader(__fs));
 
         return __program;
-    }
-
-    void Shader::SetUniformMat4f(const std::string& name, glm::mat4 matrix)
-    {
-        Debug::LogError("Not implemented");
     }
 }
