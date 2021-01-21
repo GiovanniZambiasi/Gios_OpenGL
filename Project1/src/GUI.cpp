@@ -50,24 +50,26 @@ void DrawEntity(Gio::ECS::Entity* entity)
 void DrawEntities(Gio::Scene& game)
 {
     std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
-    
-    ImGui::Begin("Entities");
 
-    ImGui::Text(("Count: " + std::to_string(entities.size())).c_str());
-    
-    ImGui::BeginChild("entities");
-    
-    ImGui::Indent(1);
-    
-    for (int i = entities.size() - 1; i >=0 ; i--)
+    if(ImGui::Begin("Entities"))
     {
-        ImGui::PushID(i);
-        Gio::ECS::Entity* entity = entities[i];
-        DrawEntity(entity);
-        ImGui::PopID();
+        ImGui::Text(("Count: " + std::to_string(entities.size())).c_str());
+    
+        if(ImGui::BeginChild("entities"))
+        {
+            ImGui::Indent(1);
+    
+            for (int i = entities.size() - 1; i >=0 ; i--)
+            {
+                ImGui::PushID(i);
+                Gio::ECS::Entity* entity = entities[i];
+                DrawEntity(entity);
+                ImGui::PopID();
+            }
+        }
+        
+        ImGui::EndChild();
     }
-
-    ImGui::EndChild();
     
     ImGui::End();
 }
@@ -133,50 +135,52 @@ void DrawCamera()
 
 void Gio::GUI::DrawSettingsWindow()
 {
-    ImGui::Begin("Settings");
-    ImGui::Checkbox("Debug Info", &_shouldShowDebugInfo);
-    ImGui::Checkbox("Entities", &_shouldShowEntities);
-    ImGui::Checkbox("Input Devices", &_shouldShowInputDevices);
-    ImGui::Checkbox("Input Actions", &_shouldShowInputActions);
-    ImGui::Checkbox("Input Axes", &_shouldShowInputAxes);
-
-    ImGui::Separator();
-
-    DrawCamera();
-    
-    ImGui::Separator();
-    
-    ImGui::Text("Video:");
-    ImGui::Indent(10);
-
-    int* _size = new int();
-
-    (*_size) = _windowSize.width;
-    
-    ImGui::InputInt("Width", _size);
-
-    _windowSize.width = *_size;
-
-    (*_size) = _windowSize.height;
-    
-    ImGui::InputInt("Height", _size);
-
-    _windowSize.height = *_size;
-
-    delete _size;
-    
-    if(ImGui::Button("Apply"))
+    if(ImGui::Begin("Settings"))
     {
-        _window.SetSize(_windowSize);
-    }
+        ImGui::Checkbox("Debug Info", &_shouldShowDebugInfo);
+        ImGui::Checkbox("Entities", &_shouldShowEntities);
+        ImGui::Checkbox("Input Devices", &_shouldShowInputDevices);
+        ImGui::Checkbox("Input Actions", &_shouldShowInputActions);
+        ImGui::Checkbox("Input Axes", &_shouldShowInputAxes);
 
-    ImGui::Separator();
+        ImGui::Separator();
 
-    ImGui::InputText("Log", _log, 24);
+        DrawCamera();
     
-    if(ImGui::Button("Test Log"))
-    {
-        Debug::Log(_log);
+        ImGui::Separator();
+    
+        ImGui::Text("Video:");
+        ImGui::Indent(10);
+
+        int* _size = new int();
+
+        (*_size) = _windowSize.width;
+    
+        ImGui::InputInt("Width", _size);
+
+        _windowSize.width = *_size;
+
+        (*_size) = _windowSize.height;
+    
+        ImGui::InputInt("Height", _size);
+
+        _windowSize.height = *_size;
+
+        delete _size;
+    
+        if(ImGui::Button("Apply"))
+        {
+            _window.SetSize(_windowSize);
+        }
+
+        ImGui::Separator();
+
+        ImGui::InputText("Log", _log, 24);
+    
+        if(ImGui::Button("Test Log"))
+        {
+            Debug::Log(_log);
+        }
     }
     
     ImGui::End();
@@ -203,50 +207,51 @@ void DrawInputDevice(int iteration, Gio::InputSystem::IInputDevice* device, std:
     
     ImGui::Text(("[" + index + "] " +  device->GetName()).c_str());
 
-    ImGui::BeginChild(index.c_str(), size);
-    
-    ImGui::Indent(10);
-    
-    device->GetElements(elements);
-    
-    for (auto j = 0; j < elements.size(); j++)
+    if(ImGui::BeginChild(index.c_str(), size))
     {
-        auto element = elements[j];
+        ImGui::Indent(10);
+    
+        device->GetElements(elements);
+    
+        for (auto j = 0; j < elements.size(); j++)
+        {
+            auto element = elements[j];
 
-        DrawInputElement(j, element);
+            DrawInputElement(j, element);
+        }
     }
-
+    
     ImGui::EndChild();
 }
 
 void Gio::GUI::DrawInputDevices()
 {
-    ImGui::Begin("Input Devices:");
-
-    _devices.clear();
-    
-    Input::GetDeviceManager()->GetDevices(_devices);
-
-    int devicesPerPage = Gio::Math::Clamp(_devices.size(), 1, 2);
-    
-    auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
-    
-    float windowHeightPerDevice = currentWindowSize.y / devicesPerPage;
-
-    ImVec2 deviceDisplaySize = ImVec2(currentWindowSize.x - 25, windowHeightPerDevice);
-    
-    for(int i = 0; i < _devices.size(); i++)
+    if(ImGui::Begin("Input Devices:"))
     {
-        InputSystem::IInputDevice* device = _devices[i];
+        _devices.clear();
+    
+        Input::GetDeviceManager()->GetDevices(_devices);
 
-        _inputElements.clear();
+        int devicesPerPage = Gio::Math::Clamp(_devices.size(), 1, 2);
+    
+        auto currentWindowSize = ImGui::GetCurrentWindow()->Size;
+    
+        float windowHeightPerDevice = currentWindowSize.y / devicesPerPage;
 
-        if(i != 0)
-            ImGui::Separator();
+        ImVec2 deviceDisplaySize = ImVec2(currentWindowSize.x - 25, windowHeightPerDevice);
+    
+        for(int i = 0; i < _devices.size(); i++)
+        {
+            InputSystem::IInputDevice* device = _devices[i];
+
+            _inputElements.clear();
+
+            if(i != 0)
+                ImGui::Separator();
         
-        DrawInputDevice(i, device, _inputElements, deviceDisplaySize);
+            DrawInputDevice(i, device, _inputElements, deviceDisplaySize);
+        }
     }
-
     ImGui::End();
 }
 
@@ -273,19 +278,20 @@ void DrawInputAction(Gio::InputSystem::InputAction& action)
 
 void Gio::GUI::DrawInputActions()
 {
-    ImGui::Begin("Input Actions:");
-
-    std::vector<InputSystem::InputAction*> actions;
-
-    Input::GetActionManager()->GetActions(actions);
-
-    for(auto i = 0; i < actions.size(); i++)
+    if(ImGui::Begin("Input Actions:"))
     {
-        auto action = actions[i];
-        if(i != 0)
-            ImGui::Separator();
+        std::vector<InputSystem::InputAction*> actions;
 
-        DrawInputAction(*action);
+        Input::GetActionManager()->GetActions(actions);
+
+        for(auto i = 0; i < actions.size(); i++)
+        {
+            auto action = actions[i];
+            if(i != 0)
+                ImGui::Separator();
+
+            DrawInputAction(*action);
+        }
     }
     
     ImGui::End();
@@ -342,20 +348,21 @@ void DrawInputAxis(Gio::InputSystem::InputAxis& axis)
 
 void Gio::GUI::DrawInputAxes()
 {
-    ImGui::Begin("Input Axes:");
-
-    std::vector<InputSystem::InputAxis*> axes;
-
-    Input::GetActionManager()->GetAxes(axes);
-
-    for(int i = 0; i < axes.size(); i++)
+    if(ImGui::Begin("Input Axes:"))
     {
-        auto axis = axes[i];
-        
-        if(i != 0)
-            ImGui::Separator();
+        std::vector<InputSystem::InputAxis*> axes;
 
-        DrawInputAxis(*axis);
+        Input::GetActionManager()->GetAxes(axes);
+
+        for(int i = 0; i < axes.size(); i++)
+        {
+            auto axis = axes[i];
+        
+            if(i != 0)
+                ImGui::Separator();
+
+            DrawInputAxis(*axis);
+        }
     }
     
     ImGui::End();
@@ -363,17 +370,18 @@ void Gio::GUI::DrawInputAxes()
 
 void Gio::GUI::DrawDebugInfo()
 {
-    ImGui::Begin("Debug Info:");
+    if(ImGui::Begin("Debug Info:"))
+    {
+        ImGui::Text(("Time: " + std::to_string(Gio::Time::GetTimeSinceStartSeconds())).c_str());
     
-    ImGui::Text(("Time: " + std::to_string(Gio::Time::GetTimeSinceStartSeconds())).c_str());
+        ImGui::Text(("DeltaTime: " + std::to_string(Gio::Time::GetDeltaTimeSeconds())).c_str());
+
+        ImGui::Text(("FPS: " + std::to_string(Gio::Time::GetFPSApprox())).c_str());
+
+        ImGui::Text(("Draw calls: " + std::to_string(_renderer.GetDrawCalls())).c_str());
     
-    ImGui::Text(("DeltaTime: " + std::to_string(Gio::Time::GetDeltaTimeSeconds())).c_str());
-
-    ImGui::Text(("FPS: " + std::to_string(Gio::Time::GetFPSApprox())).c_str());
-
-    ImGui::Text(("Draw calls: " + std::to_string(_renderer.GetDrawCalls())).c_str());
+        ImGui::Text(("Triangles: " + std::to_string(_renderer.GetTriangleCount())).c_str());
+    }
     
-    ImGui::Text(("Triangles: " + std::to_string(_renderer.GetTriangleCount())).c_str());
-
     ImGui::End();
 }

@@ -1,6 +1,6 @@
 #include "IndexBuffer.h"
+
 #include "OpenGLUtilities.h"
-#include "../Debug.h"
 
 namespace Gio::Rendering
 {
