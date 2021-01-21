@@ -12,10 +12,11 @@
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 #include "vendor/imgui/imgui_internal.h"
 
-Gio::GUI::GUI(Scene& game, Window& window, Input& input)
+Gio::GUI::GUI(Scene& game, Window& window, Input& input,Renderer& renderer)
     : _window(window)
     , _game(game)
     , _input(input)
+    , _renderer(renderer)
 {
     _windowHeight = _window.GetHeight();
     _windowWidth = _window.GetWidth();
@@ -35,22 +36,6 @@ Gio::GUI::~GUI()
 void Gio::GUI::Clear()
 {
     ImGui_ImplGlfwGL3_NewFrame();
-}
-
-void DrawDebugInfo()
-{
-    ImGui::Begin("Debug Info:");
-    
-    std::string string ="Time: " + std::to_string(Gio::Time::GetTimeSinceStartSeconds());
-    ImGui::Text(string.c_str());
-    
-    string ="DeltaTime: " + std::to_string(Gio::Time::GetDeltaTimeSeconds());
-    ImGui::Text(string.c_str());
-
-    string ="FPS: " + std::to_string(Gio::Time::GetFPSApprox());
-    ImGui::Text(string.c_str());
-
-    ImGui::End();
 }
 
 void DrawEntity(Gio::ECS::Entity* entity)
@@ -362,5 +347,22 @@ void Gio::GUI::DrawInputAxes()
         DrawInputAxis(*axis);
     }
     
+    ImGui::End();
+}
+
+void Gio::GUI::DrawDebugInfo()
+{
+    ImGui::Begin("Debug Info:");
+    
+    ImGui::Text(("Time: " + std::to_string(Gio::Time::GetTimeSinceStartSeconds())).c_str());
+    
+    ImGui::Text(("DeltaTime: " + std::to_string(Gio::Time::GetDeltaTimeSeconds())).c_str());
+
+    ImGui::Text(("FPS: " + std::to_string(Gio::Time::GetFPSApprox())).c_str());
+
+    ImGui::Text(("Draw calls: " + std::to_string(_renderer.GetDrawCalls())).c_str());
+    
+    ImGui::Text(("Triangles: " + std::to_string(_renderer.GetTriangleCount())).c_str());
+
     ImGui::End();
 }

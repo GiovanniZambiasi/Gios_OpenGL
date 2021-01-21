@@ -1,11 +1,11 @@
 ﻿#pragma once
-#include "RotatingSquare.h"
+#include "Star.h"
 #include "../../InputSystem/InputAction.h"
 #include "../../InputSystem/InputAxis.h"
 
 namespace Gio::ECS::Entities
 {
-    class MovingRotatingSquare : public RotatingSquare
+    class MovingRotatingSquare : public Star
     {
     private:
         InputSystem::InputAction* _colorChange;

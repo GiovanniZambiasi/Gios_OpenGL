@@ -21,5 +21,7 @@ namespace Gio::Rendering
         void Bind();
 
         unsigned int GetIndexCount() { return _indexBuffer.GetCount(); }
+
+        unsigned int GetTriangleCount() { return _indexBuffer.GetCount() / 3; }
     };
 }

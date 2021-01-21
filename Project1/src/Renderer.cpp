@@ -51,6 +51,9 @@ namespace Gio
 
     void Renderer::BeforeDraw()
     {
+        _drawCalls = 0;
+        _triangleCount = 0;
+        
         CalculateViewProjectionMatrix();
     }
 
@@ -66,15 +69,19 @@ namespace Gio
         
         material.ApplyProperties();
 
-        auto modelViewProjectionMatrix = viewProjectionMatrix * CalculateModelMatrix(transform);
-
-        shader.SetUniformByLocation(shader.GetMVPLocation(), modelViewProjectionMatrix);
+        const auto modelMatrix = CalculateModelMatrix(transform);
+        
+        shader.SetUniformByLocation(shader.GetViewProjectionMatrixLocation(), viewProjectionMatrix);
+        shader.SetUniformByLocation(shader.GetModelMatrixLocation(), modelMatrix);
 
         if(_previousRenderedMesh == nullptr || _previousRenderedMesh != &mesh)
         {
             mesh.Bind();
             _previousRenderedMesh = &mesh;
         }
+
+        _drawCalls++;
+        _triangleCount += mesh.GetTriangleCount();
         
         GLCall(glDrawElements(GL_TRIANGLES, mesh.GetIndexCount(), GL_UNSIGNED_INT, nullptr));
     }

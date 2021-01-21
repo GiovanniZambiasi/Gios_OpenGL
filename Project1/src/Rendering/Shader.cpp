@@ -18,7 +18,8 @@ namespace Gio::Rendering
         , _rendererID(0)
     {
         _rendererID = CreateShader(vertexSource, fragmentSource);
-        _mvpUniformLocation = GetUniformLocation("u_MVP");
+        _viewProjectionMatrixLocation = GetUniformLocation("u_ViewProjectionMatrix");
+        _modelMatrixLocation = GetUniformLocation("u_ModelMatrix");
     }
 
     Shader::~Shader()

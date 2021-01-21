@@ -1,7 +1,6 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include "../vendor/glm/glm.hpp"
 
 namespace Gio::Rendering 
 {
@@ -18,7 +17,8 @@ namespace Gio::Rendering
 		std::unordered_map<std::string, int> _uniformLocationCache;
 		std::string _name;
 		unsigned int _rendererID;
-		int _mvpUniformLocation;
+		int _viewProjectionMatrixLocation;
+		int _modelMatrixLocation;
 	
 	public:
 		Shader(ShaderProgramSource source);
@@ -35,8 +35,10 @@ namespace Gio::Rendering
 
 		unsigned int GetRendererID() {return _rendererID;}
 
-		int GetMVPLocation() { return _mvpUniformLocation; }
+		int GetViewProjectionMatrixLocation() { return _viewProjectionMatrixLocation; }
 		
+		int GetModelMatrixLocation() { return _modelMatrixLocation; }
+
 		template <typename TUniform>
 		void SetUniform(const std::string& name, TUniform val);
 

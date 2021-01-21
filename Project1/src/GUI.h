@@ -12,6 +12,7 @@ namespace Gio
         Window& _window;
         Scene& _game;
         Input& _input;
+        Renderer& _renderer;
         std::vector<InputSystem::IInputDevice*> _devices;
         std::vector<InputSystem::IInputElement*> _inputElements;
         char _log[24];
@@ -24,7 +25,7 @@ namespace Gio
         int _windowWidth = 0;
         
     public:
-        GUI(Scene& game, Window& window, Input& input);
+        GUI(Scene& game, Window& window, Input& input, Renderer& renderer);
 
         ~GUI();
 
@@ -32,6 +33,7 @@ namespace Gio
 
         void Draw();
 
+    private:
         void DrawSettingsWindow();
 
         void DrawInputDevices();
@@ -39,5 +41,7 @@ namespace Gio
         void DrawInputActions();
         
         void DrawInputAxes();
+
+        void DrawDebugInfo();
     };
 }

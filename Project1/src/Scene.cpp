@@ -4,19 +4,21 @@
 #include "ECS/Entity.h"
 #include "ECS/Components/ObjectRenderer.h"
 #include "ECS/Entities/MovingRotatingSquare.h"
+#include "ECS/Entities/SpaceShip.h"
 #include "Utilities/StdVectorUtilities.h"
 
 Gio::Scene::Scene()
 {
     ECS::Entity::RegisterSpawnHandler(this);
     
-    for (auto i = 0; i < 300; i++)
+    for (auto i = 0; i < 1000; i++)
     {
         auto position = Vector3(Random::Between(-2000.0f, 2000.0f), Random::Between(-2000.0f, 2000.0f), 0.0f);
-        new ECS::Entities::RotatingSquare(Color::White(), position,  Random::Between(2.0f, 5.0f));    
+        new ECS::Entities::Star(Color::White(), position);    
     }
-    
-    new ECS::Entities::MovingRotatingSquare(Color::Red(), Vector3(.0f, 0.0f, 0.0f), 10.0f);
+
+    new ECS::Entities::SpaceShip();
+    //new ECS::Entities::MovingRotatingSquare(Color::Red(), Vector3(.0f, 0.0f, 0.0f), 10.0f);
 }
 
 Gio::Scene::~Scene()

@@ -17,14 +17,12 @@ namespace Gio
         glm::mat4 viewProjectionMatrix;
         unsigned int _screenWidth;
         unsigned int _screenHeight;
+        unsigned int _drawCalls;
+        unsigned int _triangleCount;
 
         Rendering::Mesh* _previousRenderedMesh;
         Rendering::Shader* _previousRenderedShader;
         
-        glm::mat4 CalculateModelMatrix(Transform& transform);
-        
-        void CalculateViewProjectionMatrix();
-
     public:
         Renderer(Camera* camera);
         
@@ -41,5 +39,14 @@ namespace Gio
         void SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight);
         
         void BeforeDraw();
+        
+        unsigned int GetDrawCalls() const { return _drawCalls; }
+        
+        unsigned int GetTriangleCount() const {return _triangleCount;};
+
+    private:
+        glm::mat4 CalculateModelMatrix(Transform& transform);
+        
+        void CalculateViewProjectionMatrix();
     };
 }

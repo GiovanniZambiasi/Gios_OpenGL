@@ -37,7 +37,7 @@ bool Gio::Application::Run()
 
     _scene = new Scene();
 
-    _gui = new GUI(*_scene, *_window, *_input);
+    _gui = new GUI(*_scene, *_window, *_input, *_renderer);
     
     //_window->onSizeChanged = HandleWindowSizeChanged;
 

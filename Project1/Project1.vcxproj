@@ -446,7 +446,8 @@
     </ClCompile>
     <ClCompile Include="src\ECS\Components\Rotator.cpp" />
     <ClCompile Include="src\ECS\Entities\MovingRotatingSquare.cpp" />
-    <ClCompile Include="src\ECS\Entities\RotatingSquare.cpp" />
+    <ClCompile Include="src\ECS\Entities\Star.cpp" />
+    <ClCompile Include="src\ECS\Entities\SpaceShip.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1114,7 +1115,8 @@
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
     <ClInclude Include="src\ECS\Components\Rotator.h" />
     <ClInclude Include="src\ECS\Entities\MovingRotatingSquare.h" />
-    <ClInclude Include="src\ECS\Entities\RotatingSquare.h" />
+    <ClInclude Include="src\ECS\Entities\Star.h" />
+    <ClInclude Include="src\ECS\Entities\SpaceShip.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\ECS\IEntitySpawnHandler.h" />
     <ClInclude Include="src\Input.h" />

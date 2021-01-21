@@ -38,6 +38,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
   - The static interface classes are initialized by the application with a specialized concrete implementation (``Input::Initialize(new GLFWInput())``)
 - [ ] Simple collision component
 - [ ] View Culling
+- [ ] Batch Rendering
 
 ## Fixes
 - [ ] Fix projection when res changed in runtime 

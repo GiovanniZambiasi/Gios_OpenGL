@@ -3,7 +3,7 @@
 
 Gio::ECS::Entities::MovingRotatingSquare::MovingRotatingSquare(const Color& color, const Vector3& position,
                                                                float movementSpeed)
-    : RotatingSquare(color, position, 50.0f)
+    : Star(color, position)
     , _movementSpeed(movementSpeed)
 {
     SetName("Moving & Rotating Square");
@@ -25,7 +25,7 @@ void Gio::ECS::Entities::MovingRotatingSquare::OnUpdate(float deltaTime)
 {
     if(_spawnCube->WasPressedThisFrame())
     {
-        new RotatingSquare(Color::Random(), GetTransform().GetPosition(), 50.0f);
+        new Star(Color::Random(), GetTransform().GetPosition());
     }
     
     if(_colorChange->WasPressedThisFrame())
@@ -37,7 +37,7 @@ void Gio::ECS::Entities::MovingRotatingSquare::OnUpdate(float deltaTime)
     {
         Vector3 movement = Vector3(_moveHorizontal->GetValue(), _moveVertical->GetValue(), 0.0f);
         movement = Vector3::ClampMagnitude(movement, 1.0f);
-        GetTransform().Translate(movement * _movementSpeed);
+        GetTransform().Translate(movement * _movementSpeed * deltaTime);
     }
 
     Camera::instance->GetTransform().SetPosition(GetTransform().GetPosition());
