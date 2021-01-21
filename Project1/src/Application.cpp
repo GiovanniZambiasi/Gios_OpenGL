@@ -7,12 +7,12 @@
 #include "InputSystem/Factories/GLFWPCInputDeviceFactory.h"
 
 Gio::Application::Application(std::string name, unsigned int windowWidth, unsigned int windowHeight)
-    : _scene(nullptr)
-    , _gui(nullptr)
+    : _renderer(nullptr), _scene(nullptr)
+      , _gui(nullptr), _camera(nullptr), _input(nullptr)
 {
     _window = new Window(name.c_str(), windowWidth, windowHeight);
 
-    if(!_window->GetIsValid())
+    if (!_window->GetIsValid())
     {
         return;
     }
@@ -41,7 +41,9 @@ bool Gio::Application::Run()
     
     //_window->onSizeChanged = HandleWindowSizeChanged;
 
-    HandleWindowSizeChanged(_window->GetWidth(), _window->GetHeight());
+    _window->onWindowSizeChanged.AddObserver(this);
+
+    Observe(_window->GetSize());
     
     while (!_window->ShouldClose())
     {
@@ -56,6 +58,13 @@ bool Gio::Application::Run()
     }
 
     return true;
+}
+
+void Gio::Application::Observe(WindowSize windowSize)
+{
+    Debug::Log("Window size changed to: " + windowSize.ToString());
+
+    _renderer->SetupProjectionMatrix(windowSize);
 }
 
 void Gio::Application::Update()
@@ -78,12 +87,5 @@ void Gio::Application::Update()
 
     _gui->Draw();
         
-    _window->SwapBuffers();
-}
-
-void Gio::Application::HandleWindowSizeChanged(unsigned int width, unsigned int height)
-{
-    Debug::Log("Window size changed to: " + std::to_string(width) + "x" + std::to_string(height));
-
-    _renderer->SetupProjectionMatrix(width, height);
+    _window->Update();
 }

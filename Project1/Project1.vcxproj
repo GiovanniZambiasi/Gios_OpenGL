@@ -1156,9 +1156,11 @@
     <ClInclude Include="src\Rendering\VertexBufferLayout.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Utilities\Observer.h" />
     <ClInclude Include="src\Utilities\Singleton.h" />
     <ClInclude Include="src\Utilities\StdVectorUtilities.h" />
     <ClInclude Include="src\Utilities\StringUtilities.h" />
+    <ClInclude Include="src\Utilities\Subject.h" />
     <ClInclude Include="src\Vector2.h" />
     <ClInclude Include="src\Vector3.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
@@ -1588,6 +1590,7 @@
     <ClInclude Include="src\vendor\imgui\stb_truetype.h" />
     <ClInclude Include="src\vendor\nlohmannJSON\json.hpp" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\WindowSize.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Shaders\Basic.shader" />

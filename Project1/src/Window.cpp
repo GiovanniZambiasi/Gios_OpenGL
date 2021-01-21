@@ -1,9 +1,9 @@
 ﻿#include "Window.h"
+#include <GLFW/glfw3native.h>
 #include "Debug.h"
 
 Gio::Window::Window(const char* title, int width, int height)
     : _window(nullptr)
-    , onSizeChanged(nullptr)
 {
     _isValid = TryToInitialize(title, width, height);
 }
@@ -15,7 +15,6 @@ Gio::Window::~Window()
 
 bool Gio::Window::TryToInitialize(const char* title, int width, int height)
 {
-    /* Initialize the library */
     if (!glfwInit())
         return false;
 
@@ -23,11 +22,9 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
     //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    /* Create a windowed mode window and its OpenGL context */
     _window = glfwCreateWindow(width, height, title, NULL, NULL);
 
-    _width = width;
-    _height = height;
+    SetSize(WindowSize(width, height));
     
     if (!_window)
     {
@@ -35,7 +32,6 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
         return false;
     }
 
-    /* Make the window's context current */
     glfwMakeContextCurrent(_window);
 
     glfwSwapInterval(0);
@@ -46,13 +42,7 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
     {
     case GLEW_OK:
         Debug::Log("Initializing OpenGL...");
-        
-        {
-            std::string version = std::string("[OpenGL] v.");
-            version += (const char*)glGetString(GL_VERSION);
-            Debug::Log(version);
-        }
-        
+        Debug::Log("[OpenGL] v." + std::string((const char*)glGetString(GL_VERSION)));
         break;
     default:
         Debug::LogError("GLEW needs a valid OpenGL context to initialize!");
@@ -64,22 +54,20 @@ bool Gio::Window::TryToInitialize(const char* title, int width, int height)
 
 bool Gio::Window::ShouldClose() { return glfwWindowShouldClose(_window); }
 
-void Gio::Window::SwapBuffers()
+void Gio::Window::Update()
 {
-    /* Swap front and back buffers */
     glfwSwapBuffers(_window);
 
-    /* Poll for and process events */
     glfwPollEvents();
 }
 
-void Gio::Window::SetSize(unsigned int width, unsigned int height)
+void Gio::Window::SetSize(WindowSize size)
 {
-    glfwSetWindowSize(_window, width, height);
+    _size = size;
 
-    _width = width;
-    _height = height;
-
-    if(onSizeChanged != nullptr)
-        onSizeChanged(width, height);
+    glViewport(0, 0, size.width, size.height);
+    glfwSetWindowSize(_window, _size.width, _size.height);
+    glfwSetWindowSizeLimits(_window, _size.width, _size.height, _size.width, _size.height);
+    
+    onWindowSizeChanged.Invoke(_size);
 }

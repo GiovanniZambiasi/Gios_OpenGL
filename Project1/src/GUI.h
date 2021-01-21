@@ -21,8 +21,7 @@ namespace Gio
         bool _shouldShowInputDevices = false;
         bool _shouldShowInputActions = false;
         bool _shouldShowInputAxes = false;
-        int _windowHeight = 0;
-        int _windowWidth = 0;
+        WindowSize _windowSize;
         
     public:
         GUI(Scene& game, Window& window, Input& input, Renderer& renderer);

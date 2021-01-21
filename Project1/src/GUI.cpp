@@ -18,8 +18,7 @@ Gio::GUI::GUI(Scene& game, Window& window, Input& input,Renderer& renderer)
     , _input(input)
     , _renderer(renderer)
 {
-    _windowHeight = _window.GetHeight();
-    _windowWidth = _window.GetWidth();
+    _windowSize = _window.GetSize();
     
     ImGui::CreateContext();
     ImGui_ImplGlfwGL3_Init(window.GetGLFWWindow(), true);
@@ -149,14 +148,26 @@ void Gio::GUI::DrawSettingsWindow()
     
     ImGui::Text("Video:");
     ImGui::Indent(10);
-    
-    ImGui::InputInt("Width", &_windowWidth);
-    
-    ImGui::InputInt("Height", &_windowHeight);
 
+    int* _size = new int();
+
+    (*_size) = _windowSize.width;
+    
+    ImGui::InputInt("Width", _size);
+
+    _windowSize.width = *_size;
+
+    (*_size) = _windowSize.height;
+    
+    ImGui::InputInt("Height", _size);
+
+    _windowSize.height = *_size;
+
+    delete _size;
+    
     if(ImGui::Button("Apply"))
     {
-        _window.SetSize(_windowWidth, _windowHeight);
+        _window.SetSize(_windowSize);
     }
 
     ImGui::Separator();

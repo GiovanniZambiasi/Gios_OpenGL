@@ -7,7 +7,7 @@
 
 namespace Gio
 {
-    class Application
+    class Application : public Utilities::Observer<WindowSize>
     {
     private:
         Window* _window;
@@ -17,8 +17,6 @@ namespace Gio
         Camera* _camera;
         Input* _input;
 
-        void HandleWindowSizeChanged(unsigned int width, unsigned int height);
-    
     public:
         Application(std::string name, unsigned int windowWidth, unsigned int windowHeight);
 
@@ -26,7 +24,10 @@ namespace Gio
 
         bool Run();
 
+        void Observe(WindowSize windowSize) override;
+    
     private:
         void Update();
+
     };
 }

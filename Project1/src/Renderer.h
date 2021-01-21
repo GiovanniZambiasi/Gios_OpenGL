@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Transform.h"
 #include "Vector3.h"
+#include "WindowSize.h"
 #include "Rendering/Material.h"
 #include "Rendering/Mesh.h"
 #include "vendor/glm/glm.hpp"
@@ -15,8 +16,7 @@ namespace Gio
         Camera* _camera;
         glm::mat4 projectionMatrix;
         glm::mat4 viewProjectionMatrix;
-        unsigned int _screenWidth;
-        unsigned int _screenHeight;
+        WindowSize _windowSize;
         unsigned int _drawCalls;
         unsigned int _triangleCount;
 
@@ -36,7 +36,7 @@ namespace Gio
         
         void Clear();
 
-        void SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight);
+        void SetupProjectionMatrix(WindowSize windowSize);
         
         void BeforeDraw();
         

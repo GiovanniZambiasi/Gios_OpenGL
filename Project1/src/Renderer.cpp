@@ -11,10 +11,8 @@ namespace Gio
 {
     Renderer::Renderer(Camera* camera)
         : _camera(camera), projectionMatrix(), viewProjectionMatrix()
-        , _screenWidth(0)
-        , _screenHeight(0)
-        , _previousRenderedMesh(nullptr)
-        , _previousRenderedShader(nullptr)
+          , _drawCalls(0), _triangleCount(0), _previousRenderedMesh(nullptr)
+          , _previousRenderedShader(nullptr)
     {
         ShaderManager::LoadShaders();
     }
@@ -23,12 +21,11 @@ namespace Gio
     {
     }
 
-    void Renderer::SetupProjectionMatrix(unsigned int screenWidth, unsigned int screenHeight)
+    void Renderer::SetupProjectionMatrix(WindowSize windowSize)
     {
-        _screenWidth = screenWidth;
-        _screenHeight = screenHeight;
-        
-        projectionMatrix = glm::ortho(.0f,  float(screenWidth), .0f, float(screenHeight), -100.0f, 100.0f);
+        _windowSize = windowSize;
+        projectionMatrix = glm::ortho(.0f,  float(_windowSize.width), .0f, float(_windowSize.height), -100.0f, 100.0f);
+        Debug::Log("Setting projection matrix for " + windowSize.ToString());
     }
 
     void Renderer::DrawRay(Vector3 origin, Vector3 direction, Color color)
@@ -91,8 +88,8 @@ namespace Gio
         Transform& cameraTransform = _camera->GetTransform();
         
         auto cameraPosition = cameraTransform.GetPosition();
-        cameraPosition.x = cameraPosition.x - (_screenWidth/2);
-        cameraPosition.y = cameraPosition.y - (_screenHeight/2);
+        cameraPosition.x = cameraPosition.x - (_windowSize.width/2);
+        cameraPosition.y = cameraPosition.y - (_windowSize.height/2);
         
         glm::mat4 view = glm::translate(glm::mat4(1.0f), glm::vec3(-cameraPosition.x, -cameraPosition.y, cameraPosition.z));
 

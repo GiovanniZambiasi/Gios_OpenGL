@@ -2,16 +2,16 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "WindowSize.h"
+#include "Utilities/Subject.h"
+
 namespace Gio
 {
-    typedef void(*WindowSizeChangeHandler)(unsigned int width, unsigned int height);
-    
     class Window
     {
     private:
         GLFWwindow* _window;
-        unsigned int _width;
-        unsigned int _height;
+        WindowSize _size;
         bool _isValid;
     
     public:
@@ -19,23 +19,23 @@ namespace Gio
 
         ~Window();
 
-        WindowSizeChangeHandler onSizeChanged;
-        
+        Utilities::Subject<WindowSize> onWindowSizeChanged;
+
         GLFWwindow* GetGLFWWindow() { return _window; }
 
-        unsigned int GetWidth() { return _width; }
-        
-        unsigned int GetHeight() { return _height; }
+        WindowSize GetSize() { return _size; }
         
         bool GetIsValid() { return _isValid; }
         
         bool ShouldClose();
 
-        void SwapBuffers();
+        void Update();
 
-        void SetSize(unsigned int width, unsigned int height);
+        void SetSize(WindowSize size);
 
     private:
         bool TryToInitialize(const char* title, int width, int height);
+
+        void HandleWin(GLFWwindow* win, int w, int h);
     };
 }

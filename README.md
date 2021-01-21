@@ -25,21 +25,25 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
   - [X] Input Actions to be mapped to device name and element name
   - [ ] Implement Joystick
 - [X] Spawning of entities in realtime
+  - [X] Camera translate GUI
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer
 - [ ] Component inspectors
 - [ ] Camera rotation
-- [ ] Camera translate GUI
 - [ ] Save material as file
-- [ ] Separate modules so that:
-  - They're all accessible to the dev via static interface classes (like ``Renderer::Draw`` or ``Input::GetDevice``)
-  - Their implementation is actually concrete, but hidden (like ``OpenGLRenderer`` or ``GLFWInput``)
-  - The static interface classes are initialized by the application with a specialized concrete implementation (``Input::Initialize(new GLFWInput())``)
 - [ ] Simple collision component
 - [ ] View Culling
 - [ ] Batch Rendering
+- [ ] Add fullscreen support
+- [ ] 3D?
 
 ## Fixes
-- [ ] Fix projection when res changed in runtime 
+- [X] Fix projection when res changed in runtime 
 - [ ] Add libs for 64bit OpenGL
+
+## Refactors
+- [X] Input system to be broken down into device manager and action manager
+- [ ] Window to be abstracted and contain a reference to an interface (``IWindowBackend`` or so) of a concrete implementation (GLFW)
+- [ ] Renderer to have an extra layer of abstraction to allow for other rendering apis
+- [ ] Separate App funcionality (Window, WindowSize, Application, etc..) from the api core (Transform, Vector, Math, etc..)
