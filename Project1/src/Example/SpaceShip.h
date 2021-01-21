@@ -1,17 +1,24 @@
 ﻿#pragma once
-#include "../Entity.h"
+#include "../../InputSystem/InputAction.h"
 #include "../../InputSystem/InputAxis.h"
+#include "../ECS/Entity.h"
+#include "../ECS/Components/Physics.h"
 
-namespace Gio::ECS::Entities
+namespace Gio::Example
 {
-    class SpaceShip : public Entity
+    class SpaceShip : public ECS::Entity
     {
     private:
         InputSystem::InputAxis* _horizontal;
         InputSystem::InputAxis* _vertical;
-        float _throttleSpeed;
+        InputSystem::InputAction* _boost;
+        InputSystem::InputAction* _changeColor;
+        ECS::Components::Physics* _physics;
+        float _thrusterSpeed;
         float _rotationSpeed;
         float _rotationVelocity;
+        float _drag;
+        float _angularDrag;
     
     public:
         SpaceShip();

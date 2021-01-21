@@ -1,9 +1,9 @@
 ﻿#pragma once
-#include "../Entity.h"
+#include "../ECS/Entity.h"
 
-namespace Gio::ECS::Entities
+namespace Gio::Example
 {
-    class Star : public Entity
+    class Star : public ECS::Entity
     {
     private:
         float _scale;

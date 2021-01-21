@@ -22,7 +22,7 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{5920da54-054a-4f6e-af46-2c9e7b8a71a8}</ProjectGuid>
-    <RootNamespace>Project1</RootNamespace>
+    <RootNamespace>Gios OpenGL</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectName>Gios OpenGL</ProjectName>
   </PropertyGroup>
@@ -444,10 +444,8 @@
       <AdditionalIncludeDirectories>src\Rendering;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="src\ECS\Components\Physics.cpp" />
     <ClCompile Include="src\ECS\Components\Rotator.cpp" />
-    <ClCompile Include="src\ECS\Entities\MovingRotatingSquare.cpp" />
-    <ClCompile Include="src\ECS\Entities\Star.cpp" />
-    <ClCompile Include="src\ECS\Entities\SpaceShip.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -518,6 +516,145 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\ECS\IEntitySpawnHandler.cpp" />
+    <ClCompile Include="src\Example\SpaceScene.cpp" />
+    <ClCompile Include="src\Example\SpaceShip.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\vc142.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\Gios OpenGL.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\Gios OpenGL.tlog\</TrackerLogDirectory>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <EnablePREfast>false</EnablePREfast>
+      <OmitFramePointers>false</OmitFramePointers>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>src\vendor;src\vendor\nlohmannJSON;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
+    <ClCompile Include="src\Example\Star.cpp">
+      <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <Optimization>Disabled</Optimization>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <AssemblerOutput>NoListing</AssemblerOutput>
+      <AssemblerListingLocation>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</AssemblerListingLocation>
+      <UndefineAllPreprocessorDefinitions>false</UndefineAllPreprocessorDefinitions>
+      <BrowseInformation>false</BrowseInformation>
+      <BrowseInformationFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</BrowseInformationFile>
+      <CompileAs>Default</CompileAs>
+      <ConformanceMode>true</ConformanceMode>
+      <DiagnosticsFormat>Column</DiagnosticsFormat>
+      <DisableLanguageExtensions>false</DisableLanguageExtensions>
+      <ErrorReporting>Prompt</ErrorReporting>
+      <ExpandAttributedSource>false</ExpandAttributedSource>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <EnableASAN>false</EnableASAN>
+      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <FloatingPointModel>Precise</FloatingPointModel>
+      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
+      <GenerateModuleDependencies>false</GenerateModuleDependencies>
+      <GenerateSourceDependencies>false</GenerateSourceDependencies>
+      <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
+      <InlineFunctionExpansion>Default</InlineFunctionExpansion>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>Default</LanguageStandard_C>
+      <MinimalRebuild>false</MinimalRebuild>
+      <ModuleDependenciesFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ModuleDependenciesFile>
+      <ModuleOutputFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ModuleOutputFile>
+      <OmitDefaultLibName>false</OmitDefaultLibName>
+      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <ObjectFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</ObjectFileName>
+      <CallingConvention>Cdecl</CallingConvention>
+      <ProgramDataBaseFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\vc142.pdb</ProgramDataBaseFileName>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\Gios OpenGL.pch</PrecompiledHeaderOutputFile>
+      <PreprocessToFile>false</PreprocessToFile>
+      <PreprocessKeepComments>false</PreprocessKeepComments>
+      <PreprocessSuppressLineNumbers>false</PreprocessSuppressLineNumbers>
+      <RemoveUnreferencedCodeData>true</RemoveUnreferencedCodeData>
+      <ShowIncludes>false</ShowIncludes>
+      <SourceDependenciesFile>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</SourceDependenciesFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <SmallerTypeCheck>false</SmallerTypeCheck>
+      <SpectreMitigation>false</SpectreMitigation>
+      <StructMemberAlignment>Default</StructMemberAlignment>
+      <TrackerLogDirectory>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\Gios OpenGL.tlog\</TrackerLogDirectory>
+      <MinimalRebuildFromTracking>true</MinimalRebuildFromTracking>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <UseFullPaths>true</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <XMLDocumentationFileName>D:\Documents\_Projects_FAT\Gios_OpenGL\bin\intermediates\Win32\Debug\</XMLDocumentationFileName>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <IntelJCCErratum>false</IntelJCCErratum>
+      <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;_UNICODE;UNICODE;</PreprocessorDefinitions>
+      <EnablePREfast>false</EnablePREfast>
+      <OmitFramePointers>false</OmitFramePointers>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>src\vendor;src\vendor\nlohmannJSON;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\GLFW\include;D:\Documents\_Projects_FAT\Gios_OpenGL\Dependencies\glew-2.1.0\include</AdditionalIncludeDirectories>
+      <LinkCompiled>true</LinkCompiled>
+    </ClCompile>
     <ClCompile Include="src\Input.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1113,12 +1250,13 @@
     <ClInclude Include="src\Debug\Loggers\ConsoleAndFileLogger.h" />
     <ClInclude Include="src\ECS\Component.h" />
     <ClInclude Include="src\ECS\Components\ObjectRenderer.h" />
+    <ClInclude Include="src\ECS\Components\Physics.h" />
     <ClInclude Include="src\ECS\Components\Rotator.h" />
-    <ClInclude Include="src\ECS\Entities\MovingRotatingSquare.h" />
-    <ClInclude Include="src\ECS\Entities\Star.h" />
-    <ClInclude Include="src\ECS\Entities\SpaceShip.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\ECS\IEntitySpawnHandler.h" />
+    <ClInclude Include="src\Example\SpaceScene.h" />
+    <ClInclude Include="src\Example\SpaceShip.h" />
+    <ClInclude Include="src\Example\Star.h" />
     <ClInclude Include="src\Input.h" />
     <ClInclude Include="src\InputSystem\ActionManager.h" />
     <ClInclude Include="src\InputSystem\Actions\InputActionBinding.h" />
@@ -1604,6 +1742,9 @@
   </ImportGroup>
   <ItemGroup>
     <_CopyItems Include="$(ProjectDir)res\**\*.*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\ECS\Entities" />
   </ItemGroup>
   <Target Name="AfterBuild">
     <Copy SourceFiles="@(_CopyItems)" DestinationFolder="$(OutDir)\res\%(RecursiveDir)" />

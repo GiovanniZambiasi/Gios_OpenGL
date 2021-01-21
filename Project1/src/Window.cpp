@@ -4,6 +4,7 @@
 
 Gio::Window::Window(const char* title, int width, int height)
     : _window(nullptr)
+    , onWindowSizeChanged()
 {
     _isValid = TryToInitialize(title, width, height);
 }

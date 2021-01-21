@@ -12,30 +12,32 @@ namespace Gio
         
         Vector3();
 
-        ~Vector3();
-
         float GetMagnitude() override;
 
         std::string to_string() override;
         
         void Normalize() override;
 
-        Vector3& operator+(const Vector3& other)
+        Vector3 Normalized();
+        
+        Vector3 operator+(const Vector3& other) const
         {
-            x+=other.x;
-            y+=other.y;
-            z+=other.z;
-
-            return *this;
+            return Vector3(x + other.x, y + other.y, z + other.z);
         }
         
-        Vector3& operator*(const float& other)
+        Vector3 operator*(const float& val) const
         {
-            x *= other;
-            y *= other;
-            z *= other;
+            return Vector3(x * val, y * val, z * val);
+        }
 
-            return *this;
+        Vector3 operator/(float val) const
+        {
+            return Vector3(x/val, y/val, z/val);
+        }
+
+        Vector3 operator-() const
+        {
+            return Vector3(-x, -y, -z);
         }
 
         static Vector3 Up() { return Vector3(.0f, 1.0f, .0f); }

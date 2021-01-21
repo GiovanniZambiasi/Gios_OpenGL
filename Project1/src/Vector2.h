@@ -23,11 +23,9 @@ namespace Gio
 
         virtual std::string to_string();
         
-        Vector2& operator+(const Vector2& vector2)
+        Vector2 operator+(const Vector2& other) const
         {
-            x += vector2.x;
-            y += vector2.y;
-            return *this;
+            return Vector2(x + other.x, y + other.y);
         }
 
         static Vector2 Up() { return Vector2(.0f, 1.0f); }

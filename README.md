@@ -36,14 +36,17 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] View Culling
 - [ ] Batch Rendering
 - [ ] Add fullscreen support
+- [ ] Make scenes dynamic so that the dev can run the application with a custom scene class
 - [ ] 3D?
 
 ## Fixes
 - [X] Fix projection when res changed in runtime 
 - [ ] Add libs for 64bit OpenGL
+- [ ] Fix scaling so 1x1 represents more screen space
 
 ## Refactors
 - [X] Input system to be broken down into device manager and action manager
 - [ ] Window to be abstracted and contain a reference to an interface (``IWindowBackend`` or so) of a concrete implementation (GLFW)
 - [ ] Renderer to have an extra layer of abstraction to allow for other rendering apis
 - [ ] Separate App funcionality (Window, WindowSize, Application, etc..) from the api core (Transform, Vector, Math, etc..)
+  - [ ] Move "ECS" into core namespace

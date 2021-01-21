@@ -1,16 +1,24 @@
 {
   "Actions":
   [
-    {"Action Name":"ColorChange", 
+    {"Action Name":"Shoot",
       "Elements":
       [
-        {"Device":"Keyboard","Element":"C"}
+        {"Device":"Keyboard","Element":"Spacebar"},
+        {"Device":"Mouse","Element":"Mouse Button 0"}
       ]
     },
-    {"Action Name":"SpawnCube",
+    {"Action Name":"Boost",
       "Elements":
       [
-        {"Device":"Keyboard","Element":"Spacebar"}
+        {"Device":"Keyboard","Element":"Shift Left"}
+      ]
+    },
+    {"Action Name":"Change Color",
+      "Elements":
+      [
+        {"Device":"Keyboard","Element":"Spacebar"},
+        {"Device":"Mouse","Element":"Mouse Button 0"}
       ]
     }
   ],

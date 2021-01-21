@@ -2,3 +2,4 @@
 [Log]: [OpenGL] v.4.6.0 NVIDIA 460.79
 [Log]: Window size changed to: W: 1240 H: 720
 [Log]: Setting projection matrix for W: 1240 H: 720
+[Log]: Application has finished with status: GOOD

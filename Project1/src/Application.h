@@ -7,7 +7,13 @@
 
 namespace Gio
 {
-    class Application : public Utilities::Observer<WindowSize>
+    enum ApplicationResultTypes : unsigned char
+    {
+        Good,
+        Bad,
+    };
+    
+    class Application final : public Utilities::Observer<WindowSize>
     {
     private:
         Window* _window;
@@ -22,12 +28,20 @@ namespace Gio
 
         ~Application();
 
-        bool Run();
+        ApplicationResultTypes Run();
 
         void Observe(WindowSize windowSize) override;
     
     private:
         void Update();
 
+        void Prepare();
+
+    };
+
+    class BadWindowException : std::exception
+    {
+    public:
+        char const* what() const override;
     };
 }

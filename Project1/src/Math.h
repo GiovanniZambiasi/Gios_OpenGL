@@ -71,6 +71,16 @@ namespace Gio
                 return valueWithNoDecimal + 1;
         }
 
+        static int Sign(float v)
+        {
+            return v < 0 ? -1 : 1;
+        }
+
+        static int Sign(int v)
+        {
+            return v < 0 ? -1 : 1;
+        }
+        
         static int RoundToInt(float v)
         {
             return Round(v);
@@ -110,6 +120,17 @@ namespace Gio
         static float LerpUnclamped(float x, float y, float t)
         {
             return x * (1 - t) + y * t;
+        }
+
+        static float ApplyDrag(float x, float drag)
+        {
+            int sign = Sign(x);
+            float absX = Abs(x);
+            float absDrag = Abs(drag);
+
+            absX = Clamp((absX - absDrag), 0.0f, absX);
+
+            return absX * sign;
         }
     };
 }

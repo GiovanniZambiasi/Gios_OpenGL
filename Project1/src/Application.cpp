@@ -4,6 +4,7 @@
 #include "Time.h"
 #include "InputSystem/IInputDeviceFactory.h"
 #include "Input.h"
+#include "Example/SpaceScene.h"
 #include "InputSystem/Factories/GLFWPCInputDeviceFactory.h"
 
 Gio::Application::Application(std::string name, unsigned int windowWidth, unsigned int windowHeight)
@@ -22,28 +23,18 @@ Gio::Application::~Application()
 {
 }
 
-bool Gio::Application::Run()
+Gio::ApplicationResultTypes Gio::Application::Run()
 {
-    if(!_window->GetIsValid())
-        return false;
+    try
+    {
+        Prepare();
+    }
+    catch(std::exception e)
+    {
+        Debug::LogError("Exception caught while preparing scene: '" + std::string(e.what()) + "'");
 
-    InputSystem::IInputDeviceFactory* _inputDeviceFactory = new InputSystem::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
-    
-    _input = new Input(*_inputDeviceFactory);
-    
-    _camera = new Camera();
-
-    _renderer = new Renderer(_camera);
-
-    _scene = new Scene();
-
-    _gui = new GUI(*_scene, *_window, *_input, *_renderer);
-    
-    //_window->onSizeChanged = HandleWindowSizeChanged;
-
-    _window->onWindowSizeChanged.AddObserver(this);
-
-    Observe(_window->GetSize());
+        return Bad;
+    }
     
     while (!_window->ShouldClose())
     {
@@ -57,7 +48,7 @@ bool Gio::Application::Run()
         }
     }
 
-    return true;
+    return Good;
 }
 
 void Gio::Application::Observe(WindowSize windowSize)
@@ -88,4 +79,33 @@ void Gio::Application::Update()
     _gui->Draw();
         
     _window->Update();
+}
+
+void Gio::Application::Prepare()
+{
+    if(!_window->GetIsValid())
+    {
+        throw BadWindowException();
+    }
+
+    InputSystem::IInputDeviceFactory* _inputDeviceFactory = new InputSystem::Factories::GLFWPCInputDeviceFactory(_window->GetGLFWWindow()); // Determine current platform and create the factory
+    
+    _input = new Input(*_inputDeviceFactory);
+    
+    _camera = new Camera();
+
+    _renderer = new Renderer(_camera);
+
+    _scene = new Example::SpaceScene();
+
+    _gui = new GUI(*_scene, *_window, *_input, *_renderer);
+
+    _window->onWindowSizeChanged.AddObserver(this);
+
+    Observe(_window->GetSize());
+}
+
+char const* Gio::BadWindowException::what() const
+{
+    return "GLFW window is not valid";
 }

@@ -7,6 +7,7 @@ namespace Gio::ECS
     class IEntitySpawnHandler
     {
     public:
+        virtual ~IEntitySpawnHandler() = default;
         virtual void HandleEntitySpawned(Entity& entity) = 0;
     };
 }

@@ -6,6 +6,10 @@ namespace Gio::Utilities
     template<typename T0>
         class Observer
     {
+    protected:
+        ~Observer()
+        {}
+
     public:
         virtual void Observe(T0 t) = 0;
     };

@@ -10,7 +10,8 @@ namespace Gio
     {
     private:
         std::vector<ECS::Entity*> _entities;
-
+        std::string _name;
+    
     public:
         Scene();
         

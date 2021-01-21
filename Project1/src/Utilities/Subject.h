@@ -10,7 +10,12 @@ namespace Gio::Utilities
     {
     private:
         std::vector<Observer<T0>*> _observers;
+    
     public:
+        Subject(){}
+        
+        ~Subject(){}
+        
         void AddObserver(Observer<T0>* observer);
 
         void RemoveObserver(Observer<T0>* observer);
