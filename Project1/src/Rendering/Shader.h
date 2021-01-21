@@ -2,6 +2,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "../vendor/glm/glm.hpp"
+
 namespace Gio::Rendering 
 {
 	struct ShaderProgramSource
