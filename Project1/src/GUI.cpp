@@ -3,6 +3,7 @@
 
 #include "Input.h"
 #include "Scene.h"
+#include "SceneManager.h"
 #include "time.h"
 #include "Window.h"
 #include "InputSystem/IInputDevice.h"
@@ -12,9 +13,9 @@
 #include "vendor/imgui/imgui_impl_glfw_gl3.h"
 #include "vendor/imgui/imgui_internal.h"
 
-Gio::GUI::GUI(Scene& game, Window& window, Input& input,Renderer& renderer)
+Gio::GUI::GUI(SceneManager& game, Window& window, Input& input,Renderer& renderer)
     : _window(window)
-    , _game(game)
+    , _sceneManager(game)
     , _input(input)
     , _renderer(renderer)
 {
@@ -47,33 +48,6 @@ void DrawEntity(Gio::ECS::Entity* entity)
     }
 }
 
-void DrawEntities(Gio::Scene& game)
-{
-    std::vector<Gio::ECS::Entity*>& entities =  game.GetEntities();
-
-    if(ImGui::Begin("Entities"))
-    {
-        ImGui::Text(("Count: " + std::to_string(entities.size())).c_str());
-    
-        if(ImGui::BeginChild("entities"))
-        {
-            ImGui::Indent(1);
-    
-            for (int i = entities.size() - 1; i >=0 ; i--)
-            {
-                ImGui::PushID(i);
-                Gio::ECS::Entity* entity = entities[i];
-                DrawEntity(entity);
-                ImGui::PopID();
-            }
-        }
-        
-        ImGui::EndChild();
-    }
-    
-    ImGui::End();
-}
-
 void Gio::GUI::Draw()
 {
     DrawSettingsWindow();
@@ -82,7 +56,7 @@ void Gio::GUI::Draw()
         DrawDebugInfo();
     
     if(_shouldShowEntities)
-        DrawEntities(_game);
+        DrawScenes();
 
     if(_shouldShowInputDevices)
         DrawInputDevices();
@@ -384,4 +358,37 @@ void Gio::GUI::DrawDebugInfo()
     }
     
     ImGui::End();
+}
+
+void Gio::GUI::DrawScenes()
+{
+    auto scene = _sceneManager.GetMasterScene();
+    
+    std::vector<Gio::ECS::Entity*>& entities =  scene->GetEntities();
+
+    if(ImGui::Begin("Entities"))
+    {
+        ImGui::Text(("Count: " + std::to_string(entities.size())).c_str());
+    
+        if(ImGui::BeginChild("entities"))
+        {
+            ImGui::Indent(1);
+    
+            for (int i = entities.size() - 1; i >=0 ; i--)
+            {
+                ImGui::PushID(i);
+                Gio::ECS::Entity* entity = entities[i];
+                DrawEntity(entity);
+                ImGui::PopID();
+            }
+        }
+        
+        ImGui::EndChild();
+    }
+    
+    ImGui::End();
+}
+
+void Gio::GUI::DrawScene(Scene& scene)
+{
 }

@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Input.h"
 #include "GUI.h"
+#include "SceneManager.h"
 
 namespace Gio
 {
@@ -18,10 +19,10 @@ namespace Gio
     private:
         Window* _window;
         Renderer* _renderer;
-        Scene* _scene;
-        GUI* _gui;
+        SceneManager* _sceneManager;
         Camera* _camera;
         Input* _input;
+        GUI* _gui;
 
     public:
         Application(std::string name, unsigned int windowWidth, unsigned int windowHeight);

@@ -13,6 +13,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [X] Create wrapper for Material
 - [X] Shader manager for shader reuse
 - [X] Random utility
+- [X] Make scenes dynamic so that the dev can run the application with a custom scene class
 - [X] Input system
   - [X] Device interface
   - [X] Key interface
@@ -25,7 +26,7 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
   - [X] Input Actions to be mapped to device name and element name
   - [ ] Implement Joystick
 - [X] Spawning of entities in realtime
-  - [X] Camera translate GUI
+- [X] Camera translate GUI
 - [ ] Gizmos
   - [ ] Gizmos shader
   - [ ] Gizmos drawer
@@ -36,8 +37,8 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 - [ ] View Culling
 - [ ] Batch Rendering
 - [ ] Add fullscreen support
-- [ ] Make scenes dynamic so that the dev can run the application with a custom scene class
 - [ ] 3D?
+- [ ] **UNIT TESTING**
 
 ## Fixes
 - [X] Fix projection when res changed in runtime 

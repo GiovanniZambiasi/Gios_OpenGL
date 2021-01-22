@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Input.h"
 #include "Scene.h"
+#include "SceneManager.h"
 #include "Window.h"
 #include "InputSystem/IInputDevice.h"
 
@@ -10,7 +11,7 @@ namespace Gio
     {
     private:
         Window& _window;
-        Scene& _game;
+        SceneManager& _sceneManager;
         Input& _input;
         Renderer& _renderer;
         std::vector<InputSystem::IInputDevice*> _devices;
@@ -24,7 +25,7 @@ namespace Gio
         WindowSize _windowSize;
         
     public:
-        GUI(Scene& game, Window& window, Input& input, Renderer& renderer);
+        GUI(SceneManager& game, Window& window, Input& input, Renderer& renderer);
 
         ~GUI();
 
@@ -42,5 +43,9 @@ namespace Gio
         void DrawInputAxes();
 
         void DrawDebugInfo();
+
+        void DrawScenes();
+
+        void DrawScene(Scene& scene);
     };
 }

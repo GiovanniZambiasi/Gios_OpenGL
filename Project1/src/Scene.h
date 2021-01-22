@@ -28,5 +28,24 @@ namespace Gio
         void Update(float deltaTime);
         
         void Draw(Renderer& renderer);
+
+        ECS::Entity* GetEntity(const std::string& name);
+
+        template <typename TEntity>
+        TEntity* GetEntity();
     };
+
+    template <typename TEntity>
+    TEntity* Scene::GetEntity()
+    {
+        for (int i = 0; i < _entities.size(); i++)
+        {
+            auto entity = dynamic_cast<TEntity*>(_entities[i]);
+        
+            if(entity != nullptr)
+                return entity;
+        }
+
+        return nullptr;
+    }
 }

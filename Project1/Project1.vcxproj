@@ -955,6 +955,7 @@
     <ClCompile Include="src\Rendering\ShaderManager.cpp" />
     <ClCompile Include="src\Rendering\VertexArray.cpp" />
     <ClCompile Include="src\Rendering\VertexBuffer.cpp" />
+    <ClCompile Include="src\SceneManager.cpp" />
     <ClCompile Include="src\Time.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1094,7 +1095,6 @@
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
     <ClCompile Include="src\Utilities\Singleton.cpp" />
-    <ClCompile Include="src\Utilities\StdVectorUtilities.cpp" />
     <ClCompile Include="src\Vector2.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -1292,8 +1292,11 @@
     <ClInclude Include="src\Rendering\VertexBuffer.h" />
     <ClInclude Include="src\Rendering\VertexArray.h" />
     <ClInclude Include="src\Rendering\VertexBufferLayout.h" />
+    <ClInclude Include="src\SceneManager.h" />
+    <ClInclude Include="src\SceneManagement\MissingSceneException.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\Transform.h" />
+    <ClInclude Include="src\Utilities\MapUtilities.h" />
     <ClInclude Include="src\Utilities\Observer.h" />
     <ClInclude Include="src\Utilities\Singleton.h" />
     <ClInclude Include="src\Utilities\StdVectorUtilities.h" />

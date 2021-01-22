@@ -5,6 +5,7 @@
 #include "OpenGLUtilities.h"
 #include "../Color.h"
 #include "../Debug.h"
+#include "../Utilities/MapUtilities.h"
 
 namespace Gio::Rendering 
 {
@@ -63,7 +64,7 @@ namespace Gio::Rendering
 
     int Shader::GetUniformLocation(const std::string& name)
     {
-        if (_uniformLocationCache.find(name) != _uniformLocationCache.end())
+        if (Utilities::ContainsKey(_uniformLocationCache, name))
         {
             return _uniformLocationCache[name];
         }

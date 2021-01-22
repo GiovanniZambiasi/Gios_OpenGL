@@ -4,19 +4,13 @@
 #include "Time.h"
 #include "InputSystem/IInputDeviceFactory.h"
 #include "Input.h"
-#include "Example/SpaceScene.h"
 #include "InputSystem/Factories/GLFWPCInputDeviceFactory.h"
 
 Gio::Application::Application(std::string name, unsigned int windowWidth, unsigned int windowHeight)
-    : _renderer(nullptr), _scene(nullptr)
-      , _gui(nullptr), _camera(nullptr), _input(nullptr)
+    : _renderer(nullptr)
+      , _sceneManager(new SceneManager), _camera(nullptr), _input(nullptr), _gui(nullptr)
 {
     _window = new Window(name.c_str(), windowWidth, windowHeight);
-
-    if (!_window->GetIsValid())
-    {
-        return;
-    }
 }
 
 Gio::Application::~Application()
@@ -32,8 +26,6 @@ Gio::ApplicationResultTypes Gio::Application::Run()
     catch(std::exception e)
     {
         Debug::LogError("Exception caught while preparing scene: '" + std::string(e.what()) + "'");
-
-        return Bad;
     }
     
     while (!_window->ShouldClose())
@@ -45,6 +37,7 @@ Gio::ApplicationResultTypes Gio::Application::Run()
         catch(std::exception e)
         {
             Debug::LogError("Exception thrown during Update: '" + std::string(e.what()) + "'");
+            return Bad;
         }
     }
 
@@ -69,12 +62,12 @@ void Gio::Application::Update()
     _renderer->Clear();
         
     _input->Update();
-        
-    _scene->Update(deltaTime);
 
+    _sceneManager->Update(deltaTime);
+    
     _renderer->BeforeDraw();
-        
-    _scene->Draw(*_renderer);
+
+    _sceneManager->Draw(*_renderer);
 
     _gui->Draw();
         
@@ -96,10 +89,10 @@ void Gio::Application::Prepare()
 
     _renderer = new Renderer(_camera);
 
-    _scene = new Example::SpaceScene();
+    _gui = new GUI(*_sceneManager, *_window, *_input, *_renderer);
 
-    _gui = new GUI(*_scene, *_window, *_input, *_renderer);
-
+    _sceneManager->CreateMasterScene();
+    
     _window->onWindowSizeChanged.AddObserver(this);
 
     Observe(_window->GetSize());

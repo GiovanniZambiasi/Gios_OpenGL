@@ -67,3 +67,16 @@ void Gio::Scene::Draw(Renderer& renderer)
         entity->Draw(renderer);
     }
 }
+
+Gio::ECS::Entity* Gio::Scene::GetEntity(const std::string& name)
+{
+    for (int i = 0; i < _entities.size(); i++)
+    {
+        auto entity = _entities[i];
+
+        if(entity->GetName() == name)
+            return entity;
+    }
+
+    return nullptr;
+}
