@@ -1,7 +1,7 @@
 # Gios_OpenGL
 Gio's OpenGL is an API I'm working on as an OpenGL and c++ study
 <br><br>
-NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
+**NOTE:** Building in Release mode won't work for now
 ## To-dos
 - [X] Debug window
 - [X] Logger
@@ -42,12 +42,13 @@ NOTES: Currently setup for 32 bit (x86), so use that configuration in the IDE
 
 ## Fixes
 - [X] Fix projection when res changed in runtime 
-- [ ] Add libs for 64bit OpenGL
+- [X] Add libs for 64bit OpenGL
+- [ ] Fix release mode build error
 - [ ] Fix scaling so 1x1 represents more screen space
 
 ## Refactors
 - [X] Input system to be broken down into device manager and action manager
 - [ ] Window to be abstracted and contain a reference to an interface (``IWindowBackend`` or so) of a concrete implementation (GLFW)
 - [ ] Renderer to have an extra layer of abstraction to allow for other rendering apis
-- [ ] Separate App funcionality (Window, WindowSize, Application, etc..) from the api core (Transform, Vector, Math, etc..)
+- [ ] Separate App functionality (Window, WindowSize, Application, etc..) from the api core (Transform, Vector, Math, etc..)
   - [ ] Move "ECS" into core namespace

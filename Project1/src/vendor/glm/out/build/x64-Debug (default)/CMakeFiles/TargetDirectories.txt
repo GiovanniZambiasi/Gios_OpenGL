@@ -1,0 +1,2 @@
+D:/Documents/_Projects_FAT/Gios_OpenGL/Project1/src/vendor/glm/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
+D:/Documents/_Projects_FAT/Gios_OpenGL/Project1/src/vendor/glm/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir

@@ -40,12 +40,14 @@
       "+":
       [
         {"Device":"Keyboard","Element":"W"},
-        {"Device":"Keyboard","Element":"Arrow Up"}
+        {"Device":"Keyboard","Element":"Arrow Up"},
+        {"Device":"Keyboard","Element":"U"}
       ],
       "-":
       [
         {"Device":"Keyboard","Element":"S"},
-        {"Device":"Keyboard","Element":"Arrow Down"}
+        {"Device":"Keyboard","Element":"Arrow Down"},
+        {"Device":"Keyboard","Element":"J"}
       ]
     }
   ]
