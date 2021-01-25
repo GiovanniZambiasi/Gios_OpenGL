@@ -71,4 +71,7 @@ void Gio::Window::SetSize(WindowSize size)
     glfwSetWindowSizeLimits(_window, _size.width, _size.height, _size.width, _size.height);
     
     onWindowSizeChanged.Invoke(_size);
+    
+    if(onTest != nullptr)
+        onTest(_size);
 }

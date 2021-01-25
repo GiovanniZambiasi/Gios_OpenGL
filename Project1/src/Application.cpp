@@ -94,6 +94,7 @@ void Gio::Application::Prepare()
     _sceneManager->CreateMasterScene();
     
     _window->onWindowSizeChanged.AddObserver(this);
+    //_window->onTest = [this](WindowSize size){ Observe(size);}; // close one!
 
     Observe(_window->GetSize());
 }

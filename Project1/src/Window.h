@@ -7,6 +7,8 @@
 
 namespace Gio
 {
+    typedef void(*WindowSizeHandler)(WindowSize);
+    
     class Window
     {
     private:
@@ -21,6 +23,8 @@ namespace Gio
 
         Utilities::Subject<WindowSize> onWindowSizeChanged;
 
+        WindowSizeHandler onTest;
+        
         GLFWwindow* GetGLFWWindow() { return _window; }
 
         WindowSize GetSize() { return _size; }
