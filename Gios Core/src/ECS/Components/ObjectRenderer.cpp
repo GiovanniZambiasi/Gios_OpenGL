@@ -1,5 +1,5 @@
 ﻿#include "ObjectRenderer.h"
-#include "ShaderManager.h"
+#include "..\Rendering\ShaderManager.h"
 
 Gio::ECS::Components::ObjectRenderer::ObjectRenderer(Entity& entity, Rendering::Mesh& mesh, Rendering::Material& material)
         : Component(entity)
