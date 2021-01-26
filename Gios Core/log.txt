@@ -3,3 +3,4 @@
 [Log]: Found spaceship!
 [Log]: Window size changed to: W: 1240 H: 720
 [Log]: Setting projection matrix for W: 1240 H: 720
+[Log]: Application has finished with status: GOOD

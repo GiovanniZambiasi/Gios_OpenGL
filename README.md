@@ -1,7 +1,6 @@
 # Gios_OpenGL
 Gio's OpenGL is an API I'm working on as an OpenGL and c++ study
-<br><br>
-**NOTE:** Building in Release mode won't work for now
+<br>
 ## To-dos
 - [X] Debug window
 - [X] Logger
@@ -43,7 +42,7 @@ Gio's OpenGL is an API I'm working on as an OpenGL and c++ study
 ## Fixes
 - [X] Fix projection when res changed in runtime 
 - [X] Add libs for 64bit OpenGL
-- [ ] Fix release mode build error
+- [X] Fix release mode build error
 - [ ] Fix scaling so 1x1 represents more screen space
 
 ## Refactors
