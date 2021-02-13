@@ -1,5 +1,7 @@
 ﻿#include "SpaceShip.h"
 
+
+#include "Projectile.h"
 #include "../../Input.h"
 #include "../../Rendering/ShaderManager.h"
 #include "../ECS/Components/ObjectRenderer.h"
@@ -43,6 +45,7 @@ Gio::Example::SpaceShip::SpaceShip()
 
     _boost = Input::GetActionManager()->GetAction("Boost");
     _changeColor = Input::GetActionManager()->GetAction("Change Color");
+    _shoot = Input::GetActionManager()->GetAction("Shoot");
     
     GetTransform().SetScale(Vector3::One() * 35.0f);
 }
@@ -62,6 +65,9 @@ void Gio::Example::SpaceShip::OnUpdate(float deltaTime)
         renderer->GetMaterial().SetColor("u_Color", Color::Random());
     }
 
+    if(_shoot->WasPressedThisFrame())
+        Shoot();
+        
     Camera::instance->GetTransform().SetPosition(GetTransform().GetPosition());
 }
 
@@ -90,4 +96,11 @@ void Gio::Example::SpaceShip::UpdateRotation(float deltaTime)
     auto rotation = Vector3::Forward() * (-input * deltaTime * _rotationSpeed);
 
     _physics->AddTorque(rotation);
+}
+
+void Gio::Example::SpaceShip::Shoot()
+{
+    Transform& transform = GetTransform();
+   
+    new Projectile(transform.GetPosition(), transform.GetRotationEuler(), _physics->GetVelocity());
 }

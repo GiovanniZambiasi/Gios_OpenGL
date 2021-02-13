@@ -44,11 +44,6 @@ void Gio::Example::Star::OnUpdate(float deltaTime)
     GetTransform().SetScale(Vector3::One() * scaleFactor * _scale);
 }
 
-void Gio::Example::Star::OnDraw(Renderer& renderer)
-{
-    renderer.DrawLine(Vector3::Zero(), Vector3::Up() * 10000, Color::Red());
-}
-
 void Gio::Example::Star::SetColor(Color color)
 {
     auto renderer = GetComponent<ECS::Components::ObjectRenderer>();

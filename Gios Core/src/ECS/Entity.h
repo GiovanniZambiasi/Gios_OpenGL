@@ -50,9 +50,12 @@ namespace Gio::ECS
 
         void Delete();
 
+    protected:
+
         virtual void OnUpdate(float deltaTime) {}
 
         virtual void OnDraw(Renderer& renderer) {}
+        
     };
 
     template <typename TComponent>

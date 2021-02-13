@@ -15,10 +15,11 @@ namespace Gio::Example
 
         ~Star();
 
+        void SetColor(Color color);
+
+    protected:
+
         void OnUpdate(float deltaTime) override;
         
-        void OnDraw(Renderer& renderer) override;
-
-        void SetColor(Color color);
     };
 }

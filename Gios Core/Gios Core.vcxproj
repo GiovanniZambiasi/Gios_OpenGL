@@ -31,6 +31,7 @@
     <ClCompile Include="src\ECS\Components\Rotator.cpp" />
     <ClCompile Include="src\ECS\Entity.cpp" />
     <ClCompile Include="src\ECS\IEntitySpawnHandler.cpp" />
+    <ClCompile Include="src\Example\Projectile.cpp" />
     <ClCompile Include="src\Example\SpaceScene.cpp" />
     <ClCompile Include="src\Example\SpaceShip.cpp" />
     <ClCompile Include="src\Example\Star.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="src\ECS\Components\Rotator.h" />
     <ClInclude Include="src\ECS\Entity.h" />
     <ClInclude Include="src\ECS\IEntitySpawnHandler.h" />
+    <ClInclude Include="src\Example\Projectile.h" />
     <ClInclude Include="src\Example\SpaceScene.h" />
     <ClInclude Include="src\Example\SpaceShip.h" />
     <ClInclude Include="src\Example\Star.h" />

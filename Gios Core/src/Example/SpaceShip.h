@@ -13,6 +13,7 @@ namespace Gio::Example
         InputSystem::InputAxis* _vertical;
         InputSystem::InputAction* _boost;
         InputSystem::InputAction* _changeColor;
+        InputSystem::InputAction* _shoot;
         ECS::Components::Physics* _physics;
         float _thrusterSpeed;
         float _rotationSpeed;
@@ -24,12 +25,16 @@ namespace Gio::Example
         SpaceShip();
 
         ~SpaceShip();
+    
+    protected:
         
         void OnUpdate(float deltaTime) override;
-
+    
     private:
         void UpdateThrottle(float deltaTime);
 
         void UpdateRotation(float deltaTime);
+
+        void Shoot();
     };
 }

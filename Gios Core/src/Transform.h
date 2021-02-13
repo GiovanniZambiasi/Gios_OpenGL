@@ -32,6 +32,8 @@ namespace Gio
         void Translate(Vector3 translation);
 
         void SetPosition(Vector3 position) { _position = position; }
+
+        void SetRotation(Vector3 rotation) { _rotationEuler = rotation; }
         
         void Rotate(Vector3 rotation);
 

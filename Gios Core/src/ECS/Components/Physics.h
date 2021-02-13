@@ -31,6 +31,8 @@ namespace Gio::ECS::Components
         
         Vector3 GetAngularVelocity() { return _angularVelocity; }
 
+        void SetVelocity(Vector3 velocity) { _velocity = velocity; }
+        
         void SetDrag(float drag) { _drag = drag; }
 
         void SetAngularDrag(float angularDrag) { _angularDrag = angularDrag; }
