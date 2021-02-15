@@ -27,8 +27,6 @@ Gio::ECS::Entity::Entity(std::string name)
 
 Gio::ECS::Entity::~Entity()
 {
-    Gio::Debug::Log("Destroying " + _name);
-
     for (int i = _components.size() - 1; i >= 0; i--)
     {
         Component* component = _components[i];

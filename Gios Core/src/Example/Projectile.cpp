@@ -27,7 +27,7 @@ Gio::Example::Projectile::Projectile(Vector3 position, Vector3 rotation, Vector3
     auto physics = new ECS::Components::Physics(*this, 1.0f, 0.0f, 0.0f);
 
     physics->SetVelocity(initialVelocity);
-    physics->AddForce(transform.GetUp() * 600);
+    physics->AddForce(transform.GetUp() * 900);
     
     AddComponent(physics);
 }

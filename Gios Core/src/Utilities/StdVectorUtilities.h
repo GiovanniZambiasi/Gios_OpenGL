@@ -16,4 +16,10 @@ namespace Gio::Utilities
         
         return false;
     }
+
+    template<typename T>
+    void RemoveAt(int index, std::vector<T>& vec)
+    {
+        vec.erase(vec.begin() + index);
+    }
 }

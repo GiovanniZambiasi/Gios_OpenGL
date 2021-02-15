@@ -33,7 +33,7 @@ void Gio::Scene::RemoveEntity(ECS::Entity* entity)
 
         if (currEntity == entity)
         {
-            _entities.erase(_entities.begin() + i);
+            Utilities::RemoveAt(i, _entities);
             break;
         }
     }
@@ -56,6 +56,8 @@ void Gio::Scene::Update(float deltaTime)
             entity->Update(deltaTime);
         }
     }
+
+    OnUpdate(deltaTime);
 }
 
 void Gio::Scene::Draw(Renderer& renderer)
@@ -80,3 +82,6 @@ Gio::ECS::Entity* Gio::Scene::GetEntity(const std::string& name)
 
     return nullptr;
 }
+
+void Gio::Scene::OnUpdate(float deltaTime)
+{}

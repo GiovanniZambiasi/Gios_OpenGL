@@ -33,6 +33,10 @@ namespace Gio
 
         template <typename TEntity>
         TEntity* GetEntity();
+
+    protected:
+
+        virtual void OnUpdate(float deltaTime);
     };
 
     template <typename TEntity>

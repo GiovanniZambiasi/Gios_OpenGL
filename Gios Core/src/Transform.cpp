@@ -41,3 +41,9 @@ void Gio::Transform::Rotate(Vector3 rotation)
 {
     this->_rotationEuler = this->_rotationEuler + rotation;
 }
+
+Gio::Vector3 Gio::Transform::TransformPoint(Vector3 point)
+{
+    Debug::LogWarning("TransformPoint not properly implemented");
+    return point - _position;
+}

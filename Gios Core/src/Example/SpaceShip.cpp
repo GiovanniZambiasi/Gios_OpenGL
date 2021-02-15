@@ -101,6 +101,8 @@ void Gio::Example::SpaceShip::UpdateRotation(float deltaTime)
 void Gio::Example::SpaceShip::Shoot()
 {
     Transform& transform = GetTransform();
-   
-    new Projectile(transform.GetPosition(), transform.GetRotationEuler(), _physics->GetVelocity());
+
+    Vector3 spawnPosition = transform.GetPosition() + transform.GetUp() * 30.0f;
+    
+    new Projectile(spawnPosition, transform.GetRotationEuler(), _physics->GetVelocity());
 }

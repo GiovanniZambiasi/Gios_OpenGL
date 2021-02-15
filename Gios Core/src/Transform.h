@@ -12,7 +12,6 @@ namespace Gio
         Vector3 _rotationEuler;
     public:
         
-        
         Transform();
         
         ~Transform();
@@ -38,5 +37,7 @@ namespace Gio
         void Rotate(Vector3 rotation);
 
         void SetScale(Vector3 scale) { _scale = scale; }
+
+        Vector3 TransformPoint(Vector3 point);
     };
 }

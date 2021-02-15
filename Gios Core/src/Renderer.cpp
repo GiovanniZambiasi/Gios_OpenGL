@@ -107,7 +107,6 @@ namespace Gio
         glm::mat4 scaleMatrix = glm::scale(model, glm::vec3(scale.x, scale.y, scale.z));
 
         auto rotationRadians = transform.GetRotationRadians();
-        //glm::mat4 rotationMatrix = glm::radians(glm::);
         glm::mat4 rotationMatrix = glm::rotate(model, rotationRadians.z, glm::vec3(0, 0, 1));
         
         return translate * scaleMatrix * rotationMatrix;

@@ -8,7 +8,7 @@
 #include "../ECS/Components/Rotator.h"
 
 Gio::Example::Star::Star(Color color, Vector3 position)
-    : Entity("Rotating Square")
+    : Entity("Star")
     , _scale(Random::Between(2.0f, 3.0f))
     , _offset(Random::Between(0.0f, 10.0f))
     , _twinkleSpeed(Random::Between(2.0f, 5.0f))
