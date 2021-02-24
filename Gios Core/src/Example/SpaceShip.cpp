@@ -69,6 +69,13 @@ void Gio::Example::SpaceShip::OnUpdate(float deltaTime)
         Shoot();
         
     Camera::instance->GetTransform().SetPosition(GetTransform().GetPosition());
+
+
+    Vector3 position = GetTransform().GetPosition() + Vector3::Down() * 1.0f;
+
+    position = GetTransform().TransformPoint(position);
+    
+    Debug::Log(position.to_string());
 }
 
 void Gio::Example::SpaceShip::UpdateThrottle(float deltaTime)

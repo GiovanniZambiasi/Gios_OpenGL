@@ -44,6 +44,9 @@ void Gio::Transform::Rotate(Vector3 rotation)
 
 Gio::Vector3 Gio::Transform::TransformPoint(Vector3 point)
 {
-    Debug::LogWarning("TransformPoint not properly implemented");
-    return point - _position;
+    Vector3 localPoint = point - _position;
+
+    localPoint.Rotate(-_rotationEuler.z);
+    
+    return localPoint;
 }
