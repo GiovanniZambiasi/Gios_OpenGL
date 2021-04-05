@@ -51,3 +51,4 @@ Gio's OpenGL is an API I'm working on as an OpenGL and c++ study
 - [ ] Renderer to have an extra layer of abstraction to allow for other rendering apis
 - [ ] Separate App functionality (Window, WindowSize, Application, etc..) from the api core (Transform, Vector, Math, etc..)
   - [ ] Move "ECS" into core namespace
+- [ ] Remove GLCALL macro. Replace with: https://youtu.be/9HCboZHTyrw?t=924
